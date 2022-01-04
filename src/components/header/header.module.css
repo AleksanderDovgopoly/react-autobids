@@ -1,0 +1,47 @@
+.header {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 11px 5px #c1c1c154;
+}
+
+.logoContainer {
+    height: 100%;
+    width: 70px;
+    padding: 25px;
+}
+
+.logoContainer a {
+    text-decoration: none;
+    color: #4ad493;
+    font-weight: bold;
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+    align-content: center;
+}
+
+.navBar {
+    display: flex;
+    padding-left: 0;
+    height: 100%;
+    margin: 0;
+    list-style: none;
+}
+.navBar li {
+    padding: 0 8px;
+    align-self: center;
+}
+
+@media screen and (max-width: 800px) {
+    .logo-container {
+        width: 50px;
+        padding: 0;
+    }
+}

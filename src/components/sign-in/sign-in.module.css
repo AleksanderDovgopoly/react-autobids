@@ -1,0 +1,21 @@
+.SignIn {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    margin: 10px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 800px) {
+    .SignIn {
+        max-width: 90vw;
+        justify-self: center;
+    }
+}

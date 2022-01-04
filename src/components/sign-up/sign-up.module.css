@@ -1,0 +1,17 @@
+.SignUp {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+}
+
+.title {
+    margin: 10px 0;
+}
+
+@media screen and (max-width: 800px) {
+    .SignUp {
+        padding-top: 45px;
+        max-width: 90vw;
+        justify-self: center;
+    }
+}
