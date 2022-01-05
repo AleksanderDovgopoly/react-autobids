@@ -54,45 +54,45 @@ const SignUp = () => {
 
     return (
         <div className={classes.SignUp}>
-                <h2 className={classes.title}>I do not have account</h2>
-                <span>Sign Up with your Email and Password</span>
-                <form className='sign-up-form' onSubmit={handleSubmit}>
-                    <FormInput
-                        type='text'
-                        name='displayName'
-                        value={displayName}
-                        handleChange={handleChange}
-                        label='Display name'
-                        required
-                    />
-                    <FormInput
-                        type='email'
-                        name='email'
-                        value={email}
-                        handleChange={handleChange}
-                        label='Email'
-                        required
-                    />
-                    <FormInput
-                        type='password'
-                        name='password'
-                        value={password}
-                        handleChange={handleChange}
-                        label='Password'
-                        required
-                    />
-                    <FormInput
-                        type='password'
-                        name='confirmPassword'
-                        value={confirmPassword}
-                        handleChange={handleChange}
-                        label='Confirm password'
-                        required
-                    />
+            <h2 className={classes.title}>I do not have account</h2>
+            <span>Sign Up with your Email and Password</span>
+            <form className='sign-up-form' onSubmit={handleSubmit}>
+                <FormInput
+                    type='text'
+                    name='displayName'
+                    value={displayName}
+                    handleChange={handleChange}
+                    label='Display name'
+                    required
+                />
+                <FormInput
+                    type='email'
+                    name='email'
+                    value={email}
+                    handleChange={handleChange}
+                    label='Email'
+                    required
+                />
+                <FormInput
+                    type='password'
+                    name='password'
+                    value={password}
+                    handleChange={handleChange}
+                    label='Password'
+                    required
+                />
+                <FormInput
+                    type='password'
+                    name='confirmPassword'
+                    value={confirmPassword}
+                    handleChange={handleChange}
+                    label='Confirm password'
+                    required
+                />
 
-                    <CustomButton type='submit'> Sign up </CustomButton>
+                <CustomButton type='submit'> Sign up </CustomButton>
 
-                </form>
+            </form>
         </div>
     )
 }

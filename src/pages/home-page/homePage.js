@@ -1,9 +1,9 @@
-import AuctionsListing from "../../components/auctions-listing/auctions-listing";
+import AuctionsCollection from "../../components/auctions-collection/auctions-collection";
 
 
 const HomePage = () => {
     return (
-        <AuctionsListing />
+        <AuctionsCollection />
     )
 }
 

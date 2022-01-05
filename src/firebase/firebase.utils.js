@@ -14,13 +14,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
-export const auth = firebase.auth();
-
-export const firestore = firebase.firestore();
-
-export default firebase;
-
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
 
@@ -45,3 +38,45 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     return userRef;
 };
+
+export const fetchAuctions = async () => {
+    const auctionsRef = await firestore.collection('auctions');
+    const auctionsMap = await auctionsRef
+        .get()
+        .then(snapshot => {
+            const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+            return collectionsMap;
+        })
+        .catch(error => {
+            console.log('Some error with fetching!', error)
+        })
+    return auctionsMap;
+};
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+        const {title, short_description, current_price, geo, photos} = doc.data();
+
+        return {
+            id: doc.id,
+            title,
+            short_description,
+            current_price,
+            geo,
+            photos,
+        }
+
+    });
+
+    return transformedCollection.reduce((accumulator, collection, index) => {
+        accumulator[index] = collection;
+        return accumulator;
+    }, {});
+}
+
+
+export const auth = firebase.auth();
+
+export const firestore = firebase.firestore();
+
+export default firebase;
