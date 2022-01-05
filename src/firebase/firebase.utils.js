@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
+import 'firebase/compat/storage'
 
 const firebaseConfig = {
     apiKey: "AIzaSyA0CGxASlJ2b3WI5Jl68TUC5T69BcQ2SkQ",
@@ -78,5 +79,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 export const auth = firebase.auth();
 
 export const firestore = firebase.firestore();
+
+export const storage = firebase.storage();
 
 export default firebase;

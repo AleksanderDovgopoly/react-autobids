@@ -25,7 +25,9 @@ const Header = () => {
             <div className={classes.navContainer}>
                 <ul className={classes.navBar}>
                     <li>Auctions</li>
-                    <li>Sell car</li>
+                    <li>
+                        <Link to="/sell-car">Sell car</Link>
+                    </li>
                 </ul>
                 <SearchForm />
             </div>
