@@ -77,6 +77,20 @@ export const fetchAuctions = async () => {
     return auctionsMap;
 };
 
+export const fetchAuctionById = async (auctionId) => {
+    console.log(auctionId)
+    const auctionRef = await firestore.doc(`auctions/${auctionId}`);
+    const documentSnapshot = await auctionRef
+        .get()
+        .then(snapshot => {
+            return snapshot.data();
+        })
+        .catch(error => {
+            console.log('Some error with fetching!', error)
+        })
+    return documentSnapshot;
+};
+
 export const convertCollectionsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
         const {title, short_description, current_price, start_price,  geo, photos} = doc.data();
