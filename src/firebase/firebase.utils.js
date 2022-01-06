@@ -40,6 +40,29 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 };
 
+export const createNewAuctionDocument = async (auctionData) => {
+    if (!auctionData) return;
+
+    const {id, title, short_description, start_price, geo, photos} = auctionData;
+
+    const auctionRef = await firestore.doc(`auctions/${auctionData.id}`);
+
+    try {
+        await auctionRef.set({
+            id,
+            title,
+            short_description,
+            start_price: Number(start_price),
+            geo,
+            photos,
+        })
+    } catch (error) {
+        console.log('Error creating Auction Document!')
+    }
+
+    return auctionRef;
+}
+
 export const fetchAuctions = async () => {
     const auctionsRef = await firestore.collection('auctions');
     const auctionsMap = await auctionsRef
@@ -56,13 +79,14 @@ export const fetchAuctions = async () => {
 
 export const convertCollectionsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
-        const {title, short_description, current_price, geo, photos} = doc.data();
+        const {title, short_description, current_price, start_price,  geo, photos} = doc.data();
 
         return {
             id: doc.id,
             title,
             short_description,
             current_price,
+            start_price,
             geo,
             photos,
         }

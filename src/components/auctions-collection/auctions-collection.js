@@ -12,9 +12,13 @@ const AuctionsCollection = () => {
     const dispatch = useDispatch();
     const isCarsFetching = useSelector((state => state.auctions.isFetching));
 
-    useEffect(async () => {
-        const auctionsCollection = await fetchAuctions();
-        dispatch(fetchAuctionsAction(auctionsCollection));
+    useEffect( () => {
+        async function fetchData () {
+            const auctionsCollection = await fetchAuctions();
+            dispatch(fetchAuctionsAction(auctionsCollection));
+        }
+
+        fetchData();
 
     }, [dispatch])
 

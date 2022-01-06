@@ -8,8 +8,7 @@ const SellCar = () => {
     return (
         <div className={classes.sellCarContainer}>
             <h3>Sell your Car on AutoBids</h3>
-
-            <SellCarForm />
+            <SellCarForm/>
         </div>
     )
 }

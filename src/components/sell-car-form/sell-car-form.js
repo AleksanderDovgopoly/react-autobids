@@ -1,27 +1,42 @@
+import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import firebase, {createNewAuctionDocument, storage} from "../../firebase/firebase.utils";
 import FormInput from "../form-input/form-input";
+import CustomButton from "../custom-button/custom-button";
 
 import classes from "./sell-car-form.module.css";
-import {useState} from "react";
-import CustomButton from "../custom-button/custom-button";
-import firebase, {storage} from "../../firebase/firebase.utils";
 
 
 const SellCarForm = () => {
 
+    const currentUser = useSelector(state => state.user.currentUser);
+    const [auctionId, setAuctionId] = useState('');
     const [files, setFiles] = useState([]);
     const [uploadedPhoto, setUploadedPhoto] = useState([]);
     const [newAuctionData, setNewAuctionData] = useState({
+        id: '',
         title: '',
         short_description: '',
-        start_price: '',
+        start_price: 0,
         geo: '',
         photos: [],
     });
 
-    console.log('Current auction data: ', newAuctionData);
-    console.log(uploadedPhoto)
+    useEffect(() => {
+        setNewAuctionData({...newAuctionData, photos: uploadedPhoto});
+    }, [uploadedPhoto]);
 
-    const {title, short_description, start_price, geo, photos} = newAuctionData;
+    const {title, short_description, start_price, geo} = newAuctionData;
+
+    if (auctionId === '') {
+        const date = Date.now();
+        let newId = currentUser.uid + '-' + date;
+        setAuctionId(newId);
+        setNewAuctionData({...newAuctionData, id: newId})
+    }
+
+    // console.log('Current auction data: ', newAuctionData);
+    // console.log(uploadedPhoto)
 
 
     const handleChange = event => {
@@ -38,7 +53,27 @@ const SellCarForm = () => {
         }
     };
 
-    //console.log(uploadedPhoto)
+
+    const handleSubmit = async event => {
+        event.preventDefault();
+
+        try {
+            await createNewAuctionDocument(newAuctionData);
+
+            setNewAuctionData({
+                id: '',
+                title: '',
+                short_description: '',
+                start_price: 0,
+                geo: '',
+                photos: [],
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    };
 
 
     const onUploadSubmission = e => {
@@ -47,7 +82,7 @@ const SellCarForm = () => {
         const promises = [];
         files.forEach(file => {
             const uploadTask =
-                storage.ref().child(`testFolder/${file.name}`).put(file);
+                storage.ref().child(`${auctionId}/${file.name}`).put(file);
             promises.push(uploadTask);
             uploadTask.on(
                 firebase.storage.TaskEvent.STATE_CHANGED,
@@ -111,13 +146,13 @@ const SellCarForm = () => {
                 type='file'
                 accept=".png, .jpg, .jpeg"
                 name='photos'
-                value={photos}
                 handleChange={handlePhotoChange}
                 label='Upload photos'
                 required
                 multiple
             />
             <CustomButton onClick={onUploadSubmission}>Upload files</CustomButton>
+            <CustomButton type='submit' onClick={handleSubmit}> Submit </CustomButton>
         </form>
     )
 }

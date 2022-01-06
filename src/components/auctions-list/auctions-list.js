@@ -1,6 +1,7 @@
-import classes from "./auctions-list.module.css";
 import {useSelector} from "react-redux";
 import AuctionItem from "../auction-item/auction-item";
+
+import classes from "./auctions-list.module.css";
 
 
 const AuctionsList = () => {
