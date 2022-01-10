@@ -1,0 +1,11 @@
+.auctionHeaderBar {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    background: coral;
+    padding: 20px 0;
+    border-radius: 10px;
+}

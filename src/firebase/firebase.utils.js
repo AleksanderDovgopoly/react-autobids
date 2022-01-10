@@ -78,7 +78,6 @@ export const fetchAuctions = async () => {
 };
 
 export const fetchAuctionById = async (auctionId) => {
-    console.log(auctionId)
     const auctionRef = await firestore.doc(`auctions/${auctionId}`);
     const documentSnapshot = await auctionRef
         .get()
