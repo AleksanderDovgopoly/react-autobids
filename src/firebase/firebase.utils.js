@@ -53,8 +53,12 @@ export const createNewAuctionDocument = async (auctionData) => {
             title,
             short_description,
             start_price: Number(start_price),
+            current_price: Number(start_price),
             geo,
             photos,
+            bids_history: [],
+            bids_step: Number(500)
+            // TODO: Step input add to form
         })
     } catch (error) {
         console.log('Error creating Auction Document!')
@@ -110,6 +114,27 @@ export const convertCollectionsSnapshotToMap = (collections) => {
         accumulator[index] = collection;
         return accumulator;
     }, {});
+}
+
+export const setNewBidByAuctionId = async (auctionId, bidData) => {
+    if (!bidData || !auctionId) return;
+
+    const auctionRef = await firestore.doc(`auctions/${auctionId}`);
+
+    const snapShot = (await auctionRef.get()).data();
+
+    console.log(snapShot)
+
+    try {
+        await auctionRef.update({
+            current_price: bidData.bid_price,
+            bids_history: [...snapShot.bids_history, bidData]
+        })
+    } catch (error) {
+        console.log('Error update auction bids!')
+    }
+
+    return auctionRef;
 }
 
 

@@ -1,12 +1,25 @@
-import { Carousel } from 'react-carousel-minimal';
+import {Carousel} from 'react-carousel-minimal';
 
 import classes from "./auction-detail-content.module.css";
 import AuctionHeaderBar from "../auction-header-bar/auction-header-bar";
+import SetBidBar from "../set-bid-bar/set-bid-bar";
+
 
 const AuctionDetailContent = (props) => {
-    const {title, short_description, current_price, start_price, geo, photos, id, bids_history, start_date, bid_range} = props.item;
+    const {
+        title,
+        short_description,
+        current_price,
+        start_price,
+        geo,
+        photos,
+        id,
+        bids_history,
+        start_date,
+        bids_step
+    } = props.item;
 
-    const sliderData = Object.entries(photos).map((e) => ( { image: e[1] } ));
+    const sliderData = Object.entries(photos).map((e) => ({image: e[1]}));
 
 
     return (
@@ -43,12 +56,14 @@ const AuctionDetailContent = (props) => {
                 thumbnails={true}
                 thumbnailWidth="100px"
                 style={{
+                    display: "contents",
                     textAlign: "center",
                     maxWidth: "850px",
                     maxHeight: "500px",
                     margin: "40px auto",
                 }}
             />
+            <SetBidBar current_price={current_price} step={bids_step} auctionId={id} startPrice={start_price}/>
         </div>
     )
 }
