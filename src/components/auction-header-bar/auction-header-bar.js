@@ -46,7 +46,7 @@ const AuctionHeaderBar = (props) => {
                 ${current_price || start_price}
             </div>
             <div>
-                <span># Bids: </span>
+                <span>#Bids: </span>
                 {
                     bids_history
                         ? bids_history.length

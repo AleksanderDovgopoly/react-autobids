@@ -5,6 +5,7 @@ import FormInput from "../form-input/form-input";
 import CustomButton from "../custom-button/custom-button";
 
 import classes from "./sell-car-form.module.css";
+import DateTimePicker from "react-datetime-picker";
 
 
 const SellCarForm = () => {
@@ -12,12 +13,15 @@ const SellCarForm = () => {
     const currentUser = useSelector(state => state.user.currentUser);
     const [auctionId, setAuctionId] = useState('');
     const [files, setFiles] = useState([]);
+    const [dateValue, setDateValue] = useState(new Date());
     const [uploadedPhoto, setUploadedPhoto] = useState([]);
     const [newAuctionData, setNewAuctionData] = useState({
         id: '',
         title: '',
         short_description: '',
         start_price: 0,
+        bids_step: 100,
+        start_date: dateValue,
         geo: '',
         photos: [],
     });
@@ -26,7 +30,11 @@ const SellCarForm = () => {
         setNewAuctionData({...newAuctionData, photos: uploadedPhoto});
     }, [uploadedPhoto]);
 
-    const {title, short_description, start_price, geo} = newAuctionData;
+    useEffect(() => {
+        setNewAuctionData({...newAuctionData, start_date: dateValue});
+    }, [dateValue]);
+
+    const {title, short_description, start_price, bids_step, geo} = newAuctionData;
 
     if (auctionId === '') {
         const date = Date.now();
@@ -65,6 +73,8 @@ const SellCarForm = () => {
                 title: '',
                 short_description: '',
                 start_price: 0,
+                bids_step: 100,
+                start_date: dateValue,
                 geo: '',
                 photos: [],
             })
@@ -132,6 +142,18 @@ const SellCarForm = () => {
                 value={start_price}
                 handleChange={handleChange}
                 label='Start price, $'
+                required
+            />
+            <FormInput
+                type='number'
+                name='bids_step'
+                value={bids_step}
+                handleChange={handleChange}
+                label='Increase Bid step, $'
+            />
+            <DateTimePicker
+                onChange={setDateValue}
+                value={dateValue}
                 required
             />
             <FormInput

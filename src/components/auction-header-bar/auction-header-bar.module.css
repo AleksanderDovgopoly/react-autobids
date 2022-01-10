@@ -5,7 +5,10 @@
     align-content: center;
     justify-content: space-around;
     align-items: center;
-    background: coral;
+    background: #00d41047;
     padding: 20px 0;
     border-radius: 10px;
+}
+.auctionHeaderBar span {
+    font-weight: bold;
 }

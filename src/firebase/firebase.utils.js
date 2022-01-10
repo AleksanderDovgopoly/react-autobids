@@ -43,7 +43,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 export const createNewAuctionDocument = async (auctionData) => {
     if (!auctionData) return;
 
-    const {id, title, short_description, start_price, geo, photos} = auctionData;
+    const {id, title, short_description, start_price, bids_step, start_date, geo, photos} = auctionData;
 
     const auctionRef = await firestore.doc(`auctions/${auctionData.id}`);
 
@@ -57,8 +57,8 @@ export const createNewAuctionDocument = async (auctionData) => {
             geo,
             photos,
             bids_history: [],
-            bids_step: Number(500)
-            // TODO: Step input add to form
+            start_date,
+            bids_step: Number(bids_step)
         })
     } catch (error) {
         console.log('Error creating Auction Document!')
