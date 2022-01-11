@@ -32,6 +32,7 @@ const SetBidBar = (props) => {
 
     return (
         <div className={classes.SetBidBar}>
+            <h3>Place Bid</h3>
             <p>Step - ${step}</p>
             <NumericInput onChange={setBidInputHandler} min={current_price} step={step} value={newBidValue} />
             <CustomButton className={classes.submitBid} onClick={setNewBidHandler} disabled={user.uid ? false : true}>Set New Bid</CustomButton>

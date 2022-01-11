@@ -58,7 +58,8 @@ export const createNewAuctionDocument = async (auctionData) => {
             photos,
             bids_history: [],
             start_date,
-            bids_step: Number(bids_step)
+            bids_step: Number(bids_step),
+            comments: []
         })
     } catch (error) {
         console.log('Error creating Auction Document!')
@@ -131,6 +132,23 @@ export const setNewBidByAuctionId = async (auctionId, bidData) => {
         })
     } catch (error) {
         console.log('Error update auction bids!')
+    }
+
+    return auctionRef;
+}
+
+export const setNewAuctionComment = async (auctionId, commentData) => {
+    if (!auctionId || !commentData) return;
+
+    const auctionRef = await firestore.doc(`auctions/${auctionId}`);
+    const snapShot = (await auctionRef.get()).data();
+
+    try {
+        await auctionRef.update({
+            comments: [...snapShot.comments, commentData]
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
     }
 
     return auctionRef;

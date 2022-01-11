@@ -4,6 +4,8 @@ import classes from "./auction-detail-content.module.css";
 import AuctionHeaderBar from "../auction-header-bar/auction-header-bar";
 import SetBidBar from "../set-bid-bar/set-bid-bar";
 import BidsHistory from "../bids-history/bids-history";
+import CommentBox from "../comment-box/comment-box";
+import CommentsList from "../comments-list/comments-list";
 
 
 const AuctionDetailContent = (props) => {
@@ -17,7 +19,8 @@ const AuctionDetailContent = (props) => {
         id,
         bids_history,
         start_date,
-        bids_step
+        bids_step,
+        comments,
     } = props.item;
 
     const sliderData = Object.entries(photos).map((e) => ({image: e[1]}));
@@ -62,6 +65,8 @@ const AuctionDetailContent = (props) => {
                 <BidsHistory history={bids_history} />
             </div>
             <SetBidBar current_price={current_price} step={bids_step} auctionId={id} startPrice={start_price}/>
+            <CommentBox auctionId={id} />
+            <CommentsList commentsList={comments} />
         </div>
     )
 }
