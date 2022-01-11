@@ -1,0 +1,18 @@
+.statusBar {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+.auctionCounter:before {
+    content: "\f017";
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-right: -1.3em;
+    width: 1em;
+}
+.auctionCounter span {
+    margin-left: 25px;
+}
