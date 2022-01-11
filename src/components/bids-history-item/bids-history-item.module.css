@@ -1,0 +1,21 @@
+.bidHistoryItem {
+    padding: 5px 20px;
+}
+
+.bidHistoryItem:after {
+    content: "\f0e3";
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-right: -1.3em;
+    width: 1em;
+}
+
+.bidHistoryItem span {
+    padding-right: 0.5em;
+}
+
+.user {
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0 5px;
+}

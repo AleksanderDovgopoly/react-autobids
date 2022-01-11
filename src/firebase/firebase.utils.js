@@ -123,8 +123,6 @@ export const setNewBidByAuctionId = async (auctionId, bidData) => {
 
     const snapShot = (await auctionRef.get()).data();
 
-    console.log(snapShot)
-
     try {
         await auctionRef.update({
             current_price: bidData.bid_price,

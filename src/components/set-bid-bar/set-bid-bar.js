@@ -10,7 +10,7 @@ import {setNewBidByAuctionId} from "../../firebase/firebase.utils";
 const SetBidBar = (props) => {
     const {current_price, step, auctionId, startPrice} = props;
     const [newBidValue, setNewBidValue] = useState(current_price || startPrice);
-    const userId = useSelector(state => state.user.currentUser.uid)
+    const user = useSelector(state => state.user.currentUser)
 
     function setBidInputHandler (event) {
         setNewBidValue(event);
@@ -23,7 +23,8 @@ const SetBidBar = (props) => {
         const newBidData = {
             bid_date: new Date(),
             bid_price: newBidValue,
-            user_id: userId
+            user_id: user.uid,
+            user_name: user.displayName,
         }
 
         setNewBidByAuctionId( auctionId, newBidData);
@@ -33,8 +34,8 @@ const SetBidBar = (props) => {
         <div className={classes.SetBidBar}>
             <p>Step - ${step}</p>
             <NumericInput onChange={setBidInputHandler} min={current_price} step={step} value={newBidValue} />
-            <CustomButton className={classes.submitBid} onClick={setNewBidHandler} disabled={userId ? false : true}>Set New Bid</CustomButton>
-            {!userId && <p>Only logged in users can place a bet</p>}
+            <CustomButton className={classes.submitBid} onClick={setNewBidHandler} disabled={user.uid ? false : true}>Set New Bid</CustomButton>
+            {!user.uid && <p>Only logged in users can place a bet</p>}
         </div>
     )
 };

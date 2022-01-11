@@ -3,6 +3,7 @@ import {Carousel} from 'react-carousel-minimal';
 import classes from "./auction-detail-content.module.css";
 import AuctionHeaderBar from "../auction-header-bar/auction-header-bar";
 import SetBidBar from "../set-bid-bar/set-bid-bar";
+import BidsHistory from "../bids-history/bids-history";
 
 
 const AuctionDetailContent = (props) => {
@@ -36,26 +37,30 @@ const AuctionDetailContent = (props) => {
                     start_date={start_date}
                 />
             </div>
-            <Carousel
-                data={sliderData}
-                time={3000}
-                width="850px"
-                height="500px"
-                radius="10px"
-                slideNumber={true}
-                slideNumberStyle={{
-                    fontSize: '20px',
-                    fontWeight: 'bold',
-                }}
-                automatic={true}
-                dots={true}
-                pauseIconColor="white"
-                pauseIconSize="40px"
-                slideBackgroundColor="darkgrey"
-                slideImageFit="cover"
-                thumbnails={true}
-                thumbnailWidth="100px"
-            />
+            <div className={classes.sliderContainer}>
+                <Carousel
+                    data={sliderData}
+                    time={3000}
+                    width="850px"
+                    height="500px"
+                    radius="10px"
+                    slideNumber={true}
+                    slideNumberStyle={{
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                    }}
+                    automatic={true}
+                    dots={true}
+                    pauseIconColor="white"
+                    pauseIconSize="40px"
+                    slideBackgroundColor="darkgrey"
+                    slideImageFit="cover"
+                    thumbnails={true}
+                    thumbnailWidth="100px"
+                    classname={classes.auctionDetailContent}
+                />
+                <BidsHistory history={bids_history} />
+            </div>
             <SetBidBar current_price={current_price} step={bids_step} auctionId={id} startPrice={start_price}/>
         </div>
     )

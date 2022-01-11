@@ -1,0 +1,27 @@
+.bidsHistoryContainer {
+    width: 30%;
+    background: aliceblue;
+    border-radius: 10px;
+    padding: 10px 30px;
+}
+
+.bidsHistoryContainer h4 {
+    font-size: 20px;
+    text-align: center;
+}
+
+.bidsHistoryContainer ul {
+    list-style: none;
+    text-align: right;
+    padding: 0;
+}
+.bidsHistoryContainer p {
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .bidsHistoryContainer {
+        width: 90%;
+        margin-top: 20px;
+    }
+}

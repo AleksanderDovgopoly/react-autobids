@@ -31,6 +31,14 @@ const SignUp = () => {
                 password
             );
 
+            await user.updateProfile({
+                displayName: displayName
+            }).then(function() {
+                //console.log('DisplayName updated')
+            }, function(error) {
+                console.log(error)
+            });
+
             await createUserProfileDocument(user, {displayName});
 
             setCredentials({
