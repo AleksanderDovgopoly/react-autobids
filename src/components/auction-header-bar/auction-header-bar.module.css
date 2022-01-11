@@ -12,3 +12,9 @@
 .auctionHeaderBar span {
     font-weight: bold;
 }
+
+@media screen and (max-width: 735px) {
+    .auctionHeaderBar {
+        width: 96%
+    }
+}

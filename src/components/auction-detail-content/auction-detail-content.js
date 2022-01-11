@@ -25,7 +25,7 @@ const AuctionDetailContent = (props) => {
     return (
         <div className={classes.auctionDetailContent}>
             <div className={classes.auctionDetailHeader}>
-                <div>
+                <div className={classes.auctionDetailHeading}>
                     <h2>{title}</h2>
                     <span>{short_description}</span>
                 </div>
@@ -55,13 +55,6 @@ const AuctionDetailContent = (props) => {
                 slideImageFit="cover"
                 thumbnails={true}
                 thumbnailWidth="100px"
-                style={{
-                    display: "contents",
-                    textAlign: "center",
-                    maxWidth: "850px",
-                    maxHeight: "500px",
-                    margin: "40px auto",
-                }}
             />
             <SetBidBar current_price={current_price} step={bids_step} auctionId={id} startPrice={start_price}/>
         </div>

@@ -11,7 +11,7 @@ const Header = () => {
     const isLogin = useSelector((state => state.user.isLogin));
     const dispatch = useDispatch();
 
-    function logOutHandler (event)  {
+    function logOutHandler(event) {
         event.preventDefault();
         auth.signOut();
         dispatch(clearCurrentUser())
@@ -29,15 +29,15 @@ const Header = () => {
                         <Link to="/sell-car">Sell car</Link>
                     </li>
                 </ul>
-                <SearchForm />
+                <SearchForm/>
             </div>
-
-            {
-                isLogin
-                    ? <button className="btn btn-primary signOutBtn" onClick={logOutHandler}>Log out</button>
-                    : <Link className="btn btn-primary signInBtn" to='sign-in'>Sign In</Link>
-            }
-
+            <div className={classes.loginContainer}>
+                {
+                    isLogin
+                        ? <button className="btn btn-primary signOutBtn" onClick={logOutHandler}>Log out</button>
+                        : <Link className="btn btn-primary signInBtn" to='sign-in'>Sign In</Link>
+                }
+            </div>
         </div>
     )
 }

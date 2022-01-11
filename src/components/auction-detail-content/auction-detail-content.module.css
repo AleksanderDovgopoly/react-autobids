@@ -8,4 +8,8 @@
     align-content: center;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 20px;
+}
+.auctionDetailHeading h2 {
+    margin: 0 0;
 }

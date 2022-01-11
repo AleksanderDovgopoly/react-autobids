@@ -26,6 +26,21 @@
     height: 100%;
     align-content: center;
 }
+.loginContainer {
+    display: block;
+    width: 25%;
+    height: 100%;
+    text-align: right;
+    padding: 15px 0;
+}
+
+.loginContainer a {
+    margin: auto 10%;
+}
+
+.navContainer form {
+    padding: 20px 0;
+}
 
 .navBar {
     display: flex;
@@ -43,5 +58,11 @@
     .logo-container {
         width: 50px;
         padding: 0;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .navContainer form {
+        display: none;
     }
 }
