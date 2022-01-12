@@ -1,11 +1,14 @@
 import {useEffect, useState} from "react";
-import {calculateLeftTime} from "../../helpers/auction-functions";
+import {calculateLeftTime, timeConverter} from "../../helpers/auction-functions";
 
 import classes from "./auction-item-status-bar.module.css";
 
 
 const AuctionItemStatusBar = (props) => {
     const {currentPrice, startPrice, startDate} = props;
+
+    const start_date = timeConverter(startDate);
+
     const [timeLeft, setTimeLeft] = useState(calculateLeftTime(startDate));
 
     useEffect(() => {
@@ -14,10 +17,6 @@ const AuctionItemStatusBar = (props) => {
         }, 1000);
     }, [startDate])
 
-    const daysLeft = timeLeft.getDate();
-    const hoursLeft = timeLeft.getUTCHours();
-    const minutesLeft = timeLeft.getUTCMinutes();
-    const secondsLeft = timeLeft.getUTCSeconds();
 
     return (
         <div className={classes.statusBar}>
@@ -26,9 +25,10 @@ const AuctionItemStatusBar = (props) => {
             </div>
             <div className={classes.auctionCounter}>
                 {
-                    daysLeft > 1
-                        ? <span>{daysLeft} days</span>
-                        : <span>{hoursLeft} : {minutesLeft} : {secondsLeft}</span>
+                    <span>{timeLeft}</span>
+                    // daysLeft > 1
+                    //     ? <span>{daysLeft} days</span>
+                    //     : <span>{hoursLeft} : {minutesLeft} : {secondsLeft}</span>
                 }
             </div>
         </div>

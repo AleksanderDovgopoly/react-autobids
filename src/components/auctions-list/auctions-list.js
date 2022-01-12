@@ -5,13 +5,18 @@ import classes from "./auctions-list.module.css";
 
 
 const AuctionsList = () => {
-    const auctionItems = useSelector((state => state.auctions.cars));
+    const auctionItemsObject = useSelector((state => state.auctions.cars));
+
+    const auctionItems = Object.values(auctionItemsObject)
+        .sort(function (x, y) {
+        return x.start_date - y.start_date;
+    })
 
     return (
         <ul className={classes.auctionList}>
             {
-                Object.keys(auctionItems).map((key) => (
-                    <AuctionItem key={key} item={auctionItems[key]} />
+                auctionItems.map((item) => (
+                    <AuctionItem key={item.id} item={item}/>
                 ))
             }
         </ul>

@@ -1,17 +1,29 @@
-export const calculateLeftTime = (start_date) => {
-    Date.prototype.addDays = function (days) {
-        let date = new Date(this.valueOf());
-        date.setDate(date.getDate() + days);
-        return date;
-    }
-
+export const calculateLeftTime = (UNIX_timestamp) => {
+    let days = 7;
     let timeLeft = 0;
-    const startDate = new Date(start_date.seconds * 1000);
-    const endDate = startDate.addDays(5);
+    const startDate = new Date(UNIX_timestamp * 1000);
+    let endDateUnicode = startDate.setTime(startDate.getTime() + (days * 24 * 60 * 60 * 1000));
+    let endDate = new Date(endDateUnicode);
+
     const currentDate = new Date();
     timeLeft = new Date(endDate.getTime() - currentDate.getTime());
+    let month = timeLeft.getMonth();
+    let date = timeLeft.getDate();
+    let hour = timeLeft.getHours();
+    let min = timeLeft.getMinutes();
+    let sec = timeLeft.getSeconds();
+    // let time = date + ' ' + month + ' ' + hour + ':' + min + ':' + sec;
+    let time = date + ' days ' + hour + ':' + min + ':' + sec;
 
-    return timeLeft;
+    if (month > 2) {
+        return 'Sold';
+    }
+
+    if (date > 7) {
+        return 'Start soon';
+    }
+
+    return time;
 }
 
 export const timeConverter = (UNIX_timestamp) => {

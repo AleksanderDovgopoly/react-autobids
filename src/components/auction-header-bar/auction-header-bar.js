@@ -15,10 +15,10 @@ const AuctionHeaderBar = () => {
         }, 1000);
     }, [start_date])
 
-    const daysLeft = timeLeft.getDate();
-    const hoursLeft = timeLeft.getUTCHours();
-    const minutesLeft = timeLeft.getUTCMinutes();
-    const secondsLeft = timeLeft.getUTCSeconds();
+    // const daysLeft = timeLeft.getDate();
+    // const hoursLeft = timeLeft.getUTCHours();
+    // const minutesLeft = timeLeft.getUTCMinutes();
+    // const secondsLeft = timeLeft.getUTCSeconds();
 
 
     return (
@@ -42,9 +42,10 @@ const AuctionHeaderBar = () => {
             <div>
                 <span>Time left: </span>
                 {
-                    daysLeft
-                        ? `${daysLeft} days ${hoursLeft} : ${minutesLeft} : ${secondsLeft}`
-                        : `${hoursLeft} : ${minutesLeft} : ${secondsLeft}`
+                    timeLeft
+                    // daysLeft
+                    //     ? `${daysLeft} days ${hoursLeft} : ${minutesLeft} : ${secondsLeft}`
+                    //     : `${hoursLeft} : ${minutesLeft} : ${secondsLeft}`
                 }
             </div>
         </div>
