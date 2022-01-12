@@ -12,7 +12,7 @@ const AuctionItemStatusBar = (props) => {
         setInterval(() => {
             setTimeLeft(calculateLeftTime(startDate))
         }, 1000);
-    }, [])
+    }, [startDate])
 
     const daysLeft = timeLeft.getDate();
     const hoursLeft = timeLeft.getUTCHours();

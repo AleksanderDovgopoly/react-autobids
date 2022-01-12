@@ -3,9 +3,9 @@ import {useSelector} from "react-redux";
 import firebase, {createNewAuctionDocument, storage} from "../../firebase/firebase.utils";
 import FormInput from "../form-input/form-input";
 import CustomButton from "../custom-button/custom-button";
+import DateTimePicker from "react-datetime-picker";
 
 import classes from "./sell-car-form.module.css";
-import DateTimePicker from "react-datetime-picker";
 
 
 const SellCarForm = () => {

@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 import {calculateLeftTime} from "../../helpers/auction-functions";
 
 import classes from "./auction-header-bar.module.css";
 
 
-const AuctionHeaderBar = (props) => {
-    const {start_price, current_price, bids_history, start_date} = props;
+const AuctionHeaderBar = () => {
+    const {start_price, current_price, bids_history, start_date} = useSelector(state => state.detail.data);
     const [timeLeft, setTimeLeft] = useState(calculateLeftTime(start_date));
 
     useEffect(() => {

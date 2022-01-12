@@ -1,29 +1,25 @@
 import {Fragment, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setNewAuctionComment} from "../../firebase/firebase.utils";
+import {updateAuctionComment} from "../../redux/auction-detail/auction-detail.actions";
 
 import classes from "./comment-box.module.css";
-import {useSelector} from "react-redux";
-import {setNewAuctionComment} from "../../firebase/firebase.utils";
 
 
 const CommentBox = (props) => {
     const {auctionId} = props;
+    const dispatch = useDispatch();
     const {isLogin, currentUser} = useSelector(state => state.user);
     const [newComment, setNewComment] = useState('');
     const [commentAuthor, setCommentAuthor] = useState('');
     const [isAnonymous, setIsAnonymous] = useState(false);
-
-    // console.log('Comment: ', newComment);
-    // console.log('Author: ', commentAuthor);
-    // console.log('Anonymous: ', isAnonymous);
-    // console.log('User: ', currentUser);
-    // console.log('---//----///---- ');
 
     function anonymousHandler() {
         setIsAnonymous(!isAnonymous);
         setCommentAuthor('');
     }
 
-    async function formSubmitHandler (event) {
+    async function formSubmitHandler(event) {
         event.preventDefault();
 
         const commentData = {
@@ -51,13 +47,14 @@ const CommentBox = (props) => {
             setNewComment('');
             setIsAnonymous(false);
             setCommentAuthor('');
+            dispatch(updateAuctionComment(commentData))
         }
     }
 
     return (
         <div className={classes.commentBox}>
             <h3>Asks & Comments</h3>
-            <form>
+            <form onSubmit={formSubmitHandler}>
                 <div className={classes.formRow}>
                     <textarea
                         className={classes.input}
@@ -78,11 +75,12 @@ const CommentBox = (props) => {
                                     onChange={event => setCommentAuthor(event.target.value)}
                                     placeholder="Email"
                                     disabled={isAnonymous}
+                                    required
                                 />
                             </div>
                             <div className={classes.formRow}>
                                 <input
-                                    name="comment-anonymous"
+                                    id="comment-anonymous"
                                     type="checkbox"
                                     checked={isAnonymous}
                                     onChange={anonymousHandler}
@@ -93,7 +91,7 @@ const CommentBox = (props) => {
                     )
                 }
                 <div className={classes.formRow}>
-                    <button type="submit" onClick={formSubmitHandler}>Add comment</button>
+                    <button type="submit">Add comment</button>
                 </div>
             </form>
         </div>

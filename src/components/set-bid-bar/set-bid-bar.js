@@ -1,41 +1,51 @@
 import {useState} from "react";
-import NumericInput from 'react-numeric-input';
+import {useDispatch, useSelector} from "react-redux";
+import {setNewBidByAuctionId} from "../../firebase/firebase.utils";
 import CustomButton from "../custom-button/custom-button";
+import {updateStateBidsHistory} from "../../redux/auction-detail/auction-detail.actions";
 
 import classes from "./set-bid-bar.module.css";
-import {useSelector} from "react-redux";
-import {setNewBidByAuctionId} from "../../firebase/firebase.utils";
 
 
-const SetBidBar = (props) => {
-    const {current_price, step, auctionId, startPrice} = props;
-    const [newBidValue, setNewBidValue] = useState(current_price || startPrice);
+const SetBidBar = () => {
+    const dispatch = useDispatch();
+    const {current_price, bids_step, id, start_price} = useSelector(state => state.detail.data);
+    const [newBidValue, setNewBidValue] = useState(current_price + bids_step || start_price + bids_step);
     const user = useSelector(state => state.user.currentUser)
 
-    function setBidInputHandler (event) {
-        setNewBidValue(event);
-    }
-
-    function setNewBidHandler (event) {
+    function setNewBidHandler(event) {
         event.preventDefault();
 
         if (!newBidValue) return;
         const newBidData = {
             bid_date: new Date(),
-            bid_price: newBidValue,
+            bid_price: Number(newBidValue),
             user_id: user.uid,
             user_name: user.displayName,
         }
 
-        setNewBidByAuctionId( auctionId, newBidData);
+        dispatch(updateStateBidsHistory(newBidData));
+        setNewBidByAuctionId(id, newBidData);
     }
 
     return (
         <div className={classes.SetBidBar}>
             <h3>Place Bid</h3>
-            <p>Step - ${step}</p>
-            <NumericInput onChange={setBidInputHandler} min={current_price} step={step} value={newBidValue} />
-            <CustomButton className={classes.submitBid} onClick={setNewBidHandler} disabled={user.uid ? false : true}>Set New Bid</CustomButton>
+            <p>Step - ${bids_step}</p>
+            <input
+                type="number"
+                onChange={(event => setNewBidValue(event.target.value))}
+                min={current_price + bids_step}
+                step={bids_step}
+                value={newBidValue}
+            />
+            <CustomButton
+                className={classes.submitBid}
+                onClick={setNewBidHandler}
+                disabled={user.uid ? false : true}
+            >
+                Set New Bid
+            </CustomButton>
             {!user.uid && <p>Only logged in users can place a bet</p>}
         </div>
     )
