@@ -24,12 +24,7 @@ const AuctionItemStatusBar = (props) => {
                 $ {currentPrice || startPrice}
             </div>
             <div className={classes.auctionCounter}>
-                {
-                    <span>{timeLeft}</span>
-                    // daysLeft > 1
-                    //     ? <span>{daysLeft} days</span>
-                    //     : <span>{hoursLeft} : {minutesLeft} : {secondsLeft}</span>
-                }
+                <span>{timeLeft}</span>
             </div>
         </div>
     )

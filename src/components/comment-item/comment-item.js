@@ -1,11 +1,14 @@
+import moment from "moment";
 import ButtonMailto from "../button-mailto/button-mailto";
-import {timeConverter} from "../../helpers/auction-functions";
 
 import classes from "./comment-item.module.css";
 
 
 const CommentItem = (props) => {
     const {commentText, commentDate, user} = props.commentData;
+
+    const date = moment.unix(commentDate.seconds);
+    const fromDate = date.from(Date.now())
 
     return (
         <div className={classes.commentItem}>
@@ -18,11 +21,11 @@ const CommentItem = (props) => {
                                 <span className={classes.author}>
                                     {
                                         user.email
-                                            ? <ButtonMailto label={user.name} mailto={user.email} />
+                                            ? <ButtonMailto label={user.name} mailto={user.email}/>
                                             : <span>{user.name}</span>
                                     }
                                 </span>
-                    <span className={classes.date}>{timeConverter(commentDate)}</span>
+                    <span className={classes.date}>{fromDate}</span>
                 </div>
             </div>
         </div>

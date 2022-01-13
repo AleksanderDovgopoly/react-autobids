@@ -1,13 +1,18 @@
+import {useSelector} from "react-redux";
 import BidsHistoryItem from "../bids-history-item/bids-history-item";
 
 import classes from "./bids-history.module.css";
 
-const BidsHistory = (props) => {
-    const bidsHistory = props.history;
+
+const BidsHistory = () => {
+    const bidsHistory = useSelector(state => state.detail.data.bids_history)
+
+    bidsHistory.sort(function (x, y) {
+        return y.bid_date - x.bid_date;
+    })
 
     return (
         <div className={classes.bidsHistoryContainer}>
-            <h4>Bids history</h4>
             {
                 bidsHistory.length
                     ? <ul>

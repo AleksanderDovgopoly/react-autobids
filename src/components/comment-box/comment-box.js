@@ -1,99 +1,47 @@
-import {Fragment, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setNewAuctionComment} from "../../firebase/firebase.utils";
-import {updateAuctionComment} from "../../redux/auction-detail/auction-detail.actions";
+import {useState} from "react";
+import {useSelector} from "react-redux";
+import CommentForm from "../comment-form/comment-form";
+import CommentsList from "../comments-list/comments-list";
+import BidsHistory from "../bids-history/bids-history";
 
 import classes from "./comment-box.module.css";
 
 
 const CommentBox = (props) => {
     const {auctionId} = props;
-    const dispatch = useDispatch();
-    const {isLogin, currentUser} = useSelector(state => state.user);
-    const [newComment, setNewComment] = useState('');
-    const [commentAuthor, setCommentAuthor] = useState('');
-    const [isAnonymous, setIsAnonymous] = useState(false);
+    const {comments, bids_history} = useSelector(state => state.detail.data);
+    const [commentsIsActive, setCommentsActive] = useState(true);
+    const [bidsIsActive, setBidsActive] = useState(false);
 
-    function anonymousHandler() {
-        setIsAnonymous(!isAnonymous);
-        setCommentAuthor('');
-    }
-
-    async function formSubmitHandler(event) {
-        event.preventDefault();
-
-        const commentData = {
-            user: {
-                name: 'Anonymous'
-            },
-            commentText: newComment,
-            commentDate: new Date()
-        }
-
-        if (isLogin) {
-            commentData.user.id = currentUser.uid;
-            commentData.user.name = currentUser.displayName;
-            commentData.user.email = currentUser.email;
-        }
-
-        if (commentAuthor) {
-            commentData.user.name = commentAuthor;
-            commentData.user.email = commentAuthor;
-        }
-
-        const response = await setNewAuctionComment(auctionId, commentData);
-
-        if (response.id === auctionId) {
-            setNewComment('');
-            setIsAnonymous(false);
-            setCommentAuthor('');
-            dispatch(updateAuctionComment(commentData))
-        }
+    function buttonsSwitchHandler() {
+        setCommentsActive(!commentsIsActive);
+        setBidsActive(!bidsIsActive)
     }
 
     return (
         <div className={classes.commentBox}>
-            <h3>Asks & Comments</h3>
-            <form onSubmit={formSubmitHandler}>
-                <div className={classes.formRow}>
-                    <textarea
-                        className={classes.input}
-                        value={newComment}
-                        onChange={event => setNewComment(event.target.value)}
-                        placeholder="Add a comment..."
-                        required
-                    />
+            <div className={classes.heading}>
+                <h3>Comments & Bids</h3>
+                <div className={classes.headingNav}>
+                    <button
+                        className={commentsIsActive ? classes.btn + ' ' + classes.active : classes.btn}
+                        onClick={buttonsSwitchHandler}>
+                        Comments
+                    </button>
+                    <button
+                        className={bidsIsActive ? classes.btn + ' ' + classes.active : classes.btn}
+                        onClick={buttonsSwitchHandler}>
+                        Bids
+                    </button>
                 </div>
-                {
-                    !isLogin && (
-                        <Fragment>
-                            <div className={classes.formRow}>
-                                <input
-                                    className={classes.input}
-                                    type="email"
-                                    value={commentAuthor}
-                                    onChange={event => setCommentAuthor(event.target.value)}
-                                    placeholder="Email"
-                                    disabled={isAnonymous}
-                                    required
-                                />
-                            </div>
-                            <div className={classes.formRow}>
-                                <input
-                                    id="comment-anonymous"
-                                    type="checkbox"
-                                    checked={isAnonymous}
-                                    onChange={anonymousHandler}
-                                />
-                                <label htmlFor="comment-anonymous">Anonymous</label>
-                            </div>
-                        </Fragment>
-                    )
-                }
-                <div className={classes.formRow}>
-                    <button type="submit">Add comment</button>
-                </div>
-            </form>
+            </div>
+            <CommentForm auctionId={auctionId}/>
+            {
+                commentsIsActive && <CommentsList commentsList={comments}/>
+            }
+            {
+                bidsIsActive && <BidsHistory history={bids_history}/>
+            }
         </div>
     )
 }

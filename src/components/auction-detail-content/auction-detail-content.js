@@ -2,9 +2,7 @@ import {useSelector} from "react-redux";
 import {Carousel} from 'react-carousel-minimal';
 import AuctionHeaderBar from "../auction-header-bar/auction-header-bar";
 import SetBidBar from "../set-bid-bar/set-bid-bar";
-import BidsHistory from "../bids-history/bids-history";
 import CommentBox from "../comment-box/comment-box";
-import CommentsList from "../comments-list/comments-list";
 
 import classes from "./auction-detail-content.module.css";
 
@@ -14,9 +12,7 @@ const AuctionDetailContent = () => {
         title,
         short_description,
         photos,
-        id,
-        bids_history,
-        comments,
+        id
     } = useSelector(state => state.detail.data)
 
     const sliderData = Object.entries(photos).map((e) => ({image: e[1]}));
@@ -53,11 +49,9 @@ const AuctionDetailContent = () => {
                     thumbnailWidth="100px"
                     classname={classes.auctionDetailContent}
                 />
-                <BidsHistory history={bids_history}/>
             </div>
             <SetBidBar />
             <CommentBox auctionId={id}/>
-            <CommentsList commentsList={comments}/>
         </div>
     )
 }

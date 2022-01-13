@@ -1,20 +1,23 @@
 .bidHistoryItem {
-    padding: 5px 20px;
+    padding: 10px 20px;
 }
 
-.bidHistoryItem:after {
-    content: "\f0e3";
-    font-family: FontAwesome;
-    display: inline-block;
-    margin-right: -1.3em;
-    width: 1em;
+.price {
+    background: #212529;
+    border-radius: 5px;
+    padding: 2px 7px;
+    margin: 5px 0;
+    color: #828282;
 }
 
 .bidHistoryItem span {
-    padding-right: 0.5em;
+    color: white;
+    font-weight: bold;
+    padding: 0 0.3em;
 }
 
 .user {
+    color: #4ad493;
     font-weight: bold;
     text-decoration: none;
     padding: 0 5px;

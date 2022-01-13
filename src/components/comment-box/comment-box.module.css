@@ -3,35 +3,35 @@
     margin: 50px auto;
     max-width: 680px;
     padding: 0 50px;
-    width: 100%;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.headingNav {
+
+}
+
+.headingNav .btn {
+    background: none;
+    border: none;
+    opacity: .6;
+    cursor: pointer;
+}
+
+.headingNav .active {
+    opacity: 1;
 }
 
 .commentBox h3 {
-    text-align: center;
-}
-
-.formRow {
-    margin-bottom: 10px;
-}
-
-.input {
-    background-color: #fcfcfc;
-    border: solid 1px #000000;
-    border-radius: 4px;
-    color: #555f77;
-    font-family: inherit;
-    font-size: 14px;
-    padding: 5px 15px;
-    outline: none;
-    width: 95%;
-    -webkit-transition: 350ms box-shadow;
-    -moz-transition: 350ms box-shadow;
-    -ms-transition: 350ms box-shadow;
-    -o-transition: 350ms box-shadow;
-    transition: 350ms box-shadow;
-}
-
-.formRow textarea {
-    height: 100px;
-    padding: 15px;
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
 }
