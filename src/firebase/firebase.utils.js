@@ -188,6 +188,21 @@ export const updateAuctionViewsById = async (auctionId) => {
     return auctionRef;
 }
 
+export const getUserDataById = async (userId) => {
+    if (!userId) return;
+
+    const userRef = await firestore.doc(`users/${userId}`);
+    const documentSnapshot = await userRef
+        .get()
+        .then(snapshot => {
+            return snapshot.data();
+        })
+        .catch(error => {
+            console.log('Some error with fetching!', error)
+        })
+    return documentSnapshot;
+}
+
 
 export const auth = firebase.auth();
 
