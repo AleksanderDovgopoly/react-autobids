@@ -28,6 +28,8 @@
 
 .headingNav .active {
     opacity: 1;
+    color: #4ad493;
+    font-weight: 800;
 }
 
 .commentBox h3 {

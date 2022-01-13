@@ -9,8 +9,8 @@ const AuctionsList = () => {
 
     const auctionItems = Object.values(auctionItemsObject)
         .sort(function (x, y) {
-        return x.start_date - y.start_date;
-    })
+            return x.start_date - y.start_date;
+        })
 
     return (
         <ul className={classes.auctionList}>

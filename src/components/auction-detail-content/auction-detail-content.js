@@ -1,8 +1,9 @@
 import {useSelector} from "react-redux";
 import {Carousel} from 'react-carousel-minimal';
 import AuctionHeaderBar from "../auction-header-bar/auction-header-bar";
-import SetBidBar from "../set-bid-bar/set-bid-bar";
 import CommentBox from "../comment-box/comment-box";
+import AuctionDetailSummary from "../auction-detail-summary/auction-detail-summary";
+import {updateAuctionViewsById} from "../../firebase/firebase.utils";
 
 import classes from "./auction-detail-content.module.css";
 
@@ -16,6 +17,7 @@ const AuctionDetailContent = () => {
     } = useSelector(state => state.detail.data)
 
     const sliderData = Object.entries(photos).map((e) => ({image: e[1]}));
+    updateAuctionViewsById(id);
 
 
     return (
@@ -25,7 +27,7 @@ const AuctionDetailContent = () => {
                     <h2>{title}</h2>
                     <span>{short_description}</span>
                 </div>
-                <AuctionHeaderBar />
+                <AuctionHeaderBar/>
             </div>
             <div className={classes.sliderContainer}>
                 <Carousel
@@ -49,8 +51,9 @@ const AuctionDetailContent = () => {
                     thumbnailWidth="100px"
                     classname={classes.auctionDetailContent}
                 />
+                <AuctionDetailSummary/>
             </div>
-            <SetBidBar />
+            {/*<SetBidBar />*/}
             <CommentBox auctionId={id}/>
         </div>
     )

@@ -37,3 +37,12 @@ export const timeConverter = (UNIX_timestamp) => {
     let time = date + ' ' + month + ' ' + hour + ':' + min + ':' + sec;
     return time;
 }
+
+export const getEndDateAuction = (UNIX_timestamp) => {
+    let days = 7;
+    const startDate = new Date(UNIX_timestamp);
+    let endDateUnicode = startDate.setTime(startDate.getTime() + (days * 24 * 60 * 60 * 1000));
+    let endDate = new Date(endDateUnicode);
+
+    return endDate;
+}

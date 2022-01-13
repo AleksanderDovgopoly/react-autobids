@@ -32,7 +32,7 @@ const AuctionDetail = () => {
         <div className={classes.auctionDetails}>
             {
                 auctionId === fetchingId
-                    ? <AuctionDetailContent />
+                    ? <AuctionDetailContent/>
                     : <Spinner/>
             }
         </div>

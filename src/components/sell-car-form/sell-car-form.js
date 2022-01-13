@@ -4,6 +4,7 @@ import firebase, {createNewAuctionDocument, storage} from "../../firebase/fireba
 import FormInput from "../form-input/form-input";
 import CustomButton from "../custom-button/custom-button";
 import DateTimePicker from "react-datetime-picker";
+import {getEndDateAuction} from "../../helpers/auction-functions";
 
 import classes from "./sell-car-form.module.css";
 
@@ -24,7 +25,17 @@ const SellCarForm = () => {
         start_date: dateValue,
         geo: '',
         photos: [],
+        seller: {
+            id: currentUser.uid,
+            name: currentUser.displayName,
+            email: currentUser.email
+        },
+        views: 0,
+        end_date: getEndDateAuction(dateValue),
+        status: 'pending'
     });
+
+    console.log(newAuctionData)
 
     useEffect(() => {
         setNewAuctionData({...newAuctionData, photos: uploadedPhoto});
@@ -32,6 +43,7 @@ const SellCarForm = () => {
 
     useEffect(() => {
         setNewAuctionData({...newAuctionData, start_date: dateValue});
+        setNewAuctionData({...newAuctionData, end_date: getEndDateAuction(dateValue)});
     }, [dateValue]);
 
     const {title, short_description, start_price, bids_step, geo} = newAuctionData;
@@ -77,6 +89,14 @@ const SellCarForm = () => {
                 start_date: dateValue,
                 geo: '',
                 photos: [],
+                seller: {
+                    id: currentUser.uid,
+                    name: currentUser.displayName,
+                    email: currentUser.email
+                },
+                views: 0,
+                end_date: getEndDateAuction(dateValue),
+                status: 'pending'
             })
 
         } catch (error) {

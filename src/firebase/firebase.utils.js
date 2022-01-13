@@ -43,7 +43,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 export const createNewAuctionDocument = async (auctionData) => {
     if (!auctionData) return;
 
-    const {id, title, short_description, start_price, bids_step, start_date, geo, photos} = auctionData;
+    const {
+        id,
+        title,
+        short_description,
+        start_price,
+        bids_step,
+        start_date,
+        end_date,
+        geo,
+        photos,
+        seller,
+        views,
+        status
+    } = auctionData;
 
     const auctionRef = await firestore.doc(`auctions/${auctionData.id}`);
 
@@ -58,8 +71,12 @@ export const createNewAuctionDocument = async (auctionData) => {
             photos,
             bids_history: [],
             start_date,
+            end_date,
             bids_step: Number(bids_step),
-            comments: []
+            comments: [],
+            seller,
+            views,
+            status
         })
     } catch (error) {
         console.log('Error creating Auction Document!')
@@ -146,6 +163,23 @@ export const setNewAuctionComment = async (auctionId, commentData) => {
     try {
         await auctionRef.update({
             comments: [...snapShot.comments, commentData]
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    return auctionRef;
+}
+
+export const updateAuctionViewsById = async (auctionId) => {
+    if (!auctionId) return;
+
+    const auctionRef = await firestore.doc(`auctions/${auctionId}`);
+    const snapShot = (await auctionRef.get()).data();
+
+    try {
+        await auctionRef.update({
+            views: snapShot.views + 1
         })
     } catch (error) {
         console.log('Error update auction comments!')

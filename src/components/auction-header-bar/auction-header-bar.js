@@ -19,10 +19,6 @@ const AuctionHeaderBar = () => {
     return (
         <div className={classes.auctionHeaderBar}>
             <div>
-                <span>Start price: </span>
-                ${start_price}
-            </div>
-            <div>
                 <span>Current bid: </span>
                 ${current_price || start_price}
             </div>
