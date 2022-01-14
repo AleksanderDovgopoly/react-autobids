@@ -1,13 +1,12 @@
-import {useSelector} from "react-redux";
 import AuctionItem from "../auction-item/auction-item";
 
 import classes from "./auctions-list.module.css";
 
 
-const AuctionsList = () => {
-    const auctionItemsObject = useSelector((state => state.auctions.cars));
+const AuctionsList = (props) => {
+    const {auctionsArr, userId} = props;
 
-    const auctionItems = Object.values(auctionItemsObject)
+    const auctionItems = auctionsArr
         .sort(function (x, y) {
             return x.start_date - y.start_date;
         })
@@ -16,7 +15,7 @@ const AuctionsList = () => {
         <ul className={classes.auctionList}>
             {
                 auctionItems.map((item) => (
-                    <AuctionItem key={item.id} item={item}/>
+                    <AuctionItem key={item.id} item={item} userId={userId}/>
                 ))
             }
         </ul>

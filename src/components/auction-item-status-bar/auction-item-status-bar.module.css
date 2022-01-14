@@ -16,3 +16,7 @@
 .auctionCounter span {
     margin-left: 25px;
 }
+
+.price {
+    padding: 0 5px;
+}

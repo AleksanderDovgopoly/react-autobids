@@ -35,7 +35,7 @@ const SellCarForm = () => {
         status: 'pending'
     });
 
-    console.log(newAuctionData)
+    //console.log(newAuctionData)
 
     useEffect(() => {
         setNewAuctionData({...newAuctionData, photos: uploadedPhoto});

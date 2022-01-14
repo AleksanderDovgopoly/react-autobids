@@ -30,6 +30,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
                 displayName,
                 email,
                 createdAt,
+                rep_score: 0,
+                avatar: '',
                 ...additionalData
             });
         } catch (error) {
@@ -114,7 +116,7 @@ export const fetchAuctionById = async (auctionId) => {
 
 export const convertCollectionsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
-        const {title, short_description, current_price, start_price, start_date, geo, photos} = doc.data();
+        const {title, short_description, current_price, start_price, start_date, geo, photos, seller, bids_history} = doc.data();
 
         return {
             id: doc.id,
@@ -124,7 +126,9 @@ export const convertCollectionsSnapshotToMap = (collections) => {
             start_price,
             geo,
             photos,
-            start_date
+            start_date,
+            seller,
+            bids_history
         }
 
     });

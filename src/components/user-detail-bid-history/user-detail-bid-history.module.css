@@ -1,0 +1,20 @@
+.bidHistory {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #ebebeb;
+}
+
+.bidHistory h2 span {
+    padding-left: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 36px;
+}
+
+@media (min-width: 576px) {
+    .bidHistory h2 span {
+        padding-left: 8px;
+        font-size: 16px;
+        line-height: 33px;
+    }
+}

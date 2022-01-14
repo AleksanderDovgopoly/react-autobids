@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {auth} from "../../firebase/firebase.utils";
+import {auth, createUserProfileDocument} from "../../firebase/firebase.utils";
 import firebase from "firebase/compat/app";
 import {getAuth, signInWithPopup} from "firebase/auth";
 import {setCurrentUser} from "../../redux/user/user.actions";
@@ -44,6 +44,7 @@ const SignIn = () => {
                 const user = result.user;
 
                 dispatch(setCurrentUser(user));
+                createUserProfileDocument(user);
                 navigate('/');
 
             }).catch((error) => {

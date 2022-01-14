@@ -11,6 +11,9 @@ import classes from "./auctions-collection.module.css";
 const AuctionsCollection = () => {
     const dispatch = useDispatch();
     const isCarsFetching = useSelector((state => state.auctions.isFetching));
+    const auctionItemsObject = useSelector((state => state.auctions.cars));
+
+    let auctionsArr = Object.values(auctionItemsObject);
 
     useEffect(() => {
         async function fetchData() {
@@ -27,7 +30,7 @@ const AuctionsCollection = () => {
             <h3>Auctions</h3>
             {
                 isCarsFetching
-                    ? <AuctionsList/>
+                    ? <AuctionsList auctionsArr={auctionsArr}/>
                     : <Spinner/>
             }
         </div>
