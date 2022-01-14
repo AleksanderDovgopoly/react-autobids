@@ -1,20 +1,47 @@
 .statusBar {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    color: white;
+    margin-right: 4px;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.statusBg {
+    padding: 4px 8px;
+    height: 25px;
+    justify-content: flex-start;
+    margin: 0;
+    background: #262626;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    align-content: center;
-    flex-wrap: nowrap;
-    align-items: stretch;
+    flex-grow: 1;
+    align-items: center;
+    z-index: 5;
+}
+
+.auctionCounter {
+    margin-left: 12px;
 }
 
 .auctionCounter:before {
     content: "\f017";
     font-family: FontAwesome;
+    font-weight: normal;
     display: inline-block;
     margin-right: -1.3em;
     width: 1em;
 }
 .auctionCounter span {
     margin-left: 25px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    white-space: nowrap;
 }
 
 .price {

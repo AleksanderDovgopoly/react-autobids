@@ -24,24 +24,25 @@ const AuctionItem = (props) => {
             >
                 <div className={classes.image}>
                     <img src={mainPhoto} alt={title}/>
+                    {
+                        userId
+                            ? <AuctionItemStatusBarByUser
+                                itemData={item}
+                                userId={userId}
+                            />
+                            : <AuctionItemStatusBar
+                                currentPrice={current_price}
+                                startPrice={start_price}
+                                startDate={start_date}
+                            />
+                    }
+
                 </div>
             </Link>
             <div className={classes.metaData}>
                 <div className={classes.auctionTitle}>{title}</div>
                 <p className={classes.auctionSubtitle}>{short_description}</p>
                 <p className={classes.auctionGeo}>{geo}</p>
-                {
-                    userId
-                        ? <AuctionItemStatusBarByUser
-                            itemData={item}
-                            userId={userId}
-                        />
-                        : <AuctionItemStatusBar
-                            currentPrice={current_price}
-                            startPrice={start_price}
-                            startDate={start_date}
-                        />
-                }
             </div>
         </li>
     )

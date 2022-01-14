@@ -12,9 +12,11 @@ const AuctionItemStatusBarByUser = (props) => {
 
     return (
         <div className={classes.statusBar}>
-            <div>
-                {currUserBids.length} Bids to
-                <span className={classes.price}>${maxUserBid}</span>
+            <div className={classes.statusBg}>
+                <div>
+                    {currUserBids.length} Bids to
+                    <span className={classes.price}>${maxUserBid}</span>
+                </div>
             </div>
         </div>
     )

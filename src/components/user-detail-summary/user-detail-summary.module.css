@@ -67,4 +67,8 @@
         margin-right: 32px;
         margin-bottom: 0;
     }
+
+    .metadata {
+        align-items: flex-start;
+    }
 }

@@ -20,11 +20,13 @@ const AuctionItemStatusBar = (props) => {
 
     return (
         <div className={classes.statusBar}>
-            <div>
-                $ {currentPrice || startPrice}
-            </div>
-            <div className={classes.auctionCounter}>
-                <span>{timeLeft}</span>
+            <div className={classes.statusBg}>
+                <div>
+                    $ {currentPrice || startPrice}
+                </div>
+                <div className={classes.auctionCounter}>
+                    <span>{timeLeft}</span>
+                </div>
             </div>
         </div>
     )
