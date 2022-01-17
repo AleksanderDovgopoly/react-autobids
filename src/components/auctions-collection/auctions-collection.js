@@ -28,7 +28,9 @@ const AuctionsCollection = (props) => {
     }
 
     if (pageType === 'search') {
-        auctionsArr = auctionsArr.filter(auction => {return auction.title.toLowerCase().includes(queryWord.toLowerCase())});
+        auctionsArr = auctionsArr.filter(auction => {
+            return auction.title.toLowerCase().includes(queryWord.toLowerCase())
+        });
         pageTitle = `Results for: ${queryWord}  (${auctionsArr.length})`;
     }
 

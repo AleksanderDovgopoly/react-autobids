@@ -28,7 +28,7 @@ const SignIn = () => {
             const response = await auth.signInWithEmailAndPassword(email, password);
             dispatch(setCurrentUser(response.user));
             setUserCredentials({email: '', password: ''});
-            navigate('/')
+            navigate('/my-account')
         } catch (error) {
             console.log('SignIn error: ', error)
         }
@@ -45,7 +45,7 @@ const SignIn = () => {
 
                 dispatch(setCurrentUser(user));
                 createUserProfileDocument(user);
-                navigate('/');
+                navigate('/my-account');
 
             }).catch((error) => {
             console.log('Sign In Error', error)

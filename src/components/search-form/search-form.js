@@ -17,10 +17,19 @@ const SearchForm = () => {
         setSearchWords(event.target.value);
     }
 
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        if (!searchWords) {
+            return;
+        }
+        navigate(`/search/${searchWords}`, {replace: false})
+    }
+
     return (
         <form
             className={classes.searchForm}
-            onSubmit={() => navigate(`/search/${searchWords}`, {replace: false})}
+            onSubmit={submitHandler}
         >
             <input
                 type="text"

@@ -1,14 +1,20 @@
 .searchForm {
     width: inherit;
+    display: flex;
+    height: 100%;
+    align-content: center;
+    align-items: center;
 }
 
 .searchForm input {
     display: block;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
+    font-family: 'Poppins';
     font-size: .875rem;
     font-weight: 400;
     line-height: 1.5;
+    padding-left: 1rem;
     color: #262626;
     background-color: #fff;
     background-clip: padding-box;

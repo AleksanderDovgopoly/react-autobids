@@ -10,7 +10,7 @@ const SearchPage = () => {
 
     return (
         <div className={classes.searchContainer}>
-            <AuctionsCollection pageType="search" queryWord={query} />
+            <AuctionsCollection pageType="search" queryWord={query}/>
         </div>
     )
 }

@@ -7,3 +7,7 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.pastAuctions ul {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
