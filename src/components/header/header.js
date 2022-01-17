@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {auth} from "../../firebase/firebase.utils";
 import SearchForm from "../search-form/search-form";
 import {clearCurrentUser} from "../../redux/user/user.actions";
+import DropDownMenu from "../drop-down-menu/drop-down-menu";
 
 import classes from "./header.module.css";
 
@@ -24,7 +25,10 @@ const Header = () => {
             </div>
             <div className={classes.navContainer}>
                 <ul className={classes.navBar}>
-                    <li>Auctions</li>
+                    <li className={classes.hasSubMenu}>
+                        Auctions
+                        <DropDownMenu/>
+                    </li>
                     <li>
                         <Link to="/sell-car">Sell car</Link>
                     </li>

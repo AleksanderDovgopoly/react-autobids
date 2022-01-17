@@ -6,10 +6,14 @@ import classes from "./auctions-list.module.css";
 const AuctionsList = (props) => {
     const {auctionsArr, userId} = props;
 
+    if (!auctionsArr.length) {
+        return <p>Nothing found for your request</p>;
+    }
+
     const auctionItems = auctionsArr
         .sort(function (x, y) {
             return x.start_date - y.start_date;
-        })
+        });
 
     return (
         <ul className={classes.auctionList}>

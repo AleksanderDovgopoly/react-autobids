@@ -5,7 +5,7 @@ import classes from "./home-page.module.css";
 const HomePage = () => {
     return (
         <div className={classes.homePage}>
-            <AuctionsCollection />
+            <AuctionsCollection pageType="home" />
         </div>
     )
 }

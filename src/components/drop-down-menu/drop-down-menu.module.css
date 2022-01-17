@@ -1,0 +1,24 @@
+.submenu {
+    display: none;
+    position: absolute;
+    top: inherit;
+    left: inherit;
+    z-index: 1000;
+    float: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    font-size: .875rem;
+    color: #262626;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 8px 40px rgb(0 0 0 / 16%);
+    border: 0;
+    border-radius: 8px;
+    margin-top: -1px;
+}
+
+.submenu:hover {
+    display: block;
+}

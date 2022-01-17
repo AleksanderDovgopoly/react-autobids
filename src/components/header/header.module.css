@@ -52,6 +52,11 @@
 .navBar li {
     padding: 0 8px;
     align-self: center;
+    line-height: 40px;
+}
+
+.hasSubMenu:hover ul {
+    display: block;
 }
 
 @media screen and (max-width: 800px) {
