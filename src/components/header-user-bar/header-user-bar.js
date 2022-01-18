@@ -12,8 +12,14 @@ const UserBar = () => {
         <div className={classes.userBar}>
             {
                 isLogin
-                    ? <UserInfo />
-                    : <Link className="btn btn-primary signInBtn" to='sign-in'>Sign In</Link>
+                    ? <UserInfo/>
+                    : <Link
+                        className="btn btn-primary signInBtn"
+                        to='sign-in'
+                        style={{margin:"1rem 1.5rem"}}
+                    >
+                        Sign In
+                    </Link>
             }
         </div>
     )

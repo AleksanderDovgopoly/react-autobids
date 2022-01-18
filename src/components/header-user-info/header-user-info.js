@@ -14,7 +14,7 @@ const UserInfo = () => {
     function logOutHandler(event) {
         event.preventDefault();
         auth.signOut();
-        dispatch(clearCurrentUser())
+        dispatch(clearCurrentUser());
     }
 
     return (
@@ -30,9 +30,12 @@ const UserInfo = () => {
             <div className={classes.drop}>
                 <ul>
                     <li>
-                        <button className="btn btn-primary signOutBtn" onClick={logOutHandler}>Log out</button>
+                        <Link to="/my-account">Edit account</Link>
                     </li>
                 </ul>
+                <div className={classes.logOut}>
+                    <button onClick={logOutHandler}>Log out</button>
+                </div>
             </div>
         </div>
     )
