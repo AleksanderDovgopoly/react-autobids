@@ -15,6 +15,11 @@
     margin: 0 0;
 }
 
+.ending span {
+    font-size: 14px;
+    opacity: .7;
+}
+
 .sliderContainer {
     display: flex;
     flex-wrap: wrap;

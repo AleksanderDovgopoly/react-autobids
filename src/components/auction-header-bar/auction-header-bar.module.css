@@ -1,14 +1,33 @@
 .auctionHeaderBar {
-    width: 50%;
+    display: flex;
+    margin-top: 40px;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.bidStats {
+    width: auto;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: space-around;
     align-items: center;
-    background: #00d41047;
-    padding: 20px 0;
+    background: #262626;
+    color: #fff;
+    padding: 13px 0;
     border-radius: 10px;
+    width: 88%;
 }
+
+.auctionHeaderBar button {
+    white-space: nowrap;
+    height: 50px;
+    margin-left: 7px;
+}
+
 .auctionHeaderBar span {
     font-weight: bold;
 }

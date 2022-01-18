@@ -6,7 +6,7 @@ import classes from "./auction-header-bar.module.css";
 
 
 const AuctionHeaderBar = () => {
-    const {start_price, current_price, bids_history, start_date} = useSelector(state => state.detail.data);
+    const {start_price, current_price, bids_history, start_date, views} = useSelector(state => state.detail.data);
     const [timeLeft, setTimeLeft] = useState(calculateLeftTime(start_date));
 
     useEffect(() => {
@@ -18,22 +18,29 @@ const AuctionHeaderBar = () => {
 
     return (
         <div className={classes.auctionHeaderBar}>
-            <div>
-                <span>Current bid: </span>
-                ${current_price || start_price}
+            <div className={classes.bidStats}>
+                <div>
+                    <span>Time left: </span>
+                    {timeLeft}
+                </div>
+                <div>
+                    <span>Current bid: </span>
+                    ${current_price || start_price}
+                </div>
+                <div>
+                    <span>#Bids: </span>
+                    {
+                        bids_history
+                            ? bids_history.length
+                            : 0
+                    }
+                </div>
+                <div>
+                    <span>Views: </span>
+                    {views}
+                </div>
             </div>
-            <div>
-                <span>#Bids: </span>
-                {
-                    bids_history
-                        ? bids_history.length
-                        : 0
-                }
-            </div>
-            <div>
-                <span>Time left: </span>
-                {timeLeft}
-            </div>
+            <button className="btn btn-primary signInBtn">Place Bid</button>
         </div>
     )
 }

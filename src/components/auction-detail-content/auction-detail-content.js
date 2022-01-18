@@ -1,26 +1,26 @@
 import {useSelector} from "react-redux";
 import {Carousel} from 'react-carousel-minimal';
+import moment from "moment";
+import {updateAuctionViewsById} from "../../firebase/firebase.utils";
 import AuctionHeaderBar from "../auction-header-bar/auction-header-bar";
 import CommentBox from "../comment-box/comment-box";
-import AuctionDetailSummary from "../auction-detail-summary/auction-detail-summary";
-import {updateAuctionViewsById} from "../../firebase/firebase.utils";
-
-import classes from "./auction-detail-content.module.css";
 import AuctionSpec from "../auction-detail-spec/auction-detail-spec";
 import NewListingsSidebar from "../sidebars/new-listings-sidebar/new-listings-sidebar";
+import SetBidBar from "../set-bid-bar/set-bid-bar";
+
+import classes from "./auction-detail-content.module.css";
 
 
 const AuctionDetailContent = () => {
-    const {
-        title,
-        short_description,
-        photos,
-        id
-    } = useSelector(state => state.detail.data)
+    const {title, short_description, photos, id, end_date} = useSelector(state => state.detail.data);
 
     const sliderData = Object.entries(photos).map((e) => ({image: e[1]}));
-    updateAuctionViewsById(id);
 
+    const endingMoment = moment.unix(end_date.seconds);
+    const endingDate = endingMoment.format("MMM D YYYY, h:mm a");
+
+    //views counter
+    updateAuctionViewsById(id);
 
     return (
         <div className={classes.auctionDetailContent}>
@@ -29,7 +29,10 @@ const AuctionDetailContent = () => {
                     <h2>{title}</h2>
                     <span>{short_description}</span>
                 </div>
-                <AuctionHeaderBar/>
+                <div className={classes.ending}>
+                    <span>Ending: </span>
+                    {endingDate}
+                </div>
             </div>
             <div className={classes.sliderContainer}>
                 <Carousel
@@ -53,10 +56,11 @@ const AuctionDetailContent = () => {
                     thumbnailWidth="100px"
                     classname={classes.auctionDetailContent}
                 />
-                {/*<AuctionDetailSummary/>*/}
+                <SetBidBar/>
             </div>
             <div className={classes.withSidebar}>
                 <div className={classes.col}>
+                    <AuctionHeaderBar/>
                     <AuctionSpec/>
                     <CommentBox auctionId={id}/>
                 </div>

@@ -116,7 +116,7 @@ export const fetchAuctionById = async (auctionId) => {
 
 export const convertCollectionsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
-        const {title, short_description, current_price, start_price, start_date, geo, photos, seller, bids_history, status} = doc.data();
+        const {title, short_description, current_price, start_price, start_date, geo, photos, seller, bids_history, status, end_date} = doc.data();
 
         return {
             id: doc.id,
@@ -127,6 +127,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
             geo,
             photos,
             start_date,
+            end_date,
             seller,
             bids_history,
             status
