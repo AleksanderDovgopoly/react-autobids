@@ -22,3 +22,46 @@
     justify-content: space-between;
     align-items: stretch;
 }
+
+.withSidebar {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+    max-width: 1440px;
+    width: 100%;
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    width: 70%;
+}
+
+.withSidebar .sidebar {
+    display: flex;
+    width: 30%;
+    align-items: flex-end;
+    flex-direction: column;
+    padding-left: 34px;
+}
+
+@media (max-width: 1400px) {
+    .col {
+        width: 75%;
+    }
+
+    .withSidebar .sidebar {
+        width: 25%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .col {
+        width: 100%;
+    }
+
+    .withSidebar .sidebar {
+        display: none;
+    }
+}

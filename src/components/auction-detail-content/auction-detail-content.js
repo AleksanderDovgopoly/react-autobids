@@ -6,6 +6,8 @@ import AuctionDetailSummary from "../auction-detail-summary/auction-detail-summa
 import {updateAuctionViewsById} from "../../firebase/firebase.utils";
 
 import classes from "./auction-detail-content.module.css";
+import AuctionSpec from "../auction-detail-spec/auction-detail-spec";
+import NewListingsSidebar from "../sidebars/new-listings-sidebar/new-listings-sidebar";
 
 
 const AuctionDetailContent = () => {
@@ -33,7 +35,7 @@ const AuctionDetailContent = () => {
                 <Carousel
                     data={sliderData}
                     time={3000}
-                    width="850px"
+                    width="1440px"
                     height="500px"
                     radius="10px"
                     slideNumber={true}
@@ -51,10 +53,17 @@ const AuctionDetailContent = () => {
                     thumbnailWidth="100px"
                     classname={classes.auctionDetailContent}
                 />
-                <AuctionDetailSummary/>
+                {/*<AuctionDetailSummary/>*/}
             </div>
-            {/*<SetBidBar />*/}
-            <CommentBox auctionId={id}/>
+            <div className={classes.withSidebar}>
+                <div className={classes.col}>
+                    <AuctionSpec/>
+                    <CommentBox auctionId={id}/>
+                </div>
+                <div className={classes.sidebar}>
+                    <NewListingsSidebar/>
+                </div>
+            </div>
         </div>
     )
 }

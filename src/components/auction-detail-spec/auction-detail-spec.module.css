@@ -1,0 +1,60 @@
+.auctionSpec {
+    display: flex;
+    width: 100%;
+    padding-top: 40px;
+}
+
+.auctionSpec dl {
+    margin: 0;
+    flex-basis: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid #ebebeb;
+    border-bottom: 0;
+}
+
+.auctionSpec dt {
+    padding: 0 2%;
+    margin: 0 -1px 0 0;
+    font-size: 15px;
+    line-height: 40px;
+    white-space: nowrap;
+    border-bottom: 1px solid #ebebeb;
+    flex-basis: 36%;
+    font-weight: 600;
+    background: #fafafa;
+    border-right: 1px solid #ebebeb;
+}
+
+.auctionSpec dd {
+    padding: 0 2%;
+    margin: 0;
+    font-size: 15px;
+    line-height: 40px;
+    border-bottom: 1px solid #ebebeb;
+    flex-basis: 56%;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 769px) {
+    .auctionSpec dl:nth-child(2) {
+        border-left: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .auctionSpec dl:nth-child(2) {
+        border-top: none;
+    }
+
+    .auctionSpec {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .auctionSpec dl {
+        flex-basis: 90%;
+    }
+}

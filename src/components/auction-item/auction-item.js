@@ -40,7 +40,7 @@ const AuctionItem = (props) => {
                 </div>
             </Link>
             <div className={classes.metaData}>
-                <div className={classes.auctionTitle}>{title}</div>
+                <h4 className={classes.auctionTitle}>{title}</h4>
                 <p className={classes.auctionSubtitle}>{short_description}</p>
                 <p className={classes.auctionGeo}>{geo}</p>
             </div>
