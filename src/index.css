@@ -42,3 +42,7 @@ code {
   background-color: #4ad493;
   border-color: #4ad493;
 }
+
+.react-datetime-picker {
+  height: fit-content;
+}

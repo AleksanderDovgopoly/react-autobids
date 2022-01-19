@@ -57,6 +57,7 @@ export const createNewAuctionDocument = async (auctionData) => {
         photos,
         seller,
         views,
+        spec,
         status
     } = auctionData;
 
@@ -78,6 +79,7 @@ export const createNewAuctionDocument = async (auctionData) => {
             comments: [],
             seller,
             views,
+            spec,
             status
         })
     } catch (error) {

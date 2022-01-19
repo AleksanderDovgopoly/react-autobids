@@ -6,7 +6,7 @@ export const calculateLeftTime = (UNIX_timestamp) => {
     const leftDate = new Date(endDate - currentDate);
 
     let month = leftDate.getUTCMonth();
-    let date = leftDate.getUTCDate() - 1;
+    let date = leftDate.getUTCDate();
     let hour = leftDate.getUTCHours();
     let min = addZero(leftDate.getUTCMinutes());
     let sec = addZero(leftDate.getUTCSeconds());
@@ -15,13 +15,13 @@ export const calculateLeftTime = (UNIX_timestamp) => {
         return 'Sold';
     }
 
-    if (date > 6) {
+    if (date > 7) {
         return 'Start soon';
     }
 
     response = date + ' days';
 
-    if (date === 0) {
+    if (date === 1) {
         response = hour + ':' + min + ':' + sec;
     }
 

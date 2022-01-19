@@ -4,3 +4,7 @@
     max-width: 680px;
     width: 100%;
 }
+
+.commentsList p {
+    text-align: center;
+}

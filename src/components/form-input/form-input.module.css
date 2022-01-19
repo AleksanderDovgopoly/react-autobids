@@ -36,6 +36,6 @@ input[type='password'] {
     position: absolute;
     pointer-events: none;
     left: 5px;
-    top: 10px;
+    top: 0;
     transition: 300ms ease all;
 }

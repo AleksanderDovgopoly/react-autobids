@@ -5,6 +5,7 @@ import FormInput from "../form-input/form-input";
 import CustomButton from "../custom-button/custom-button";
 import DateTimePicker from "react-datetime-picker";
 import {getEndDateAuction} from "../../helpers/auction-functions";
+import SpecFieldset from "../sell-car-spec-fieldset/sell-car-spec-fieldset";
 
 import classes from "./sell-car-form.module.css";
 
@@ -30,13 +31,14 @@ const SellCarForm = () => {
             name: currentUser.displayName,
             email: currentUser.email
         },
+        spec: {},
         views: 0,
         end_date: getEndDateAuction(dateValue),
         status: 'active'
         // ToDo: change status to 'pending'
     });
 
-    //console.log(newAuctionData)
+    console.log('FormData: ', newAuctionData)
 
     useEffect(() => {
         setNewAuctionData({...newAuctionData, photos: uploadedPhoto});
@@ -74,6 +76,9 @@ const SellCarForm = () => {
         }
     };
 
+    const handleSpecChange = (specData) => {
+        setNewAuctionData({...newAuctionData, spec: specData});
+    }
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -90,6 +95,7 @@ const SellCarForm = () => {
                 start_date: dateValue,
                 geo: '',
                 photos: [],
+                spec: {},
                 seller: {
                     id: currentUser.uid,
                     name: currentUser.displayName,
@@ -142,60 +148,70 @@ const SellCarForm = () => {
 
     return (
         <form className={classes.form}>
-            <FormInput
-                type='text'
-                name='title'
-                value={title}
-                handleChange={handleChange}
-                label='Car full name'
-                required
-            />
-            <FormInput
-                type='text'
-                name='short_description'
-                value={short_description}
-                handleChange={handleChange}
-                label='Short description'
-                required
-            />
-            <FormInput
-                type='number'
-                name='start_price'
-                value={start_price}
-                handleChange={handleChange}
-                label='Start price, $'
-                required
-            />
-            <FormInput
-                type='number'
-                name='bids_step'
-                value={bids_step}
-                handleChange={handleChange}
-                label='Increase Bid step, $'
-            />
-            <DateTimePicker
-                onChange={setDateValue}
-                value={dateValue}
-                required
-            />
-            <FormInput
-                type='text'
-                name='geo'
-                value={geo}
-                handleChange={handleChange}
-                label='Location'
-                required
-            />
-            <FormInput
-                type='file'
-                accept=".png, .jpg, .jpeg"
-                name='photos'
-                handleChange={handlePhotoChange}
-                label='Upload photos'
-                required
-                multiple
-            />
-            <CustomButton onClick={onUploadSubmission}>Upload files</CustomButton>
+            <fieldset>
+                <FormInput
+                    type='text'
+                    name='title'
+                    value={title}
+                    handleChange={handleChange}
+                    label='Car full name'
+                    style={{margin: "20px 0"}}
+                    required
+                />
+                <FormInput
+                    type='text'
+                    name='short_description'
+                    value={short_description}
+                    handleChange={handleChange}
+                    label='Short description'
+                    style={{margin: "20px 0"}}
+                    required
+                />
+                <FormInput
+                    type='number'
+                    name='start_price'
+                    value={start_price}
+                    handleChange={handleChange}
+                    label='Start price, $'
+                    style={{margin: "20px 0"}}
+                    required
+                />
+                <FormInput
+                    type='number'
+                    name='bids_step'
+                    value={bids_step}
+                    handleChange={handleChange}
+                    label='Increase Bid step, $'
+                    style={{margin: "20px 0"}}
+                />
+                <DateTimePicker
+                    onChange={setDateValue}
+                    value={dateValue}
+                    required
+                />
+                <FormInput
+                    type='text'
+                    name='geo'
+                    value={geo}
+                    handleChange={handleChange}
+                    label='Location'
+                    style={{margin: "20px 0"}}
+                    required
+                />
+                <FormInput
+                    type='file'
+                    accept=".png, .jpg, .jpeg"
+                    name='photos'
+                    handleChange={handlePhotoChange}
+                    label='Upload photos'
+                    style={{margin: "20px 0"}}
+                    required
+                    multiple
+                />
+                <CustomButton onClick={onUploadSubmission}>Upload files</CustomButton>
+            </fieldset>
+
+            <SpecFieldset setFormState={handleSpecChange} />
             <CustomButton type='submit' onClick={handleSubmit}> Submit </CustomButton>
         </form>
     )
