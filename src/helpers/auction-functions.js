@@ -1,41 +1,38 @@
 export const calculateLeftTime = (UNIX_timestamp) => {
-    let days = 7;
-    let timeLeft = 0;
-    const startDate = new Date(UNIX_timestamp * 1000);
-    let endDateUnicode = startDate.setTime(startDate.getTime() + (days * 24 * 60 * 60 * 1000));
-    let endDate = new Date(endDateUnicode);
+    let response = '';
 
     const currentDate = new Date();
-    timeLeft = new Date(endDate.getTime() - currentDate.getTime());
-    let month = timeLeft.getMonth();
-    let date = timeLeft.getDate();
-    let hour = timeLeft.getHours();
-    let min = timeLeft.getMinutes();
-    let sec = timeLeft.getSeconds();
-    // let time = date + ' ' + month + ' ' + hour + ':' + min + ':' + sec;
-    let time = date + ' days ' + hour + ':' + min + ':' + sec;
+    const endDate = new Date(UNIX_timestamp.seconds * 1000);
+    const leftDate = new Date(endDate - currentDate);
+
+    let month = leftDate.getUTCMonth();
+    let date = leftDate.getUTCDate() - 1;
+    let hour = leftDate.getUTCHours();
+    let min = addZero(leftDate.getUTCMinutes());
+    let sec = addZero(leftDate.getUTCSeconds());
 
     if (month > 2) {
         return 'Sold';
     }
 
-    if (date > 7) {
+    if (date > 6) {
         return 'Start soon';
     }
 
-    return time;
+    response = date + ' days';
+
+    if (date === 0) {
+        response = hour + ':' + min + ':' + sec;
+    }
+
+    return response;
 }
 
-export const timeConverter = (UNIX_timestamp) => {
-    let a = new Date(UNIX_timestamp * 1000);
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    let month = months[a.getMonth()];
-    let date = a.getDate();
-    let hour = a.getHours();
-    let min = a.getMinutes();
-    let sec = a.getSeconds();
-    let time = date + ' ' + month + ' ' + hour + ':' + min + ':' + sec;
-    return time;
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i
+    }
+    return i;
 }
 
 export const getEndDateAuction = (UNIX_timestamp) => {

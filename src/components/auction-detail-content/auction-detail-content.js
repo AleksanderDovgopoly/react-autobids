@@ -7,6 +7,7 @@ import CommentBox from "../comment-box/comment-box";
 import AuctionSpec from "../auction-detail-spec/auction-detail-spec";
 import NewListingsSidebar from "../sidebars/new-listings-sidebar/new-listings-sidebar";
 import SetBidBar from "../set-bid-bar/set-bid-bar";
+import EndingSoonSidebar from "../sidebars/ending-soon-sidebar/ending-soon-sidebar";
 
 import classes from "./auction-detail-content.module.css";
 
@@ -66,6 +67,7 @@ const AuctionDetailContent = () => {
                 </div>
                 <div className={classes.sidebar}>
                     <NewListingsSidebar/>
+                    <EndingSoonSidebar/>
                 </div>
             </div>
         </div>

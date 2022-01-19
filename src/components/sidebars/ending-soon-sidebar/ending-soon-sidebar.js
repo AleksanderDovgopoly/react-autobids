@@ -1,21 +1,21 @@
 import {useSelector} from "react-redux";
 import AuctionItem from "../../auction-item/auction-item";
 
-import classes from "./new-listings-sidebar.module.css";
+import classes from "../new-listings-sidebar/new-listings-sidebar.module.css";
 
 
-const NewListingsSidebar = () => {
+const EndingSoonSidebar = () => {
     const auctionsObj = useSelector(state => state.auctions.cars);
 
     const auctionItems = Object.values(auctionsObj)
         .sort(function (x, y) {
-            return y.start_date - x.start_date;
+            return x.end_date - y.end_date;
         })
         .filter((item) => (item.status === 'active'));
 
     return (
         <div className={classes.sidebarContainer}>
-            <h5>New Listings</h5>
+            <h5>Ending Soon</h5>
             <ul>
                 {
                     auctionItems.slice(0, 6).map((item) => (
@@ -27,4 +27,4 @@ const NewListingsSidebar = () => {
     )
 }
 
-export default NewListingsSidebar;
+export default EndingSoonSidebar

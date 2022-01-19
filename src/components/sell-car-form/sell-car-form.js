@@ -32,7 +32,8 @@ const SellCarForm = () => {
         },
         views: 0,
         end_date: getEndDateAuction(dateValue),
-        status: 'pending'
+        status: 'active'
+        // ToDo: change status to 'pending'
     });
 
     //console.log(newAuctionData)
@@ -96,7 +97,8 @@ const SellCarForm = () => {
                 },
                 views: 0,
                 end_date: getEndDateAuction(dateValue),
-                status: 'pending'
+                status: 'active'
+                // ToDo: change status to 'pending'
             })
 
         } catch (error) {

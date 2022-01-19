@@ -6,15 +6,14 @@ import classes from "./auction-header-bar.module.css";
 
 
 const AuctionHeaderBar = () => {
-    const {start_price, current_price, bids_history, start_date, views} = useSelector(state => state.detail.data);
-    const [timeLeft, setTimeLeft] = useState(calculateLeftTime(start_date));
+    const {start_price, current_price, bids_history, views, end_date} = useSelector(state => state.detail.data);
+    const [timeLeft, setTimeLeft] = useState(calculateLeftTime(end_date));
 
     useEffect(() => {
         setInterval(() => {
-            setTimeLeft(calculateLeftTime(start_date))
+            setTimeLeft(calculateLeftTime(end_date))
         }, 1000);
-    }, [start_date]);
-
+    });
 
     return (
         <div className={classes.auctionHeaderBar}>

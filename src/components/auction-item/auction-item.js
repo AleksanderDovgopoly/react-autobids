@@ -38,6 +38,7 @@ const AuctionItem = (props) => {
                                 currentPrice={current_price}
                                 startPrice={start_price}
                                 startDate={start_date}
+                                endDate={end_date}
                             />
                     }
 

@@ -1,21 +1,19 @@
 import {useEffect, useState} from "react";
-import {calculateLeftTime, timeConverter} from "../../helpers/auction-functions";
+import {calculateLeftTime} from "../../helpers/auction-functions";
 
 import classes from "./auction-item-status-bar.module.css";
 
 
 const AuctionItemStatusBar = (props) => {
-    const {currentPrice, startPrice, startDate} = props;
+    const {currentPrice, startPrice, endDate} = props;
 
-    const start_date = timeConverter(startDate);
-
-    const [timeLeft, setTimeLeft] = useState(calculateLeftTime(startDate));
+    const [timeLeft, setTimeLeft] = useState(calculateLeftTime(endDate));
 
     useEffect(() => {
         setInterval(() => {
-            setTimeLeft(calculateLeftTime(startDate))
+            setTimeLeft(calculateLeftTime(endDate))
         }, 1000);
-    }, [startDate])
+    })
 
 
     return (
