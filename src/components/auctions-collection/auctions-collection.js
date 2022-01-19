@@ -4,6 +4,7 @@ import {fetchAuctions} from "../../firebase/firebase.utils";
 import {fetchAuctionsAction} from "../../redux/auctions/auctions.actions";
 import AuctionsList from "../auctions-list/auctions-list";
 import Spinner from "../spinner/spinner";
+import CollectionSortsBar from "../collection-sorts-bar/collection-sorts-bar";
 
 import classes from "./auctions-collection.module.css";
 
@@ -46,9 +47,12 @@ const AuctionsCollection = (props) => {
 
     return (
         <div className={classes.auctionCollection}>
-            <h3>
-                {pageTitle}
-            </h3>
+            <div className={classes.heading}>
+                <h3>
+                    {pageTitle}
+                </h3>
+                <CollectionSortsBar/>
+            </div>
             {
                 isCarsFetching
                     ? <AuctionsList auctionsArr={auctionsArr}/>
