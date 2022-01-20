@@ -1,45 +1,44 @@
-import {useEffect, useState} from "react";
+import {Fragment} from "react";
 import {useSelector} from "react-redux";
-import {calculateLeftTime} from "../../helpers/auction-functions";
+import StatsTimeLeft from "./stats-time-left/stats-time-left";
+import StatsCurrentBid from "./stats-current-bid/stats-current-bid";
+import StatsBidsCounter from "./stats-bids-counter/stats-bids-counter";
+import StatsViewsCounter from "./stats-views-counter/stats-views-counter";
+import StatsSoldPrice from "./stats-sold-price/stats-sold-price";
+import StatsSoldDate from "./stats-sold-date/stats-sold-date";
 
 import classes from "./auction-header-bar.module.css";
 
 
 const AuctionHeaderBar = () => {
-    const {start_price, current_price, bids_history, views, end_date} = useSelector(state => state.detail.data);
-    const [timeLeft, setTimeLeft] = useState(calculateLeftTime(end_date));
-
-    useEffect(() => {
-        setInterval(() => {
-            setTimeLeft(calculateLeftTime(end_date))
-        }, 1000);
-    });
+    const {start_price, current_price, bids_history, views, end_date, status} = useSelector(state => state.detail.data);
 
     return (
         <div className={classes.auctionHeaderBar}>
-            <div className={classes.bidStats}>
-                <div>
-                    <span>Time left: </span>
-                    {timeLeft}
-                </div>
-                <div>
-                    <span>Current bid: </span>
-                    ${current_price || start_price}
-                </div>
-                <div>
-                    <span>#Bids: </span>
-                    {
-                        bids_history
-                            ? bids_history.length
-                            : 0
-                    }
-                </div>
-                <div>
-                    <span>Views: </span>
-                    {views}
-                </div>
+            <div
+                className={classes.bidStats}
+                style={status === 'past' ? {width: '100%'} : null}
+            >
+                {
+                    status === 'active'
+                        ? <Fragment>
+                            <StatsTimeLeft endDate={end_date}/>
+                            <StatsCurrentBid bid={current_price} startPrice={start_price}/>
+                        </Fragment>
+                        : <Fragment>
+                            <StatsSoldPrice price={current_price}/>
+                            <StatsSoldDate endDate={end_date}/>
+                        </Fragment>
+                }
+                <StatsBidsCounter bidHistory={bids_history}/>
+                <StatsViewsCounter views={views}/>
             </div>
-            <button className="btn btn-primary signInBtn">Place Bid</button>
+            {
+                status === 'active'
+                    ? <button className="btn btn-primary signInBtn">Place Bid</button>
+                    : null
+            }
+
         </div>
     )
 }
