@@ -43,3 +43,31 @@ export const getEndDateAuction = (UNIX_timestamp) => {
 
     return endDate;
 }
+
+export const doSortAuctionsList = (auctionsArr, sortType) => {
+
+    switch (sortType) {
+        case 'highest_price':
+            return auctionsArr.sort(function (x, y) {
+                return y.current_price - x.current_price;
+            });
+        case 'lowest_price':
+            return auctionsArr.sort(function (x, y) {
+                return x.current_price - y.current_price;
+            });
+
+        case 'highest_mileage':
+            return auctionsArr.sort(function (x, y) {
+                return y.spec.mileage - x.spec.mileage;
+            });
+        case 'lowest_mileage':
+            return auctionsArr.sort(function (x, y) {
+                return x.spec.mileage - y.spec.mileage;
+            });
+
+        default:
+            return auctionsArr.sort(function (x, y) {
+                return x.end_date - y.end_date;
+            });
+    }
+}

@@ -1,4 +1,5 @@
 import {useSearchParams} from "react-router-dom";
+import {doSortAuctionsList} from "../../helpers/auction-functions";
 import AuctionItem from "../auction-item/auction-item";
 
 import classes from "./auctions-list.module.css";
@@ -7,18 +8,13 @@ import classes from "./auctions-list.module.css";
 const AuctionsList = (props) => {
     const {auctionsArr, userId} = props;
     const [searchParams] = useSearchParams();
-    let currentSort = searchParams.get('sort');
-
-    console.log('Do sort here: ', currentSort)
+    const currentSort = searchParams.get('sort');
 
     if (!auctionsArr.length) {
         return <p>Nothing found for your request</p>;
     }
 
-    const auctionItems = auctionsArr
-        .sort(function (x, y) {
-            return x.start_date - y.start_date;
-        });
+    const auctionItems = doSortAuctionsList(auctionsArr, currentSort);
 
     return (
         <ul className={classes.auctionList}>
