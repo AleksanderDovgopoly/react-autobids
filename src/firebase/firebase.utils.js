@@ -58,6 +58,7 @@ export const createNewAuctionDocument = async (auctionData) => {
         seller,
         views,
         spec,
+        year_release,
         status
     } = auctionData;
 
@@ -80,6 +81,7 @@ export const createNewAuctionDocument = async (auctionData) => {
             seller,
             views,
             spec,
+            year_release,
             status
         })
     } catch (error) {
@@ -118,7 +120,7 @@ export const fetchAuctionById = async (auctionId) => {
 
 export const convertCollectionsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
-        const {title, short_description, current_price, start_price, start_date, geo, photos, seller, bids_history, status, end_date, spec} = doc.data();
+        const {title, short_description, current_price, start_price, start_date, geo, photos, seller, bids_history, status, end_date, year_release, spec} = doc.data();
 
         return {
             id: doc.id,
@@ -133,6 +135,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
             seller,
             bids_history,
             spec,
+            year_release,
             status
         }
 
@@ -202,6 +205,21 @@ export const getUserDataById = async (userId) => {
 
     const userRef = await firestore.doc(`users/${userId}`);
     const documentSnapshot = await userRef
+        .get()
+        .then(snapshot => {
+            return snapshot.data();
+        })
+        .catch(error => {
+            console.log('Some error with fetching!', error)
+        })
+    return documentSnapshot;
+}
+
+export const getCategoriesListBySlug = async (catSlug) => {
+    if (!catSlug) return;
+
+    const categoriesRef = await firestore.doc(`categories/${catSlug}`);
+    const documentSnapshot = await categoriesRef
         .get()
         .then(snapshot => {
             return snapshot.data();

@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import {getEndDateAuction} from "../../helpers/auction-functions";
 import {createNewAuctionDocument} from "../../firebase/firebase.utils";
 import FormSuccessAlert from "../form-success-alert/form-success-alert";
+import FormSelect from "../form-select-fetch/form-select-fetch";
 
 import classes from "./sell-car-hook-form.module.css";
 
@@ -14,7 +15,7 @@ const SellCarHookForm = () => {
     const currentDate = new Date();
     const [auctionId, setAuctionId] = useState('');
     const currentUser = useSelector(state => state.user.currentUser);
-    const {register, handleSubmit, setValue, setError, formState: {errors, isSubmitSuccessful}} = useForm({
+    const {register, handleSubmit, setValue, formState: {errors, isSubmitSuccessful, isValid}} = useForm({
         defaultValues: {
             spec: {},
             seller: {
@@ -70,14 +71,31 @@ const SellCarHookForm = () => {
                             <Input label="Exterior" name="spec.exterior" register={register} errors={errors}
                                    isRequired={true}/>
                             <Input label="Engine" name="spec.engine" register={register} errors={errors} isRequired={true}/>
-                            <Input label="Transmission" name="spec.transmission" register={register} errors={errors}
-                                   isRequired={true}/>
-                            <Input label="Body style" name="spec.body_style" register={register} errors={errors}
-                                   isRequired={true}/>
+                            <FormSelect label="Transmission"
+                                        name="spec.transmission"
+                                        catSlug="transmission"
+                                        register={register}
+                                        errors={errors}
+                                        isRequired={true}
+                            />
                             <Input label="Drivetrain" name="spec.drivetrain" register={register} errors={errors}
                                    isRequired={true}/>
+                            <FormSelect label="Body style"
+                                        name="spec.body_style"
+                                        catSlug="body_style"
+                                        register={register}
+                                        errors={errors}
+                                        isRequired={true}
+                            />
                             <Input label="VIN" name="spec.vin" register={register} errors={errors} isRequired={true}/>
-                            <Input label="Mileage" name="spec.mileage" register={register} errors={errors}
+                            <FormSelect label="Year release"
+                                        name="year_release"
+                                        catSlug="year_release"
+                                        register={register}
+                                        errors={errors}
+                                        isRequired={true}
+                            />
+                            <Input label="Mileage" name="spec.mileage" type={'number'} register={register} errors={errors}
                                    isRequired={true}/>
                             {
                                 errors && errors.spec ?
