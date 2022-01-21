@@ -5,3 +5,9 @@
     align-items: center;
     justify-items: stretch;
 }
+.warning {
+    color: red;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}

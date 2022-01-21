@@ -6,9 +6,9 @@ const InputUploadPhoto = ({setFormData, auctionId}) => {
     const [files, setFiles] = useState([]);
     const [uploadedPhoto, setUploadedPhoto] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         setFormData('photos', uploadedPhoto);
-    }, [uploadedPhoto])
+    }, [uploadedPhoto, setFormData])
 
     const handlePhotoChange = event => {
         for (let i = 0; i < event.target.files.length; i++) {
@@ -52,8 +52,9 @@ const InputUploadPhoto = ({setFormData, auctionId}) => {
 
     return (
         <>
-            <label>Upload photos</label>
-            <input type='file' accept=".png, .jpg, .jpeg" name='photos' onChange={handlePhotoChange} required multiple />
+            <label>Upload photos
+                <input type='file' accept=".png, .jpg, .jpeg" name='photos' onChange={handlePhotoChange} required multiple/>
+            </label>
             <CustomButton onClick={onUploadSubmission}>Upload files</CustomButton>
         </>
     )
