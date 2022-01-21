@@ -7,6 +7,7 @@ import Spinner from "../spinner/spinner";
 import CollectionSortsBar from "../collection-sorts-bar/collection-sorts-bar";
 
 import classes from "./auctions-collection.module.css";
+import FiltersBar from "../collection-filters-bar/collection-filters-bar";
 
 
 const AuctionsCollection = (props) => {
@@ -51,6 +52,7 @@ const AuctionsCollection = (props) => {
                 <h3>
                     {pageTitle}
                 </h3>
+                <FiltersBar />
                 <CollectionSortsBar/>
             </div>
             {

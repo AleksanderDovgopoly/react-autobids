@@ -5,25 +5,25 @@ import classes from "../form-input-hook/form-input-hook.module.css";
 
 const FormSelect = ({label, catSlug, register, name, isRequired, errors}) => {
     const [isFetching, setIsFetching] = useState(false);
-    const [bodyStyleList, setBodyStyleList] = useState('');
+    const [categoriesList, setCategoriesList] = useState('');
 
     useEffect(async () => {
         if (!isFetching) {
             const fetchingData = await getCategoriesListBySlug(catSlug);
-            setBodyStyleList(fetchingData);
+            setCategoriesList(fetchingData);
             setIsFetching(true);
         }
     });
 
     return (
         <label>{label}
-            <select {...register(name, {required: isRequired ? "This field is required!" : false})} >
-                <option value="" selected disabled hidden>Choose here</option>
+            <select {...register(name, {required: isRequired ? "This field is required!" : false})} defaultValue=''>
+                <option value="" disabled hidden>Choose here</option>
                 {
                     isFetching
-                        ? Object.entries(bodyStyleList).map(([key, value], index) => {
+                        ? Object.entries(categoriesList).map(([key, value], index) => {
                             return (
-                                <option value={key}>{value}</option>
+                                <option key={index} value={key}>{value}</option>
                             )
                         })
                         : <option>Loading</option>
