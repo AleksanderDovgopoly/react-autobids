@@ -11,9 +11,11 @@ const AuctionsList = (props) => {
     const currentSort = searchParams.get('sort');
     const transmissionFilter = searchParams.get('transmission');
     const bodyStyleFilter = searchParams.get('body_style');
+    const startYearFilter = searchParams.get('start_year');
+    const endYearFilter = searchParams.get('end_year');
 
-    if (transmissionFilter || bodyStyleFilter) {
-        auctionsArr = doFilterAuctions(auctionsArr, transmissionFilter, bodyStyleFilter);
+    if (transmissionFilter || bodyStyleFilter || startYearFilter || endYearFilter) {
+        auctionsArr = doFilterAuctions(auctionsArr, transmissionFilter, bodyStyleFilter, startYearFilter, endYearFilter);
     }
 
     if (!auctionsArr.length) {

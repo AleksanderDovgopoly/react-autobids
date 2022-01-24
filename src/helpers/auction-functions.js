@@ -89,7 +89,7 @@ export const doSortAuctionsList = (auctionsArr, sortType) => {
     }
 }
 
-export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter) => {
+export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter, startYear, endYear) => {
     if (transmissionFilter) {
         auctionsArr = auctionsArr.filter(auction => {
             return auction.spec.transmission.includes(transmissionFilter);
@@ -99,6 +99,18 @@ export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter) =>
     if (bodyFilter) {
         auctionsArr = auctionsArr.filter(auction => {
             return auction.spec.body_style.includes(bodyFilter);
+        });
+    }
+
+    if (startYear) {
+        auctionsArr = auctionsArr.filter(auction => {
+            return auction.year_release >= startYear;
+        });
+    }
+
+    if (endYear) {
+        auctionsArr = auctionsArr.filter(auction => {
+            return auction.year_release <= endYear;
         });
     }
 
