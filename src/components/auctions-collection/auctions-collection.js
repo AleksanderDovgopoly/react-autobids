@@ -1,23 +1,24 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAuctions} from "../../firebase/firebase.utils";
 import {fetchAuctionsAction} from "../../redux/auctions/auctions.actions";
 import AuctionsList from "../auctions-list/auctions-list";
 import Spinner from "../spinner/spinner";
 import CollectionSortsBar from "../collection-sorts-bar/collection-sorts-bar";
+import FiltersBar from "../collection-filters-bar/collection-filters-bar";
 
 import classes from "./auctions-collection.module.css";
-import FiltersBar from "../collection-filters-bar/collection-filters-bar";
 
 
 const AuctionsCollection = (props) => {
     const {pageType, queryWord} = props;
-    let pageTitle = 'Auctions';
     const dispatch = useDispatch();
     const isCarsFetching = useSelector((state => state.auctions.isFetching));
     const auctionItemsObject = useSelector((state => state.auctions.cars));
 
     let auctionsArr = Object.values(auctionItemsObject);
+
+    let pageTitle = 'Auctions';
 
     // Check page type
     if (pageType === 'home') {

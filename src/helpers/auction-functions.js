@@ -1,3 +1,5 @@
+import {createSearchParams} from "react-router-dom";
+
 export const calculateLeftTime = (UNIX_timestamp) => {
     let response = '';
 
@@ -44,6 +46,21 @@ export const getEndDateAuction = (UNIX_timestamp) => {
     return endDate;
 }
 
+export const appendSearchParams = (obj, searchParams) => {
+    const sp = createSearchParams(searchParams);
+    Object.entries(obj).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+            sp.delete(key);
+            value.forEach((v) => sp.append(key, v));
+        } else if (value === undefined || value === null) {
+            sp.delete(key);
+        } else {
+            sp.set(key, value);
+        }
+    });
+    return sp;
+}
+
 export const doSortAuctionsList = (auctionsArr, sortType) => {
 
     switch (sortType) {
@@ -70,4 +87,20 @@ export const doSortAuctionsList = (auctionsArr, sortType) => {
                 return x.end_date - y.end_date;
             });
     }
+}
+
+export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter) => {
+    if (transmissionFilter) {
+        auctionsArr = auctionsArr.filter(auction => {
+            return auction.spec.transmission.includes(transmissionFilter);
+        });
+    }
+
+    if (bodyFilter) {
+        auctionsArr = auctionsArr.filter(auction => {
+            return auction.spec.body_style.includes(bodyFilter);
+        });
+    }
+
+    return auctionsArr;
 }

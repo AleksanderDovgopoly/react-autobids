@@ -1,8 +1,8 @@
 .dropdownContainer {
-
+    padding-left: 5px;
 }
 
-.dropdownToggle {
+.dropdownToggle, .dropdownToggleActive {
     box-sizing: border-box;
     margin: 0;
     font-family: inherit;
@@ -30,7 +30,11 @@
     background: #f9f9f9;
 }
 
-.dropdownToggle:after {
+.dropdownToggleActive {
+    border-color: #828282;
+}
+
+.dropdownToggle:after, .dropdownToggleActive:after {
     content: '\f107';
     font-family: FontAwesome;
     padding-left: 6px;
