@@ -7,6 +7,8 @@ import classes from "../../collection-filter-dropdown/collection-filter-dropdown
 
 const YearSelector = ({filterType, catList}) => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const activeStartYear = searchParams.get('start_year');
+    const activeEndYear = searchParams.get('end_year');
     const activeYear = searchParams.get([filterType]);
     let catArr = Object.values(catList);
     let initYear = Math.max(...catArr);
@@ -15,6 +17,21 @@ const YearSelector = ({filterType, catList}) => {
     }
 
     const [currentYear, setCurrentYear] = useState(activeYear || initYear);
+
+    let yearsList = [];
+    const yearsArr = Object.values(catList);
+    const maxYear = Math.max(...yearsArr);
+    const minYear = Math.min(...yearsArr);
+
+    if (filterType === 'start_year') {
+        yearsList = yearsArr.filter((year) => {
+            return year <= (activeEndYear || maxYear)
+        })
+    } else {
+        yearsList = yearsArr.filter((year) => {
+            return year >= (activeStartYear || minYear)
+        })
+    }
 
     function setYearHandler(event) {
         event.preventDefault();
@@ -26,12 +43,12 @@ const YearSelector = ({filterType, catList}) => {
         <fieldset>
             <select name={filterType} onChange={setYearHandler} value={currentYear}>
                 {
-                    Object.entries(catList).map(([key, value], index) => {
+                    yearsList.map((value, index) => {
                         return (
                             <option
                                 className={classes.item}
                                 key={index}
-                                value={key}
+                                value={value}
                             >
                                 {value}
                             </option>

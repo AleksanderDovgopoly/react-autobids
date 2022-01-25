@@ -41,7 +41,6 @@ const FilterByYears = () => {
         return ((activeStartYear || minYear) + ' - ' + (activeEndYear || maxYear));
     }
 
-
     return (
         <div className={classes.dropdownContainer}>
             <button
@@ -56,9 +55,15 @@ const FilterByYears = () => {
                         {
                             isFetching
                                 ? <div className={classes2.yearOptions}>
-                                    <YearSelector filterType='start_year' catList={categoriesList}/>
+                                    <YearSelector
+                                        filterType='start_year'
+                                        catList={categoriesList}
+                                    />
                                     <span>To</span>
-                                    <YearSelector filterType='end_year' catList={categoriesList}/>
+                                    <YearSelector
+                                        filterType='end_year'
+                                        catList={categoriesList}
+                                    />
                                 </div>
                                 : null
                         }

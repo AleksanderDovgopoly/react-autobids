@@ -43,8 +43,9 @@ const AuctionsCollection = (props) => {
             dispatch(fetchAuctionsAction(auctionsCollection));
         }
 
-        fetchData();
-
+        if (!isCarsFetching) {
+            fetchData();
+        }
     }, [dispatch])
 
     return (

@@ -1,4 +1,5 @@
 import {createSearchParams} from "react-router-dom";
+// import {getCategoriesListBySlug} from "../firebase/firebase.utils";
 
 export const calculateLeftTime = (UNIX_timestamp) => {
     let response = '';
@@ -116,3 +117,11 @@ export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter, st
 
     return auctionsArr;
 }
+
+// export const getCatNameBySlug = async (category, itemSlug) => {
+//     const categoryList = await getCategoriesListBySlug(category);
+//
+//     console.log(categoryList);
+//
+//     return categoryList[itemSlug];
+// }

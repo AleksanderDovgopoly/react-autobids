@@ -1,11 +1,27 @@
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import AuctionItem from "../../auction-item/auction-item";
+import {fetchAuctions} from "../../../firebase/firebase.utils";
+import {fetchAuctionsAction} from "../../../redux/auctions/auctions.actions";
 
 import classes from "./new-listings-sidebar.module.css";
 
 
 const NewListingsSidebar = () => {
+    const dispatch = useDispatch();
+    const isCarsFetching = useSelector((state => state.auctions.isFetching));
     const auctionsObj = useSelector(state => state.auctions.cars);
+
+    useEffect(() => {
+        async function fetchData() {
+            const auctionsCollection = await fetchAuctions();
+            dispatch(fetchAuctionsAction(auctionsCollection));
+        }
+
+        if (!isCarsFetching) {
+            fetchData();
+        }
+    }, [dispatch])
 
     const auctionItems = Object.values(auctionsObj)
         .sort(function (x, y) {
