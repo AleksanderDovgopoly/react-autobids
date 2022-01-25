@@ -5,6 +5,11 @@
     align-items: center;
     justify-items: stretch;
 }
+
+.form fieldset.fullwidth {
+    grid-template-columns: 1fr;
+}
+
 .warning {
     color: red;
     padding: 0;

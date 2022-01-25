@@ -7,13 +7,14 @@ import CommentBox from "../comment-box/comment-box";
 import AuctionSpec from "../auction-detail-spec/auction-detail-spec";
 import NewListingsSidebar from "../sidebars/new-listings-sidebar/new-listings-sidebar";
 import SetBidBar from "../set-bid-bar/set-bid-bar";
+import AuctionDetailDescription from "../auction-detail-description/auction-detail-description";
 import EndingSoonSidebar from "../sidebars/ending-soon-sidebar/ending-soon-sidebar";
 
 import classes from "./auction-detail-content.module.css";
 
 
 const AuctionDetailContent = () => {
-    const {title, short_description, photos, id, end_date} = useSelector(state => state.detail.data);
+    const {title, short_description, photos, id, end_date, descriptions} = useSelector(state => state.detail.data);
 
     const sliderData = Object.entries(photos).map((e) => ({image: e[1]}));
 
@@ -63,6 +64,9 @@ const AuctionDetailContent = () => {
                 <div className={classes.col}>
                     <AuctionHeaderBar/>
                     <AuctionSpec/>
+                    {
+                        descriptions && <AuctionDetailDescription descriptionsList={descriptions}/>
+                    }
                     <CommentBox auctionId={id}/>
                 </div>
                 <div className={classes.sidebar}>

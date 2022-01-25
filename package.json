@@ -7,11 +7,15 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
     "firebase": "^9.6.0",
+    "html-to-draftjs": "^1.5.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-carousel-minimal": "^1.4.1",
     "react-dom": "^17.0.2",
+    "react-draft-wysiwyg": "^1.14.7",
     "react-hook-form": "^7.24.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
@@ -20,7 +24,6 @@
     "redux-thunk": "^2.4.1",
     "reselect": "^4.1.5",
     "sass": "^1.45.2",
-    "slate-react": "^0.72.6",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

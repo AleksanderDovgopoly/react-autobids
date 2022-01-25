@@ -49,6 +49,7 @@ export const createNewAuctionDocument = async (auctionData) => {
         id,
         title,
         short_description,
+        descriptions,
         start_price,
         bids_step,
         start_date,
@@ -69,6 +70,7 @@ export const createNewAuctionDocument = async (auctionData) => {
             id,
             title,
             short_description,
+            descriptions,
             start_price: Number(start_price),
             current_price: Number(start_price),
             geo,
@@ -85,7 +87,7 @@ export const createNewAuctionDocument = async (auctionData) => {
             status
         })
     } catch (error) {
-        console.log('Error creating Auction Document!')
+        console.log('Error creating Auction Document!', error)
     }
 
     return auctionRef;
