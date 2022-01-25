@@ -18,7 +18,7 @@ const UserDetail = () => {
             setUserData(fetchingData);
             setIsFetching(true);
         }
-    });
+    }, [userData, userId]);
 
     return (
         <div className={classes.userContainer}>

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAuctions} from "../../firebase/firebase.utils";
 import {fetchAuctionsAction} from "../../redux/auctions/auctions.actions";
@@ -46,7 +46,7 @@ const AuctionsCollection = (props) => {
         if (!isCarsFetching) {
             fetchData();
         }
-    }, [dispatch])
+    }, [dispatch, isCarsFetching])
 
     return (
         <div className={classes.auctionCollection}>

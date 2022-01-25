@@ -15,7 +15,7 @@ const SellCarHookForm = () => {
     const currentDate = new Date();
     const [auctionId, setAuctionId] = useState('');
     const currentUser = useSelector(state => state.user.currentUser);
-    const {register, handleSubmit, setValue, formState: {errors, isSubmitSuccessful, isValid}} = useForm({
+    const {register, handleSubmit, setValue, formState: {errors, isSubmitSuccessful}} = useForm({
         defaultValues: {
             spec: {},
             seller: {

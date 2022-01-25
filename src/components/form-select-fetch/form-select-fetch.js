@@ -13,7 +13,7 @@ const FormSelect = ({label, catSlug, register, name, isRequired, errors}) => {
             setCategoriesList(fetchingData);
             setIsFetching(true);
         }
-    });
+    }, [isFetching, catSlug]);
 
     return (
         <label>{label}

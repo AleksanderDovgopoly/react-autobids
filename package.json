@@ -20,6 +20,7 @@
     "redux-thunk": "^2.4.1",
     "reselect": "^4.1.5",
     "sass": "^1.45.2",
+    "slate-react": "^0.72.6",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

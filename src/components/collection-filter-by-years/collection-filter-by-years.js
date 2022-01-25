@@ -21,7 +21,7 @@ const FilterByYears = () => {
             setCategoriesList(fetchingData);
             setIsFetching(true);
         }
-    });
+    }, [isFetching]);
 
     function toggleHandler(e) {
         e.preventDefault();

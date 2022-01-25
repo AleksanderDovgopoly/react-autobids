@@ -19,7 +19,7 @@ const FilterDropdown = ({categorySlug}) => {
             setCategoriesList(fetchingData);
             setIsFetching(true);
         }
-    });
+    }, [isFetching, categorySlug]);
 
     function setCatName(categorySlug) {
         switch (categorySlug) {

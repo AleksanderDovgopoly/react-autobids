@@ -21,7 +21,7 @@ const NewListingsSidebar = () => {
         if (!isCarsFetching) {
             fetchData();
         }
-    }, [dispatch])
+    }, [dispatch, isCarsFetching])
 
     const auctionItems = Object.values(auctionsObj)
         .sort(function (x, y) {
