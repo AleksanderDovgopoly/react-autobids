@@ -1,17 +1,32 @@
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {fetchCommentsByAuctionId} from "../../firebase/firebase.utils";
 import CommentForm from "../comment-form/comment-form";
 import CommentsList from "../comments-list/comments-list";
-import BidsHistory from "../bids-history/bids-history";
+import Spinner from "../spinner/spinner";
 
 import classes from "./comment-box.module.css";
 
 
-const CommentBox = (props) => {
-    const {auctionId} = props;
-    const {comments, bids_history} = useSelector(state => state.detail.data);
+const CommentBox = ({auctionId}) => {
     const [commentsIsActive, setCommentsActive] = useState(true);
     const [bidsIsActive, setBidsActive] = useState(false);
+    const [isDataFetching, setIsDataFetching] = useState(false);
+    const [commentsData, setCommentsData] = useState([]);
+
+
+    useEffect(() => {
+        async function fetchData() {
+            const commentCollection = await fetchCommentsByAuctionId(auctionId);
+            setCommentsData(commentCollection);
+            setIsDataFetching(true);
+        }
+
+        if (!isDataFetching) {
+            fetchData();
+        }
+    }, []);
+
+
 
     function buttonsSwitchHandler() {
         setCommentsActive(!commentsIsActive);
@@ -37,10 +52,7 @@ const CommentBox = (props) => {
             </div>
             <CommentForm auctionId={auctionId}/>
             {
-                commentsIsActive && <CommentsList commentsList={comments}/>
-            }
-            {
-                bidsIsActive && <BidsHistory history={bids_history}/>
+                isDataFetching ? <CommentsList commentsList={commentsData} /> : <Spinner />
             }
         </div>
     )

@@ -1,34 +1,25 @@
-import moment from "moment";
-import ButtonMailto from "../button-mailto/button-mailto";
+import CommentUsername from "./comment-username/comment-username";
+import CommentContent from "./comment-content/comment-content";
+import Spinner from "../spinner/spinner";
 
 import classes from "./comment-item.module.css";
 
 
-const CommentItem = (props) => {
-    const {commentText, commentDate, user} = props.commentData;
-
-    const date = moment.unix(commentDate.seconds);
-    const fromDate = date.from(Date.now())
+const CommentItem = ({commentData, usersData}) => {
+    const {id, author_id, message, createAt, rep, type, reply_id, bid_price} = commentData;
+    const commentAuthor = Object.values(usersData).find(item => item.id === author_id);
 
     return (
-        <div className={classes.commentItem}>
-            <div className={classes.commentText}>{commentText}</div>
-            <div className={classes.commentFooter}>
-                <div className="comment-actions">
-                    {/*<a href="#">Reply</a>*/}
-                </div>
-                <div className={classes.info}>
-                                <span className={classes.author}>
-                                    {
-                                        user.email
-                                            ? <ButtonMailto label={user.name} mailto={user.email}/>
-                                            : <span>{user.name}</span>
-                                    }
-                                </span>
-                    <span className={classes.date}>{fromDate}</span>
-                </div>
+        <li data-id={id} data-comment-type={type} className={classes.commentItem}>
+            <div className={classes.content}>
+                {
+                    commentAuthor !== undefined
+                        ? <CommentUsername authorData={commentAuthor} commentCreate={createAt}/>
+                        : <Spinner/>
+                }
+                <CommentContent itemType={type} message={message} repScore={rep} replyId={reply_id} bidPrice={bid_price} />
             </div>
-        </div>
+        </li>
     )
 }
 

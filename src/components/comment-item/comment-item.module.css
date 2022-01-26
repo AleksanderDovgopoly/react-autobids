@@ -1,53 +1,9 @@
 .commentItem {
-    display: flex;
-    min-height: 60px;
-    position: relative;
-    padding: 15px;
-    margin: 10px 0;
-    background-color: #fcfcfc;
-    border: solid 1px #000000;
-    border-radius: 4px;
-    color: #555f77;
-    font-family: inherit;
-    font-size: 14px;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: stretch;
-    justify-content: space-between;
-    align-items: stretch;
+    margin-bottom: 30px;
+    list-style: none;
+    border-bottom: 1px solid #ebebeb;
 }
 
-.commentText {
-    color: #555f77;
-    font-size: 15px;
-    margin-bottom: 25px;
-}
-
-.commentFooter {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: flex-end;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.commentFooter .author, .commentFooter .author a {
-    color: #4ad493;
-    font-weight: bold;
-    text-decoration: none;
-    -webkit-transition: 350ms color;
-    -moz-transition: 350ms color;
-    -ms-transition: 350ms color;
-    -o-transition: 350ms color;
-    transition: 350ms color;
-}
-
-.commentFooter .info {
-
-}
-
-.commentFooter .date:before {
-    content: "|";
-    margin: 0 10px;
+.content {
+    min-height: 50px;
 }

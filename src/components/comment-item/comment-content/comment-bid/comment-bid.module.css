@@ -1,0 +1,14 @@
+.price {
+    background: #212529;
+    border-radius: 5px;
+    padding: 3px 15px;
+    margin: 10px 0;
+    color: #828282;
+    width: fit-content;
+}
+
+.price span {
+    color: white;
+    font-weight: 500;
+    padding: 0 0.3em;
+}

@@ -1,10 +1,11 @@
 .commentsList {
     display: block;
     margin: 50px auto;
+    padding: 0;
     max-width: 680px;
     width: 100%;
 }
 
-.commentsList p {
+.commentsList .noData {
     text-align: center;
 }

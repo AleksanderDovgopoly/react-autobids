@@ -107,6 +107,36 @@ export const fetchAuctions = async () => {
     return auctionsMap;
 };
 
+export const fetchUsers = async () => {
+    const usersRef = await firestore.collection('users');
+    const usersMap = await usersRef
+        .get()
+        .then(snapshot => {
+            const collectionsMap = convertUsersSnapshotToMap(snapshot);
+            return collectionsMap;
+        })
+        .catch(error => {
+            console.log('Some error with users fetching!', error)
+        })
+    return usersMap;
+};
+
+export const fetchCommentsByAuctionId = async (auctionId) => {
+    const commentsRef = await firestore.collection('comments_bids');
+    const commentsMap = await commentsRef
+        .get()
+        .then(snapshot => {
+            const commentsMap = convertCommentsSnapshotToMap(snapshot);
+            const filteredMap = Object.values(commentsMap).filter(item => item.auction_id === auctionId);
+
+            return filteredMap;
+        })
+        .catch(error => {
+            console.log('Some error with comments fetching!', error)
+        })
+    return commentsMap;
+};
+
 export const fetchAuctionById = async (auctionId) => {
     const auctionRef = await firestore.doc(`auctions/${auctionId}`);
     const documentSnapshot = await auctionRef
@@ -122,7 +152,21 @@ export const fetchAuctionById = async (auctionId) => {
 
 export const convertCollectionsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
-        const {title, short_description, current_price, start_price, start_date, geo, photos, seller, bids_history, status, end_date, year_release, spec} = doc.data();
+        const {
+            title,
+            short_description,
+            current_price,
+            start_price,
+            start_date,
+            geo,
+            photos,
+            seller,
+            bids_history,
+            status,
+            end_date,
+            year_release,
+            spec
+        } = doc.data();
 
         return {
             id: doc.id,
@@ -149,20 +193,74 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     }, {});
 }
 
-export const setNewBidByAuctionId = async (auctionId, bidData) => {
-    if (!bidData || !auctionId) return;
+export const convertCommentsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+        const {auction_id, author_id, createAt, message, rep, type, bid_price, reply_id} = doc.data();
+
+        return {
+            id: doc.id,
+            auction_id,
+            author_id,
+            createAt,
+            message,
+            rep,
+            type,
+            bid_price,
+            reply_id
+        }
+
+    });
+
+    return transformedCollection.reduce((accumulator, collection, index) => {
+        accumulator[index] = collection;
+        return accumulator;
+    }, {});
+}
+
+export const convertUsersSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+        const {avatar, createdAt, displayName, email, rep_score} = doc.data();
+
+        return {
+            id: doc.id,
+            avatar,
+            createdAt,
+            displayName,
+            email,
+            rep_score
+        }
+
+    });
+
+    return transformedCollection.reduce((accumulator, collection, index) => {
+        accumulator[index] = collection;
+        return accumulator;
+    }, {});
+}
+
+export const setNewAuctionBid = async (bidData) => {
+    if (!bidData) return;
+
+    firestore.collection("comments_bids").add(bidData)
+        .then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function (error) {
+            console.error("Error adding document: ", error);
+        })
+}
+
+export const setNewAuctionPrice = async (auctionId, newPrice) => {
+    if (!auctionId || !newPrice) return;
 
     const auctionRef = await firestore.doc(`auctions/${auctionId}`);
 
-    const snapShot = (await auctionRef.get()).data();
-
     try {
         await auctionRef.update({
-            current_price: bidData.bid_price,
-            bids_history: [...snapShot.bids_history, bidData]
+            current_price: newPrice
         })
     } catch (error) {
-        console.log('Error update auction bids!')
+        console.log('Error update auction comments!')
     }
 
     return auctionRef;

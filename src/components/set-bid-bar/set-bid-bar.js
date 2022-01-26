@@ -1,10 +1,11 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setNewBidByAuctionId} from "../../firebase/firebase.utils";
-import CustomButton from "../custom-button/custom-button";
+import {setNewAuctionBid, setNewAuctionPrice} from "../../firebase/firebase.utils";
 import {updateStateBidsHistory} from "../../redux/auction-detail/auction-detail.actions";
+import CustomButton from "../custom-button/custom-button";
 
 import classes from "./set-bid-bar.module.css";
+
 
 
 const SetBidBar = () => {
@@ -18,14 +19,17 @@ const SetBidBar = () => {
 
         if (!newBidValue) return;
         const newBidData = {
-            bid_date: new Date(),
+            createAt: new Date(),
             bid_price: Number(newBidValue),
-            user_id: user.uid,
-            user_name: user.displayName,
+            author_id: user.uid,
+            auction_id: id,
+            type: 'bid',
+            rep: 0
         }
 
-        dispatch(updateStateBidsHistory(newBidData));
-        setNewBidByAuctionId(id, newBidData);
+        //dispatch(updateStateBidsHistory(newBidData));
+        setNewAuctionBid(newBidData);
+        setNewAuctionPrice(id, Number(newBidValue))
     }
 
     return (

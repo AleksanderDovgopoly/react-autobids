@@ -1,0 +1,13 @@
+.message {
+    margin-bottom: 8px;
+    position: relative;
+    word-break: break-word;
+}
+
+.message p {
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+}

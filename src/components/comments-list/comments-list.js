@@ -1,24 +1,36 @@
+import {useEffect, useState} from "react";
+import {fetchUsers} from "../../firebase/firebase.utils";
 import CommentItem from "../comment-item/comment-item";
+
 import classes from "./comments-list.module.css";
 
 
-const CommentsList = (props) => {
-    const {commentsList} = props;
+const CommentsList = ({commentsList}) => {
+    const [isUsersFetching, setIsUsersFetching] = useState(false);
+    const [usersData, setUsersData] = useState([]);
 
-    commentsList.sort(function(x, y){
-        return y.commentDate - x.commentDate;
-    })
+    useEffect(() => {
+        async function fetchData() {
+            const usersCollection = await fetchUsers();
+            setUsersData(usersCollection);
+            setIsUsersFetching(true);
+        }
+
+        if (!isUsersFetching) {
+            fetchData();
+        }
+    }, [])
 
     return (
-        <div className={classes.commentsList}>
+        <ul className={classes.commentsList}>
             {
                 commentsList.length
                     ? commentsList.map((comment, index) => (
-                        <CommentItem key={index} commentData={comment}/>
+                        <CommentItem key={index} commentData={comment} usersData={usersData}/>
                     ))
-                    : <p>There are no comments</p>
+                    : <p className={classes.noData}>There are no comments</p>
             }
-        </div>
+        </ul>
     )
 }
 
