@@ -13,12 +13,12 @@ const UserDetail = () => {
     const [userData, setUserData] = useState([])
 
     useEffect(async () => {
-        if (!userData.length) {
+        if (!isFetchingData) {
             const fetchingData = await getUserDataById(userId);
             setUserData(fetchingData);
             setIsFetching(true);
         }
-    }, [userData, userId]);
+    }, [isFetchingData]);
 
     return (
         <div className={classes.userContainer}>

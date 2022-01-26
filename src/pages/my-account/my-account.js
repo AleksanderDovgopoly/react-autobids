@@ -1,5 +1,6 @@
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import UserDetailSummary from "../../components/user-detail-summary/user-detail-summary";
 
 import classes from "./my-account.module.css";
 
@@ -12,13 +13,9 @@ const MyAccount = () => {
         return navigate('/sign-in')
     }
 
-    const {displayName, email, uid} = currentUser;
-
     return (
         <div className={classes.myAccount}>
-            <h2>{displayName}</h2>
-            <p>{email}</p>
-            <p>{uid}</p>
+            <UserDetailSummary userData={currentUser}/>
         </div>
     )
 }

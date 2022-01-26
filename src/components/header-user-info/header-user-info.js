@@ -30,7 +30,7 @@ const UserInfo = () => {
             <div className={classes.drop}>
                 <ul>
                     <li>
-                        <Link to="/my-account">Edit account</Link>
+                        <Link to="/my-account">Profile</Link>
                     </li>
                 </ul>
                 <div className={classes.logOut}>

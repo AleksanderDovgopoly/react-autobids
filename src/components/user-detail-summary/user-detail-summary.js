@@ -4,12 +4,21 @@ import classes from "./user-detail-summary.module.css";
 
 
 const UserDetailSummary = (props) => {
-    const {createdAt, displayName, email, avatar, rep_score} = props.userData;
-    const joinDate = moment.unix(createdAt.seconds).format("MMMM YYYY");
+    const {createdAt, metadata, displayName, email, avatar, rep_score} = props.userData;
+    let createDate = createdAt;
+    if (createdAt === undefined) {
+        createDate = metadata.createdAt;
+    }
+    const joinDate = moment.unix(createDate.seconds).format("MMMM YYYY");
     let userPhoto = 'https://firebasestorage.googleapis.com/v0/b/auto-bids.appspot.com/o/empty_user.jpg?alt=media&token=0148c2c3-1bc7-4315-97ad-02a36e0a517c';
+    let showRep = 0;
 
     if (avatar) {
         userPhoto = avatar;
+    }
+
+    if (rep_score) {
+        showRep = rep_score;
     }
 
 
@@ -37,7 +46,7 @@ const UserDetailSummary = (props) => {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"></path>
                                 </svg>
-                                {rep_score} </span>Reputation Score
+                                {showRep} </span>Reputation Score
                         </span>
                 </p>
                 <p><span>Email: {email}</span></p>
