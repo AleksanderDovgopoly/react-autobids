@@ -238,16 +238,18 @@ export const convertUsersSnapshotToMap = (collections) => {
     }, {});
 }
 
-export const setNewAuctionBid = async (bidData) => {
+export const setNewAuctionBidOrComment = async (bidData) => {
     if (!bidData) return;
 
-    firestore.collection("comments_bids").add(bidData)
+    const commentRef = firestore.collection("comments_bids").add(bidData)
         .then(function (docRef) {
-            console.log("Document written with ID: ", docRef.id);
+            return docRef.id;
         })
         .catch(function (error) {
-            console.error("Error adding document: ", error);
-        })
+            return error;
+        });
+
+    return commentRef;
 }
 
 export const setNewAuctionPrice = async (auctionId, newPrice) => {
@@ -258,23 +260,6 @@ export const setNewAuctionPrice = async (auctionId, newPrice) => {
     try {
         await auctionRef.update({
             current_price: newPrice
-        })
-    } catch (error) {
-        console.log('Error update auction comments!')
-    }
-
-    return auctionRef;
-}
-
-export const setNewAuctionComment = async (auctionId, commentData) => {
-    if (!auctionId || !commentData) return;
-
-    const auctionRef = await firestore.doc(`auctions/${auctionId}`);
-    const snapShot = (await auctionRef.get()).data();
-
-    try {
-        await auctionRef.update({
-            comments: [...snapShot.comments, commentData]
         })
     } catch (error) {
         console.log('Error update auction comments!')

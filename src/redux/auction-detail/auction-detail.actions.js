@@ -5,7 +5,7 @@ export const fetchAuctionDetail = data => ({
     type: FETCH_AUCTION_DETAIL,
     payload: data
 })
-
+// ToDo: Delete or rebuild
 export const updateStateBidsHistory = newBidData => ({
     type: UPDATE_BID_HISTORY,
     payload: newBidData
