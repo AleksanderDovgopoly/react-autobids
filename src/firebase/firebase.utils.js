@@ -241,15 +241,13 @@ export const convertUsersSnapshotToMap = (collections) => {
 export const setNewAuctionBidOrComment = async (bidData) => {
     if (!bidData) return;
 
-    const commentRef = firestore.collection("comments_bids").add(bidData)
-        .then(function (docRef) {
-            return docRef.id;
-        })
-        .catch(function (error) {
-            return error;
-        });
+    try {
+        await firestore.collection("comments_bids").add(bidData);
 
-    return commentRef;
+        return 'success';
+    } catch (error) {
+        throw error;
+    }
 }
 
 export const setNewAuctionPrice = async (auctionId, newPrice) => {

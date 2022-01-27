@@ -12,6 +12,7 @@ const CommentBox = ({auctionId}) => {
     const [bidsIsActive, setBidsActive] = useState(false);
     const [isDataFetching, setIsDataFetching] = useState(false);
     const [commentsData, setCommentsData] = useState([]);
+    const [refetchComments, setRefetchComments] = useState(false);
 
 
     useEffect(() => {
@@ -21,10 +22,11 @@ const CommentBox = ({auctionId}) => {
             setIsDataFetching(true);
         }
 
-        if (!isDataFetching) {
+        if (!isDataFetching || refetchComments) {
             fetchData();
+            setRefetchComments(false);
         }
-    }, []);
+    }, [refetchComments]);
 
 
 
@@ -50,7 +52,7 @@ const CommentBox = ({auctionId}) => {
                     </button>
                 </div>
             </div>
-            <CommentForm auctionId={auctionId}/>
+            <CommentForm auctionId={auctionId} refetchComments={setRefetchComments}/>
             {
                 isDataFetching ? <CommentsList commentsList={commentsData} /> : <Spinner />
             }

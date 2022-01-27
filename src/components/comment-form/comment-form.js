@@ -1,19 +1,17 @@
-import {useState} from "react";
 import {useForm} from "react-hook-form";
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {setNewAuctionBidOrComment} from "../../firebase/firebase.utils";
+import {togglePopupAuth} from "../../redux/user/user.actions";
 
 import classes from "./comment-form.module.css";
-import 'reactjs-popup/dist/index.css';
-import Popup from "reactjs-popup";
-import SignIn from "../sign-in/sign-in";
 
 
-const CommentForm = ({auctionId}) => {
+const CommentForm = ({auctionId, refetchComments}) => {
+    const dispatch = useDispatch();
     const {isLogin, currentUser} = useSelector(state => state.user);
-    const [openPopupSignIn, setOpenPopupSignIn] = useState(false);
 
-    const {register, handleSubmit, formState: {isDirty, isSubmitSuccessful},} = useForm({
+    const {register, handleSubmit, formState: {isDirty}, setValue, reset} = useForm({
         defaultValues: {
             auction_id: auctionId,
             author_id: currentUser.uid,
@@ -24,21 +22,26 @@ const CommentForm = ({auctionId}) => {
         }
     });
 
+    useEffect(() => {
+        if (currentUser.uid) {
+            setValue('author_id', currentUser.uid)
+        }
+    }, [currentUser])
+
 
     const formSubmitHandler = async (data) => {
-
         if (!isLogin) {
-            setOpenPopupSignIn(true);
+            dispatch(togglePopupAuth())
+            return;
         }
 
         const response = await setNewAuctionBidOrComment(data);
 
-        console.log('Response: ', response)
-
-        if (response === auctionId) {
-            console.log('Success submit', response)
+        if (response === 'success') {
+            reset();
+            refetchComments(true);
         } else {
-            console.log(response)
+            console.log('Submit comment Error')
         }
     }
 
@@ -48,17 +51,11 @@ const CommentForm = ({auctionId}) => {
                 <label className={isDirty ? classes.hidden : null} htmlFor="message">
                     Add a Comment...
                 </label>
-                <textarea className={classes.input} {...register('message', {})} autoComplete="off" rows="1" />
+                <textarea className={classes.input} {...register('message', {})} autoComplete="off" rows="1"/>
             </fieldset>
-
             <button type="submit" disabled={!isDirty}>
                 <span className={classes.hidden}>Submit</span>
             </button>
-
-            {/*ToDO:  Rebuild to global Popup*/}
-            <Popup open={openPopupSignIn} >
-                <SignIn />
-            </Popup>
         </form>
     )
 }

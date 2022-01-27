@@ -1,0 +1,69 @@
+.modalAuth {
+
+}
+
+.modalHeader {
+    position: absolute;
+    right: 2%;
+    top: 0;
+}
+
+.modalHeader .close {
+    pointer-events: auto;
+    font-family: inherit;
+    text-transform: none;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    line-height: 14px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 10px;
+    margin: 20px 4px 0 0;
+    position: relative;
+    z-index: 1;
+}
+
+.modalBody {
+    color: #262626;
+    text-align: left;
+    pointer-events: auto;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    position: relative;
+    flex: 1 1 auto;
+    padding: 20px 36px 46px;
+}
+
+.modalBody h5 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 22px;
+}
+
+.authDivider {
+    padding-top: 9px;
+    margin-bottom: 9px;
+    border-bottom: 1px solid #d5d5d5;
+    position: relative;
+}
+
+.authDivider span {
+    position: absolute;
+    background: #fff;
+    color: #d5d5d5;
+    width: 22px;
+    display: inline-block;
+    line-height: 18px;
+    left: 50%;
+    margin-left: -11px;
+    top: -1px;
+    text-align: center;
+}
