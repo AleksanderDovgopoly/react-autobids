@@ -5,7 +5,7 @@ import CommentBid from "./comment-bid/comment-bid";
 import classes from "./comment-content.module.css";
 
 
-const CommentContent = ({itemType, message, repScore, replyId, bidPrice}) => {
+const CommentContent = ({refetchComments, commentId, itemType, message, repScore, replyId, bidPrice}) => {
     return (
         <div className={classes.content}>
             {
@@ -13,7 +13,7 @@ const CommentContent = ({itemType, message, repScore, replyId, bidPrice}) => {
                     ? <CommentMessage message={message} replyId={replyId}/>
                     : <CommentBid bid={bidPrice}/>
             }
-            <CommentActions repScore={repScore}/>
+            <CommentActions refetchComments={refetchComments} commentId={commentId} repScore={repScore}/>
         </div>
     )
 }

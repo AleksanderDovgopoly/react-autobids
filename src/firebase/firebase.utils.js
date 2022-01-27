@@ -283,6 +283,25 @@ export const updateAuctionViewsById = async (auctionId) => {
     return auctionRef;
 }
 
+export const updateCommentVotesById = async (commentId) => {
+    if (!commentId) return;
+
+    const commentRef = await firestore.doc(`comments_bids/${commentId}`);
+    const snapShot = (await commentRef.get()).data();
+
+    try {
+        await commentRef.update({
+            rep: snapShot.rep + 1
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    // ToDo: set vote for user
+
+    return commentRef;
+}
+
 export const getUserDataById = async (userId) => {
     if (!userId) return;
 

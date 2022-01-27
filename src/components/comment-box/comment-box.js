@@ -28,7 +28,9 @@ const CommentBox = ({auctionId}) => {
         }
     }, [refetchComments]);
 
-
+    const sortedComments = commentsData.sort(function (x, y) {
+        return y.createAt - x.createAt;
+    })
 
     function buttonsSwitchHandler() {
         setCommentsActive(!commentsIsActive);
@@ -54,7 +56,7 @@ const CommentBox = ({auctionId}) => {
             </div>
             <CommentForm auctionId={auctionId} refetchComments={setRefetchComments}/>
             {
-                isDataFetching ? <CommentsList commentsList={commentsData} /> : <Spinner />
+                isDataFetching ? <CommentsList refetchComments={setRefetchComments} commentsList={sortedComments} /> : <Spinner />
             }
         </div>
     )

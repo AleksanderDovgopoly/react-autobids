@@ -1,9 +1,25 @@
+import {updateCommentVotesById} from "../../../../firebase/firebase.utils";
+
 import classes from "./comment-actions.module.css";
 
-const CommentActions = ({repScore}) => {
+
+const CommentActions = ({refetchComments, commentId, repScore}) => {
+
+    async function setCommentVote() {
+        try {
+            await updateCommentVotesById(commentId);
+            refetchComments(true);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className={classes.actions}>
-            <button className={classes.upvote}>
+            <button
+                className={classes.upvote}
+                onClick={() => setCommentVote()}
+            >
                 <svg className="reputation"
                      width="8" height="10"
                      viewBox="0 0 11 13"
