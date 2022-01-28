@@ -1,32 +1,17 @@
-import {useEffect, useState} from "react";
-import {fetchCommentsByAuctionId} from "../../firebase/firebase.utils";
+import {useState} from "react";
+import {useSelector} from "react-redux";
 import CommentForm from "../comment-form/comment-form";
 import CommentsList from "../comments-list/comments-list";
-import Spinner from "../spinner/spinner";
 
 import classes from "./comment-box.module.css";
 
 
 const CommentBox = ({auctionId}) => {
+    const commentsData = useSelector(state => state.detail.comments_n_bids);
+
     const [commentsIsActive, setCommentsActive] = useState(true);
     const [bidsIsActive, setBidsActive] = useState(false);
-    const [isDataFetching, setIsDataFetching] = useState(false);
-    const [commentsData, setCommentsData] = useState([]);
-    const [refetchComments, setRefetchComments] = useState(false);
 
-
-    useEffect(() => {
-        async function fetchData() {
-            const commentCollection = await fetchCommentsByAuctionId(auctionId);
-            setCommentsData(commentCollection);
-            setIsDataFetching(true);
-        }
-
-        if (!isDataFetching || refetchComments) {
-            fetchData();
-            setRefetchComments(false);
-        }
-    }, [refetchComments]);
 
     const sortedComments = commentsData.sort(function (x, y) {
         return y.createAt - x.createAt;
@@ -54,10 +39,8 @@ const CommentBox = ({auctionId}) => {
                     </button>
                 </div>
             </div>
-            <CommentForm auctionId={auctionId} refetchComments={setRefetchComments}/>
-            {
-                isDataFetching ? <CommentsList refetchComments={setRefetchComments} commentsList={sortedComments} /> : <Spinner />
-            }
+            <CommentForm auctionId={auctionId}/>
+            <CommentsList commentsList={sortedComments}/>
         </div>
     )
 }

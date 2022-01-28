@@ -20,6 +20,10 @@
     align-items: center;
     transition: none;
 }
+.upvote:disabled {
+    border-color: #4ad493;
+    cursor: default;
+}
 
 .reply {
     padding: 2px 0 3px;

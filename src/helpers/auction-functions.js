@@ -1,6 +1,13 @@
 import {createSearchParams} from "react-router-dom";
 // import {getCategoriesListBySlug} from "../firebase/firebase.utils";
 
+export const isUserAlreadyVoted = (repArr, userId) => {
+    if (typeof repArr !== 'object') return;
+    let response = repArr.includes(userId);
+
+    return response;
+}
+
 export const calculateLeftTime = (UNIX_timestamp) => {
     let response = '';
 

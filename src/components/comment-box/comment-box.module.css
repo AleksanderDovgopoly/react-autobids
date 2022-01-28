@@ -1,7 +1,6 @@
 .commentBox {
     display: block;
     margin: 50px auto;
-    max-width: 680px;
     padding: 0 50px;
 }
 
@@ -36,4 +35,10 @@
     font-size: 25px;
     padding: 0;
     margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .commentBox {
+        padding: 0 20px;
+    }
 }

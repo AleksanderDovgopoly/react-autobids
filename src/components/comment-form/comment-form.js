@@ -3,11 +3,12 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setNewAuctionBidOrComment} from "../../firebase/firebase.utils";
 import {togglePopupAuth} from "../../redux/user/user.actions";
+import {updateAuctionComment} from "../../redux/auction-detail/auction-detail.actions";
 
 import classes from "./comment-form.module.css";
 
 
-const CommentForm = ({auctionId, refetchComments}) => {
+const CommentForm = ({auctionId}) => {
     const dispatch = useDispatch();
     const {isLogin, currentUser} = useSelector(state => state.user);
 
@@ -17,7 +18,7 @@ const CommentForm = ({auctionId, refetchComments}) => {
             author_id: currentUser.uid,
             createAt: new Date(),
             message: '',
-            rep: 0,
+            rep: [],
             type: 'comment'
         }
     });
@@ -39,7 +40,7 @@ const CommentForm = ({auctionId, refetchComments}) => {
 
         if (response === 'success') {
             reset();
-            refetchComments(true);
+            dispatch(updateAuctionComment(data));
         } else {
             console.log('Submit comment Error')
         }

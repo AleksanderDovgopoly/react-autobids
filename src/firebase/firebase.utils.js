@@ -30,7 +30,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
                 displayName,
                 email,
                 createdAt,
-                rep_score: 0,
+                rep_score: [],
                 avatar: '',
                 ...additionalData
             });
@@ -283,15 +283,15 @@ export const updateAuctionViewsById = async (auctionId) => {
     return auctionRef;
 }
 
-export const updateCommentVotesById = async (commentId) => {
-    if (!commentId) return;
+export const updateCommentVotesById = async (commentId, userId) => {
+    if (!commentId || !userId) return;
 
     const commentRef = await firestore.doc(`comments_bids/${commentId}`);
     const snapShot = (await commentRef.get()).data();
 
     try {
         await commentRef.update({
-            rep: snapShot.rep + 1
+            rep: [...snapShot.rep, userId]
         })
     } catch (error) {
         console.log('Error update auction comments!')
@@ -300,6 +300,25 @@ export const updateCommentVotesById = async (commentId) => {
     // ToDo: set vote for user
 
     return commentRef;
+}
+
+export const updateUserVotesById = async (authorId, userId) => {
+    if (!authorId || !userId) return;
+
+    const userRef = await firestore.doc(`users/${authorId}`);
+    const snapShot = (await userRef.get()).data();
+
+    try {
+        await userRef.update({
+            rep_score: [...snapShot.rep_score, userId]
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    // ToDo: set vote for user
+
+    return userRef;
 }
 
 export const getUserDataById = async (userId) => {

@@ -38,7 +38,7 @@ const CommentUsername = ({authorData, commentCreate}) => {
                         <path d="M1 5.125L5.125 1L9.25 5.125" stroke="#262626" strokeWidth="1.75" strokeLinecap="round"
                               strokeLinejoin="round"></path>
                     </svg>
-                    {rep_score}
+                    {rep_score.length}
                 </span>
                 <span className={classes.userExtra}>
                     {fromDate}

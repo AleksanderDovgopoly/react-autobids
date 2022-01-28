@@ -1,8 +1,8 @@
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAuctionDetail} from "../../redux/auction-detail/auction-detail.actions";
-import {fetchAuctionById} from "../../firebase/firebase.utils";
+import {fetchAuctionComments, fetchAuctionDetail} from "../../redux/auction-detail/auction-detail.actions";
+import {fetchAuctionById, fetchCommentsByAuctionId} from "../../firebase/firebase.utils";
 import AuctionDetailContent from "../../components/auction-detail-content/auction-detail-content";
 import Spinner from "../../components/spinner/spinner";
 
@@ -18,7 +18,9 @@ const AuctionDetail = () => {
     useEffect(() => {
         async function fetchData() {
             const fetchingData = await fetchAuctionById(auctionId);
-            dispatch(fetchAuctionDetail(fetchingData))
+            const fetchingComments = await fetchCommentsByAuctionId(auctionId);
+            dispatch(fetchAuctionComments(fetchingComments));
+            dispatch(fetchAuctionDetail(fetchingData));
         }
 
         if (auctionId !== fetchingId) {

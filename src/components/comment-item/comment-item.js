@@ -5,7 +5,7 @@ import Spinner from "../spinner/spinner";
 import classes from "./comment-item.module.css";
 
 
-const CommentItem = ({commentData, usersData, refetchComments}) => {
+const CommentItem = ({commentData, usersData, refetchUser}) => {
     const {id, author_id, message, createAt, rep, type, reply_id, bid_price} = commentData;
     const commentAuthor = Object.values(usersData).find(item => item.id === author_id);
 
@@ -17,7 +17,16 @@ const CommentItem = ({commentData, usersData, refetchComments}) => {
                         ? <CommentUsername authorData={commentAuthor} commentCreate={createAt}/>
                         : <Spinner/>
                 }
-                <CommentContent refetchComments={refetchComments} commentId={id} itemType={type} message={message} repScore={rep} replyId={reply_id} bidPrice={bid_price} />
+                <CommentContent
+                    commentId={id}
+                    authorId={author_id}
+                    itemType={type}
+                    message={message}
+                    repScore={rep}
+                    replyId={reply_id}
+                    bidPrice={bid_price}
+                    refetchUser={refetchUser}
+                />
             </div>
         </li>
     )

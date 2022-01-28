@@ -5,7 +5,7 @@ import CommentItem from "../comment-item/comment-item";
 import classes from "./comments-list.module.css";
 
 
-const CommentsList = ({commentsList, refetchComments}) => {
+const CommentsList = ({commentsList}) => {
     const [isUsersFetching, setIsUsersFetching] = useState(false);
     const [usersData, setUsersData] = useState([]);
 
@@ -19,14 +19,19 @@ const CommentsList = ({commentsList, refetchComments}) => {
         if (!isUsersFetching) {
             fetchData();
         }
-    }, [])
+    }, [isUsersFetching])
 
     return (
         <ul className={classes.commentsList}>
             {
                 commentsList.length
                     ? commentsList.map((comment, index) => (
-                        <CommentItem key={index} refetchComments={refetchComments} commentData={comment} usersData={usersData}/>
+                        <CommentItem
+                            key={index}
+                            commentData={comment}
+                            usersData={usersData}
+                            refetchUser={setIsUsersFetching}
+                        />
                     ))
                     : <p className={classes.noData}>There are no comments</p>
             }
