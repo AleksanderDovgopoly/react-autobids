@@ -8,6 +8,7 @@ import classes from "./comment-box.module.css";
 
 const CommentBox = ({auctionId}) => {
     const commentsData = useSelector(state => state.detail.comments_n_bids);
+    const [replyToId, setReplyToId] = useState('')
 
     const [commentsIsActive, setCommentsActive] = useState(true);
     const [bidsIsActive, setBidsActive] = useState(false);
@@ -39,8 +40,8 @@ const CommentBox = ({auctionId}) => {
                     </button>
                 </div>
             </div>
-            <CommentForm auctionId={auctionId}/>
-            <CommentsList commentsList={sortedComments}/>
+            <CommentForm auctionId={auctionId} replyTo={replyToId}/>
+            <CommentsList commentsList={sortedComments} setReplyToId={setReplyToId}/>
         </div>
     )
 }

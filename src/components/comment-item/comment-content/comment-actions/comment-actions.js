@@ -7,7 +7,7 @@ import {updateCommentVote} from "../../../../redux/auction-detail/auction-detail
 import classes from "./comment-actions.module.css";
 
 
-const CommentActions = ({commentId, authorId, repScore, refetchUser}) => {
+const CommentActions = ({commentId, authorId, repScore, refetchUser, setReplyToId}) => {
     const {isLogin, currentUser} = useSelector(state => state.user);
     const dispatch = useDispatch();
 
@@ -51,7 +51,10 @@ const CommentActions = ({commentId, authorId, repScore, refetchUser}) => {
                 </svg>
                 {repScore.length}
             </button>
-            <button className={classes.reply}>
+            <button
+                className={classes.reply}
+                onClick={() => setReplyToId(commentId)}
+            >
                 Reply
             </button>
         </div>

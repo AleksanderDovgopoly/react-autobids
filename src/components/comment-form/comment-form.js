@@ -8,7 +8,7 @@ import {updateAuctionComment} from "../../redux/auction-detail/auction-detail.ac
 import classes from "./comment-form.module.css";
 
 
-const CommentForm = ({auctionId}) => {
+const CommentForm = ({auctionId, replyTo}) => {
     const dispatch = useDispatch();
     const {isLogin, currentUser} = useSelector(state => state.user);
 
@@ -19,7 +19,7 @@ const CommentForm = ({auctionId}) => {
             createAt: new Date(),
             message: '',
             rep: [],
-            type: 'comment'
+            type: 'comment',
         }
     });
 
@@ -27,7 +27,13 @@ const CommentForm = ({auctionId}) => {
         if (currentUser.uid) {
             setValue('author_id', currentUser.uid)
         }
-    }, [currentUser])
+    }, [currentUser]);
+
+    useEffect(() => {
+        if (replyTo !== '') {
+            setValue('replyTo', replyTo)
+        }
+    }, [replyTo]);
 
 
     const formSubmitHandler = async (data) => {
@@ -48,11 +54,20 @@ const CommentForm = ({auctionId}) => {
 
     return (
         <form onSubmit={handleSubmit(formSubmitHandler)} className={classes.commentForm}>
+            {
+                replyTo !== '' ? <label className={classes.replyTo}>Re: miragejhu</label> : null
+            }
             <fieldset className={classes.formGroup}>
-                <label className={isDirty ? classes.hidden : null} htmlFor="message">
+                <label className={isDirty || replyTo !== '' ? classes.hidden : null} htmlFor="message">
                     Add a Comment...
                 </label>
-                <textarea className={classes.input} {...register('message', {})} autoComplete="off" rows="1"/>
+                <textarea
+                    className={classes.input}
+                    {...register('message', {})}
+                    autoComplete="off"
+                    rows="1"
+                    style={replyTo !== '' ? {paddingLeft: '140px'} : null}
+                />
             </fieldset>
             <button type="submit" disabled={!isDirty}>
                 <span className={classes.hidden}>Submit</span>

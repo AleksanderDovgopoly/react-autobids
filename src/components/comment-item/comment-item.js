@@ -5,8 +5,8 @@ import Spinner from "../spinner/spinner";
 import classes from "./comment-item.module.css";
 
 
-const CommentItem = ({commentData, usersData, refetchUser}) => {
-    const {id, author_id, message, createAt, rep, type, reply_id, bid_price} = commentData;
+const CommentItem = ({commentData, usersData, setReplyToId, refetchUser}) => {
+    const {id, author_id, message, createAt, rep, type, replyTo, bid_price} = commentData;
     const commentAuthor = Object.values(usersData).find(item => item.id === author_id);
 
     return (
@@ -23,9 +23,11 @@ const CommentItem = ({commentData, usersData, refetchUser}) => {
                     itemType={type}
                     message={message}
                     repScore={rep}
-                    replyId={reply_id}
+                    replyId={replyTo}
                     bidPrice={bid_price}
                     refetchUser={refetchUser}
+                    setReplyToId={setReplyToId}
+                    usersData={usersData}
                 />
             </div>
         </li>

@@ -5,9 +5,9 @@ import CommentItem from "../comment-item/comment-item";
 import classes from "./comments-list.module.css";
 
 
-const CommentsList = ({commentsList}) => {
+const CommentsList = ({commentsList, setReplyToId}) => {
     const [isUsersFetching, setIsUsersFetching] = useState(false);
-    const [usersData, setUsersData] = useState([]);
+    const [usersData, setUsersData] = useState({});
 
     useEffect(() => {
         async function fetchData() {
@@ -31,6 +31,7 @@ const CommentsList = ({commentsList}) => {
                             commentData={comment}
                             usersData={usersData}
                             refetchUser={setIsUsersFetching}
+                            setReplyToId={setReplyToId}
                         />
                     ))
                     : <p className={classes.noData}>There are no comments</p>

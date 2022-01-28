@@ -195,7 +195,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 
 export const convertCommentsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
-        const {auction_id, author_id, createAt, message, rep, type, bid_price, reply_id} = doc.data();
+        const {auction_id, author_id, createAt, message, rep, type, bid_price, replyTo} = doc.data();
 
         return {
             id: doc.id,
@@ -206,7 +206,7 @@ export const convertCommentsSnapshotToMap = (collections) => {
             rep,
             type,
             bid_price,
-            reply_id
+            replyTo
         }
 
     });
