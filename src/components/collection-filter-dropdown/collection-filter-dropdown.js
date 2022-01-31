@@ -1,25 +1,17 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import {useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
 import {appendSearchParams} from "../../helpers/auction-functions";
-import {getCategoriesListBySlug} from "../../firebase/firebase.utils";
 
 import classes from "./collection-filter-dropdown.module.css";
 
 
 const FilterDropdown = ({categorySlug}) => {
-    const [isFetching, setIsFetching] = useState(false);
-    const [categoriesList, setCategoriesList] = useState('');
+    const {isFetching, taxonomies} = useSelector(state => state.categories);
+    const currentCatList = taxonomies[categorySlug];
     const [isListOpen, setIsListOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
     const activeFilter = searchParams.get(categorySlug);
-
-    useEffect(async () => {
-        if (!isFetching) {
-            const fetchingData = await getCategoriesListBySlug(categorySlug);
-            setCategoriesList(fetchingData);
-            setIsFetching(true);
-        }
-    }, [isFetching, categorySlug]);
 
     function setCatName(categorySlug) {
         switch (categorySlug) {
@@ -27,8 +19,6 @@ const FilterDropdown = ({categorySlug}) => {
                 return 'Body Style';
             case "transmission":
                 return 'Transmission';
-            case "year_release":
-                return 'Year';
             default:
                 return 'Category';
         }
@@ -51,7 +41,7 @@ const FilterDropdown = ({categorySlug}) => {
                 className={activeFilter !== null ? classes.dropdownToggleActive : classes.dropdownToggle}
                 onClick={toggleHandler}
             >
-                <span>{activeFilter === null ? setCatName(categorySlug) : categoriesList[activeFilter]}</span>
+                <span>{activeFilter === null ? setCatName(categorySlug) : currentCatList[activeFilter]}</span>
             </button>
             {
                 isListOpen && (
@@ -65,7 +55,7 @@ const FilterDropdown = ({categorySlug}) => {
                         </button>
                         {
                             isFetching
-                                ? Object.entries(categoriesList).map(([key, value], index) => {
+                                ? Object.entries(currentCatList).map(([key, value], index) => {
                                     return (
                                         <button
                                             className={classes.item}

@@ -150,6 +150,36 @@ export const fetchAuctionById = async (auctionId) => {
     return documentSnapshot;
 };
 
+export const fetchAllCategoriesList = async () => {
+    const categoriesRef = await firestore.collection('categories');
+    const categoriesSnapshot = await categoriesRef
+        .get()
+        .then(snapshot => {
+            const commentsMap = convertCategoriesSnapshotToMap(snapshot);
+            return commentsMap;
+        })
+        .catch(error => {
+            console.log('Some error with fetching!', error)
+        })
+    return categoriesSnapshot;
+}
+
+export const convertCategoriesSnapshotToMap = (collection) => {
+    const transformedCollection = collection.docs.map(doc => {
+        const categoriesList = doc.data();
+
+        return {
+            id: doc.id,
+            list: categoriesList
+        }
+    });
+
+    return transformedCollection.reduce((accumulator, collection, index) => {
+        accumulator[collection.id] = collection.list;
+        return accumulator;
+    }, {});
+}
+
 export const convertCollectionsSnapshotToMap = (collections) => {
     const transformedCollection = collections.docs.map(doc => {
         const {

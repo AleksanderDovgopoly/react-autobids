@@ -11,7 +11,7 @@ import classes from "./auction-header-bar.module.css";
 
 
 const AuctionHeaderBar = () => {
-    const {start_price, current_price, bids_history, views, end_date, status} = useSelector(state => state.detail.data);
+    const {start_price, current_price, views, end_date, status} = useSelector(state => state.detail.data);
 
     return (
         <div className={classes.auctionHeaderBar}>
@@ -30,7 +30,7 @@ const AuctionHeaderBar = () => {
                             <StatsSoldDate endDate={end_date}/>
                         </Fragment>
                 }
-                <StatsBidsCounter bidHistory={bids_history}/>
+                <StatsBidsCounter/>
                 <StatsViewsCounter views={views}/>
             </div>
             {
@@ -38,7 +38,6 @@ const AuctionHeaderBar = () => {
                     ? <button className="btn btn-primary signInBtn">Place Bid</button>
                     : null
             }
-
         </div>
     )
 }

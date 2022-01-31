@@ -6,7 +6,6 @@ import classes from "./user-detail-bid-history.module.css";
 
 const UserDetailBidHistory = (props) => {
     const {userId} = props;
-
     const auctionItemsObject = useSelector((state => state.auctions.cars));
 
     let auctionsArr = Object.values(auctionItemsObject);

@@ -1,11 +1,18 @@
 import {createSearchParams} from "react-router-dom";
-// import {getCategoriesListBySlug} from "../firebase/firebase.utils";
 
 export const isUserAlreadyVoted = (repArr, userId) => {
     if (typeof repArr !== 'object') return;
     let response = repArr.includes(userId);
 
     return response;
+}
+
+export const bidCountFromCommentsList = (commentsList) => {
+    const bidsCount = commentsList.filter(item => {
+        return item.type === 'bid'
+    }).length;
+
+    return bidsCount;
 }
 
 export const calculateLeftTime = (UNIX_timestamp) => {
@@ -130,11 +137,3 @@ export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter, st
 
     return auctionsArr;
 }
-
-// export const getCatNameBySlug = async (category, itemSlug) => {
-//     const categoryList = await getCategoriesListBySlug(category);
-//
-//     console.log(categoryList);
-//
-//     return categoryList[itemSlug];
-// }

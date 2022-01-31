@@ -1,5 +1,9 @@
+import {useEffect} from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAllCategoriesList, fetchAuctions} from "./firebase/firebase.utils";
+import {fetchCategoriesCollection} from "./redux/categories/categories.actions";
+import {fetchAuctionsAction} from "./redux/auctions/auctions.actions";
 import HomePage from "./pages/home-page/homePage";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up";
 import Header from "./components/header/header";
@@ -12,6 +16,23 @@ import MyAccount from "./pages/my-account/my-account";
 
 function App() {
     const loggedIn = useSelector(state => state.user.isLogin);
+    const dispatch = useDispatch();
+    const {isFetching} = useSelector(state => state.categories);
+    const isCarsFetching = useSelector((state => state.auctions.isFetching));
+
+    useEffect(async () => {
+        if (!isCarsFetching) {
+            const auctionsCollection = await fetchAuctions();
+            dispatch(fetchAuctionsAction(auctionsCollection));
+        }
+    }, [dispatch, isCarsFetching]);
+
+    useEffect(async () => {
+        if (!isFetching) {
+            const fetchingData = await fetchAllCategoriesList();
+            dispatch(fetchCategoriesCollection(fetchingData));
+        }
+    }, [dispatch, isFetching]);
 
     return (
         <BrowserRouter>

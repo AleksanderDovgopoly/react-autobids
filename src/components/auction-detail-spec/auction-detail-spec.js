@@ -6,6 +6,7 @@ import classes from "./auction-detail-spec.module.css";
 
 const AuctionSpec = () => {
     const {spec, seller, geo} = useSelector(state => state.detail.data);
+    const {taxonomies} = useSelector(state => state.categories);
     const {body_style, drivetrain, engine, exterior, interior, make, mileage, model, transmission, vin} = spec;
 
     const sellerUrl = `/user/${seller.id}`;
@@ -22,11 +23,11 @@ const AuctionSpec = () => {
             </dl>
             <dl>
                 <dt>Engine</dt><dd>{engine}</dd>
-                <dt>Transmission</dt><dd>{transmission}</dd>
+                <dt>Transmission</dt><dd>{taxonomies.transmission[transmission]}</dd>
                 <dt>Drivetrain</dt><dd>{drivetrain}</dd>
                 <dt>Exterior color</dt><dd>{exterior}</dd>
                 <dt>Interior color</dt><dd>{interior}</dd>
-                <dt>Body style</dt><dd>{body_style}</dd>
+                <dt>Body style</dt><dd>{taxonomies.body_style[body_style]}</dd>
             </dl>
         </div>
     )
