@@ -1,47 +1,37 @@
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {fetchUsers} from "../../firebase/firebase.utils";
 import CommentForm from "../comment-form/comment-form";
 import CommentsList from "../comments-list/comments-list";
+import CommentFilters from "../comment-filters/comment-filters";
 
 import classes from "./comment-box.module.css";
 
 
 const CommentBox = ({auctionId}) => {
-    const commentsData = useSelector(state => state.detail.comments_n_bids);
+    const [isUsersFetching, setIsUsersFetching] = useState(false);
+    const [usersData, setUsersData] = useState({});
     const [replyToId, setReplyToId] = useState('')
 
-    const [commentsIsActive, setCommentsActive] = useState(true);
-    const [bidsIsActive, setBidsActive] = useState(false);
+    useEffect(() => {
+        async function fetchData() {
+            const usersCollection = await fetchUsers();
+            setUsersData(usersCollection);
+            setIsUsersFetching(true);
+        }
 
-
-    const sortedComments = commentsData.sort(function (x, y) {
-        return y.createAt - x.createAt;
-    })
-
-    function buttonsSwitchHandler() {
-        setCommentsActive(!commentsIsActive);
-        setBidsActive(!bidsIsActive)
-    }
+        if (!isUsersFetching) {
+            fetchData();
+        }
+    }, [isUsersFetching])
 
     return (
-        <div className={classes.commentBox}>
+        <div id="comment_box" className={classes.commentBox}>
             <div className={classes.heading}>
                 <h3>Comments & Bids</h3>
-                <div className={classes.headingNav}>
-                    <button
-                        className={commentsIsActive ? classes.btn + ' ' + classes.active : classes.btn}
-                        onClick={buttonsSwitchHandler}>
-                        Comments
-                    </button>
-                    <button
-                        className={bidsIsActive ? classes.btn + ' ' + classes.active : classes.btn}
-                        onClick={buttonsSwitchHandler}>
-                        Bids
-                    </button>
-                </div>
+                <CommentFilters/>
             </div>
-            <CommentForm auctionId={auctionId} replyTo={replyToId}/>
-            <CommentsList commentsList={sortedComments} setReplyToId={setReplyToId}/>
+            <CommentForm usersData={usersData} auctionId={auctionId} replyTo={replyToId} setReplyToId={setReplyToId}/>
+            <CommentsList usersData={usersData} setIsUsersFetching={setIsUsersFetching} setReplyToId={setReplyToId}/>
         </div>
     )
 }

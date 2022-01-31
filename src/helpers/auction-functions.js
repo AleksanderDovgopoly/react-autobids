@@ -54,6 +54,12 @@ export const getEndDateAuction = (UNIX_timestamp) => {
     return endDate;
 }
 
+export const getAuthorNameByCommentId = (commentId, comments, usersData) => {
+    const replyComment = Object.values(comments).find(item => item.id === commentId);
+    const replyCommentAuthor = Object.values(usersData).find(item => item.id === replyComment.author_id);
+    return replyCommentAuthor.displayName;
+}
+
 export const appendSearchParams = (obj, searchParams) => {
     const sp = createSearchParams(searchParams);
     Object.entries(obj).forEach(([key, value]) => {

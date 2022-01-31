@@ -4,11 +4,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {setNewAuctionBidOrComment} from "../../firebase/firebase.utils";
 import {togglePopupAuth} from "../../redux/user/user.actions";
 import {updateAuctionComment} from "../../redux/auction-detail/auction-detail.actions";
+import {getAuthorNameByCommentId} from "../../helpers/auction-functions";
 
 import classes from "./comment-form.module.css";
 
 
-const CommentForm = ({auctionId, replyTo}) => {
+const CommentForm = ({auctionId, usersData, replyTo, setReplyToId}) => {
+    const comments = useSelector(state => state.detail.comments_n_bids);
     const dispatch = useDispatch();
     const {isLogin, currentUser} = useSelector(state => state.user);
 
@@ -46,6 +48,7 @@ const CommentForm = ({auctionId, replyTo}) => {
 
         if (response === 'success') {
             reset();
+            setReplyToId('');
             dispatch(updateAuctionComment(data));
         } else {
             console.log('Submit comment Error')
@@ -55,7 +58,12 @@ const CommentForm = ({auctionId, replyTo}) => {
     return (
         <form onSubmit={handleSubmit(formSubmitHandler)} className={classes.commentForm}>
             {
-                replyTo !== '' ? <label className={classes.replyTo}>Re: miragejhu</label> : null
+                replyTo !== ''
+                    ? <label className={classes.replyTo}>
+                        Re: {getAuthorNameByCommentId(replyTo, comments, usersData)}
+                        <span onClick={() => setReplyToId('')}> </span>
+                    </label>
+                    : null
             }
             <fieldset className={classes.formGroup}>
                 <label className={isDirty || replyTo !== '' ? classes.hidden : null} htmlFor="message">

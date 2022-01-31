@@ -1,7 +1,7 @@
 import {
     CLEAR_AUCTION_DETAIL,
     FETCH_AUCTION_COMMENTS,
-    FETCH_AUCTION_DETAIL,
+    FETCH_AUCTION_DETAIL, SET_COMMENTS_FILTER,
     UPDATE_AUCTION_COMMENTS,
     UPDATE_BID_HISTORY, UPDATE_COMMENT_REP
 } from "../actionTypes";
@@ -28,6 +28,11 @@ export const updateCommentVote = (commentId, userId) => ({
         commentId,
         userId
     }
+})
+
+export const setCommentsFilter = (activeFilter) => ({
+    type: SET_COMMENTS_FILTER,
+    payload: activeFilter
 })
 
 // ToDo: Delete or rebuild

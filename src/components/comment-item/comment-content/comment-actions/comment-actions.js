@@ -29,6 +29,11 @@ const CommentActions = ({commentId, authorId, repScore, refetchUser, setReplyToI
         }
     }
 
+    function replyClickHandler() {
+        setReplyToId(commentId);
+        document.getElementById('comment_box').scrollIntoView({behavior: "smooth"});
+    }
+
     return (
         <div className={classes.actions}>
             <button
@@ -53,7 +58,7 @@ const CommentActions = ({commentId, authorId, repScore, refetchUser, setReplyToI
             </button>
             <button
                 className={classes.reply}
-                onClick={() => setReplyToId(commentId)}
+                onClick={() => replyClickHandler()}
             >
                 Reply
             </button>

@@ -1,0 +1,12 @@
+.filterItem {
+    background: none;
+    border: none;
+    opacity: .6;
+    cursor: pointer;
+}
+
+.activeFilter {
+    opacity: 1;
+    color: #4ad493;
+    font-weight: 800;
+}

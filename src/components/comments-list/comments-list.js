@@ -1,31 +1,34 @@
-import {useEffect, useState} from "react";
-import {fetchUsers} from "../../firebase/firebase.utils";
+import {useSelector} from "react-redux";
 import CommentItem from "../comment-item/comment-item";
 
 import classes from "./comments-list.module.css";
 
 
-const CommentsList = ({commentsList, setReplyToId}) => {
-    const [isUsersFetching, setIsUsersFetching] = useState(false);
-    const [usersData, setUsersData] = useState({});
+const CommentsList = ({usersData, setIsUsersFetching, setReplyToId}) => {
+    const commentsData = useSelector(state => state.detail.comments_n_bids);
+    const activeFilter = useSelector(state => state.detail.comments_filter);
 
-    useEffect(() => {
-        async function fetchData() {
-            const usersCollection = await fetchUsers();
-            setUsersData(usersCollection);
-            setIsUsersFetching(true);
-        }
+    let sortedComments = commentsData.sort(function (x, y) {
+        return y.createAt - x.createAt;
+    })
 
-        if (!isUsersFetching) {
-            fetchData();
-        }
-    }, [isUsersFetching])
+    if (activeFilter === 'upvoted') {
+        sortedComments = commentsData.sort(function (x, y) {
+            return y.rep.length - x.rep.length;
+        })
+    }
+
+    if (activeFilter === 'bids') {
+        sortedComments = sortedComments.filter((comment) => {
+            return comment.type === 'bid'
+        })
+    }
 
     return (
         <ul className={classes.commentsList}>
             {
-                commentsList.length
-                    ? commentsList.map((comment, index) => (
+                sortedComments.length
+                    ? sortedComments.map((comment, index) => (
                         <CommentItem
                             key={index}
                             commentData={comment}

@@ -14,23 +14,6 @@
     padding: 20px 0;
 }
 
-.headingNav {
-
-}
-
-.headingNav .btn {
-    background: none;
-    border: none;
-    opacity: .6;
-    cursor: pointer;
-}
-
-.headingNav .active {
-    opacity: 1;
-    color: #4ad493;
-    font-weight: 800;
-}
-
 .commentBox h3 {
     font-size: 25px;
     padding: 0;

@@ -1,7 +1,7 @@
 import {
     CLEAR_AUCTION_DETAIL,
     FETCH_AUCTION_COMMENTS,
-    FETCH_AUCTION_DETAIL,
+    FETCH_AUCTION_DETAIL, SET_COMMENTS_FILTER,
     UPDATE_AUCTION_COMMENTS,
     UPDATE_BID_HISTORY,
     UPDATE_COMMENT_REP
@@ -11,7 +11,8 @@ import {addAuctionComment, addBidToHistory, addVoteToCommentById} from "./auctio
 const INITIAL_STATE = {
     fetchingId: '',
     data: [],
-    comments_n_bids: []
+    comments_n_bids: [],
+    comments_filter: 'newest'
 };
 
 const auctionDetailReducer = (state = INITIAL_STATE, action) => {
@@ -26,6 +27,11 @@ const auctionDetailReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 comments_n_bids: action.payload
+            }
+        case SET_COMMENTS_FILTER:
+            return {
+                ...state,
+                comments_filter: action.payload
             }
         case UPDATE_AUCTION_COMMENTS:
             return {
