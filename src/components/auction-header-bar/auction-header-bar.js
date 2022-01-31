@@ -1,5 +1,6 @@
 import {Fragment} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {togglePopupAuth} from "../../redux/user/user.actions";
 import StatsTimeLeft from "./stats-time-left/stats-time-left";
 import StatsCurrentBid from "./stats-current-bid/stats-current-bid";
 import StatsBidsCounter from "./stats-bids-counter/stats-bids-counter";
@@ -12,6 +13,16 @@ import classes from "./auction-header-bar.module.css";
 
 const AuctionHeaderBar = () => {
     const {start_price, current_price, views, end_date, status} = useSelector(state => state.detail.data);
+    const {isLogin} = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+    function setNewBid() {
+        if (!isLogin) {
+            dispatch(togglePopupAuth())
+            return;
+        }
+        console.log('Scroll to set bid block here');
+    }
 
     return (
         <div className={classes.auctionHeaderBar}>
@@ -35,7 +46,7 @@ const AuctionHeaderBar = () => {
             </div>
             {
                 status === 'active'
-                    ? <button className="btn btn-primary signInBtn">Place Bid</button>
+                    ? <button className="btn btn-primary signInBtn" onClick={() => setNewBid()}>Place Bid</button>
                     : null
             }
         </div>

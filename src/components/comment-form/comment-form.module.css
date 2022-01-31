@@ -139,3 +139,9 @@
     width: 12px;
     height: 12px;
 }
+
+@media screen and (max-width: 768px) {
+    .replyTo {
+        font-size: 12px;
+    }
+}

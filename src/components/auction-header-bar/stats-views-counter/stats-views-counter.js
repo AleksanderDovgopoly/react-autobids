@@ -1,6 +1,8 @@
+import classes from "./stats-view-counter.module.css";
+
 const StatsViewsCounter = ({views}) => {
     return (
-        <div>
+        <div className={classes.viewCounter}>
             <span>Views: </span>
             {views}
         </div>

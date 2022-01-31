@@ -1,0 +1,16 @@
+.currentBid:before {
+    font-family: FontAwesome;
+    content: "\f102";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 0;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+@media screen and (max-width: 500px) {
+    .currentBid span {
+        display: none;
+    }
+}

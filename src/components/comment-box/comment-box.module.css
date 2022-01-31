@@ -24,4 +24,8 @@
     .commentBox {
         padding: 0 20px;
     }
+
+    .heading {
+        flex-direction: column;
+    }
 }

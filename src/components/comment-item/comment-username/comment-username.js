@@ -1,4 +1,5 @@
 import moment from "moment";
+import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
 import classes from "./comment-username.module.css";
@@ -6,6 +7,7 @@ import classes from "./comment-username.module.css";
 
 const CommentUsername = ({authorData, commentCreate}) => {
     const {id, avatar, displayName, rep_score} = authorData;
+    const auctionSellerId = useSelector(state => state.detail.data.seller.id);
     const date = moment.unix(commentCreate.seconds);
     const fromDate = date.from(Date.now());
     let userPhoto = 'https://firebasestorage.googleapis.com/v0/b/auto-bids.appspot.com/o/empty_user.jpg?alt=media&token=0148c2c3-1bc7-4315-97ad-02a36e0a517c';
@@ -40,6 +42,11 @@ const CommentUsername = ({authorData, commentCreate}) => {
                     </svg>
                     {rep_score.length}
                 </span>
+                {
+                    id === auctionSellerId
+                        ? <span className={classes.seller}>Seller</span>
+                        : null
+                }
                 <span className={classes.userExtra}>
                     {fromDate}
                 </span>

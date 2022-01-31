@@ -1,0 +1,16 @@
+.viewCounter:before {
+    font-family: FontAwesome;
+    content: "\f06e";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .viewCounter {
+        display: none;
+    }
+}

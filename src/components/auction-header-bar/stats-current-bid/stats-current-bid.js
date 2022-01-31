@@ -1,6 +1,8 @@
+import classes from "./stats-current-bid.module.css";
+
 const StatsCurrentBid = ({bid, startPrice}) => {
     return (
-        <div>
+        <div className={classes.currentBid}>
             <span>Current bid: </span>
             ${bid || startPrice}
         </div>
