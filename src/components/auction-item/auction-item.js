@@ -6,8 +6,7 @@ import AuctionItemStatusBarByUser from "../auction-item-status-bar-by-user/aucti
 import classes from "./auction-item.module.css";
 
 
-const AuctionItem = (props) => {
-    const {item, userId} = props;
+const AuctionItem = ({item, bids}) => {
     const {title, short_description, current_price, start_price, geo, photos, start_date, id, status, end_date} = item;
 
     const endingMoment = moment.unix(end_date.seconds);
@@ -29,10 +28,10 @@ const AuctionItem = (props) => {
                 <div className={classes.image}>
                     <img src={mainPhoto} alt={title}/>
                     {
-                        userId
+                        bids
                             ? <AuctionItemStatusBarByUser
                                 itemData={item}
-                                userId={userId}
+                                bids={bids}
                             />
                             : <AuctionItemStatusBar
                                 currentPrice={current_price}

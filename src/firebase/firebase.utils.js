@@ -127,9 +127,7 @@ export const fetchCommentsByAuctionId = async (auctionId) => {
         .get()
         .then(snapshot => {
             const commentsMap = convertCommentsSnapshotToMap(snapshot);
-            const filteredMap = Object.values(commentsMap).filter(item => item.auction_id === auctionId);
-
-            return filteredMap;
+            return Object.values(commentsMap).filter(item => item.auction_id === auctionId);
         })
         .catch(error => {
             console.log('Some error with comments fetching!', error)
@@ -379,6 +377,14 @@ export const getCategoriesListBySlug = async (catSlug) => {
             console.log('Some error with fetching!', error)
         })
     return documentSnapshot;
+}
+
+export const getCommentsAndBidsByUserId = async (userId) => {
+    if (!userId) return;
+
+    const commentsRef = await firestore.collection('comments_bids');
+    const commentsByUser = await commentsRef.where('author_id', '==', userId).get();
+    return convertCommentsSnapshotToMap(commentsByUser);
 }
 
 

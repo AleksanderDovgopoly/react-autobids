@@ -4,8 +4,7 @@ import AuctionsList from "../auctions-list/auctions-list";
 import classes from "./user-detail-auctioned.module.css";
 
 
-const UserDetailAuctioned = (props) => {
-    const {userId} = props;
+const UserDetailAuctioned = ({userId}) => {
     const auctionItemsObject = useSelector((state => state.auctions.cars));
 
     let auctionsArr = Object.values(auctionItemsObject);

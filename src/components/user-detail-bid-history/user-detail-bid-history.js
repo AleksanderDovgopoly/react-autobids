@@ -4,16 +4,21 @@ import AuctionsList from "../auctions-list/auctions-list";
 import classes from "./user-detail-bid-history.module.css";
 
 
-const UserDetailBidHistory = (props) => {
-    const {userId} = props;
+const UserDetailBidHistory = ({userBids}) => {
     const auctionItemsObject = useSelector((state => state.auctions.cars));
+    let auctionsItemsArr = Object.values(auctionItemsObject);
 
-    let auctionsArr = Object.values(auctionItemsObject);
+    const bidsGroupByAuctions = userBids.reduce((acc, item) => {
+        const auctionId = item.auction_id;
+        if (acc[auctionId]) {
+            acc[auctionId].push(item)
+        } else {
+            acc[auctionId] = [item]
+        }
+        return acc
+    }, {});
 
-    const filteredAuctions = auctionsArr
-        .filter(function (key, value) {
-            return key.bids_history.find((bid) => ( bid.user_id === userId ))
-        })
+    const filteredAuctions = Object.keys(bidsGroupByAuctions).map(key => auctionsItemsArr.find(item => item.id === key));
 
     return (
         <div className={classes.bidHistory}>
@@ -23,7 +28,7 @@ const UserDetailBidHistory = (props) => {
             </h2>
             {
                 filteredAuctions.length
-                    ? <AuctionsList auctionsArr={filteredAuctions} userId={userId}/>
+                    ? <AuctionsList auctionsArr={filteredAuctions} bidGroups={bidsGroupByAuctions}/>
                     : <p>There are no auctions created yet</p>
             }
         </div>

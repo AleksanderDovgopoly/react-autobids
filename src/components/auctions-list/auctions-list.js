@@ -5,8 +5,7 @@ import AuctionItem from "../auction-item/auction-item";
 import classes from "./auctions-list.module.css";
 
 
-const AuctionsList = (props) => {
-    let {auctionsArr, userId} = props;
+const AuctionsList = ({auctionsArr, bidGroups}) => {
     const [searchParams] = useSearchParams();
     const currentSort = searchParams.get('sort');
     const transmissionFilter = searchParams.get('transmission');
@@ -28,7 +27,7 @@ const AuctionsList = (props) => {
         <ul className={classes.auctionList}>
             {
                 auctionItems.map((item) => (
-                    <AuctionItem key={item.id} item={item} userId={userId}/>
+                    <AuctionItem key={item.id} item={item} bids={bidGroups}/>
                 ))
             }
         </ul>

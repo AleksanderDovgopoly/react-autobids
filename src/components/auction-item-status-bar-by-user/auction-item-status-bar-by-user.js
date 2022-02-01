@@ -1,12 +1,8 @@
 import classes from "../auction-item-status-bar/auction-item-status-bar.module.css";
 
-
-const AuctionItemStatusBarByUser = (props) => {
-    const {itemData, userId} = props;
-
-    const allItemBids = itemData.bids_history;
-    const currUserBids = allItemBids.filter(item => item.user_id === userId);
-    const maxUserBid = Math.max.apply(Math, currUserBids.map(function (bid) {
+const AuctionItemStatusBarByUser = ({itemData, bids}) => {
+    const allItemBids = bids[itemData.id];
+    const maxUserBid = Math.max.apply(Math, allItemBids.map(function (bid) {
         return bid.bid_price
     }));
 
@@ -14,7 +10,7 @@ const AuctionItemStatusBarByUser = (props) => {
         <div className={classes.statusBar}>
             <div className={classes.statusBg}>
                 <div>
-                    {currUserBids.length} Bids to
+                    {allItemBids.length} Bids to
                     <span className={classes.price}>${maxUserBid}</span>
                 </div>
             </div>
