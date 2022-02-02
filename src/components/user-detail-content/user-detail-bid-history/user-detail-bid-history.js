@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import AuctionsList from "../auctions-list/auctions-list";
+import AuctionsList from "../../auctions-list/auctions-list";
 
 import classes from "./user-detail-bid-history.module.css";
 

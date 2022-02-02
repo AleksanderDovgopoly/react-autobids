@@ -1,0 +1,72 @@
+.commentItem {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.auctionCard {
+    margin-bottom: 14px;
+    margin-right: 24px;
+    width: 196px;
+    height: 131px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.metadata {
+
+}
+
+.auctionTitle {
+    display: flex;
+    position: relative;
+    padding-right: 30px;
+    word-break: break-word;
+}
+
+.auctionTitle a {
+    margin-right: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #262626;
+    text-decoration: none;
+}
+
+.commentCreate {
+    margin-bottom: 8px;
+    color: #828282;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.commentText p {
+    margin-bottom: 0;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+@media (min-width: 576px) {
+    .commentItem {
+        margin-bottom: 40px;
+        flex-direction: row;
+    }
+
+    .auctionCard {
+        margin-bottom: 0;
+        margin-right: 24px;
+        width: 218px;
+        height: 143px;
+    }
+
+    .auctionTitle a {
+        font-size: 16px;
+        line-height: 19px;
+    }
+}

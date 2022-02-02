@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     border-top: 1px solid #ebebeb;
+    padding-bottom: 40px;
 }
 
 .bidHistory h2 span {

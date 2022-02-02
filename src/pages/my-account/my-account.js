@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import UserDetailSummary from "../../components/user-detail-summary/user-detail-summary";
+import UserDetailSummary from "../../components/user-detail-content/user-detail-summary/user-detail-summary";
 
 import classes from "./my-account.module.css";
 

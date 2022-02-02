@@ -1,0 +1,15 @@
+.hero {
+    display: block;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.image {
+    position: relative;
+}
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

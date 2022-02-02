@@ -1,0 +1,17 @@
+.userComments {
+    border-top: 1px solid #ebebeb;
+    padding-bottom: 40px;
+}
+
+.userComments h2 span {
+    padding-left: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 36px;
+}
+
+@media (min-width: 576px) {
+    .userComments h2 span {
+        line-height: 33px;
+    }
+}

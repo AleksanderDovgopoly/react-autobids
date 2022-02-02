@@ -1,0 +1,17 @@
+.upvote {
+    padding: 0 8px;
+    background: #fff;
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    color: #828282;
+    font-size: 14px;
+    line-height: 16px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    transition: none;
+}
+.upvote:disabled {
+    border-color: #4ad493;
+    cursor: default;
+}

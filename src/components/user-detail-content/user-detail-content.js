@@ -1,8 +1,9 @@
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {getCommentsAndBidsByUserId} from "../../firebase/firebase.utils";
-import UserDetailSummary from "../user-detail-summary/user-detail-summary";
-import UserDetailAuctioned from "../user-detail-auctioned/user-detail-auctioned";
-import UserDetailBidHistory from "../user-detail-bid-history/user-detail-bid-history";
+import UserDetailSummary from "./user-detail-summary/user-detail-summary";
+import UserDetailAuctioned from "./user-detail-auctioned/user-detail-auctioned";
+import UserDetailBidHistory from "./user-detail-bid-history/user-detail-bid-history";
+import UserDetailComments from "./user-detail-comments/user-detail-comments";
 import Spinner from "../spinner/spinner";
 
 import classes from "./user-detail-content.module.css";
@@ -12,8 +13,6 @@ const UserDetailContent = ({userData, userId}) => {
     const [isCommentsFetching, setIsCommentsFetching] = useState(false);
     const [userBidsArr, setUserBidsArr] = useState([]);
     const [userCommentsArr, setUserCommentsArr] = useState([]);
-
-    // ToDo: User comments list
 
     useEffect(async () => {
         const fetchUserCommentsAndBids = await getCommentsAndBidsByUserId(userId);
@@ -25,10 +24,13 @@ const UserDetailContent = ({userData, userId}) => {
     return (
         <div className={classes.userContainer}>
             <UserDetailSummary userData={userData}/>
-            <UserDetailAuctioned userId={userId} />
+            <UserDetailAuctioned userId={userId}/>
             {
                 isCommentsFetching
-                    ? <UserDetailBidHistory userBids={userBidsArr}/>
+                    ? <Fragment>
+                        <UserDetailBidHistory userBids={userBidsArr}/>
+                        <UserDetailComments comments={userCommentsArr}/>
+                    </Fragment>
                     : <Spinner/>
             }
 
