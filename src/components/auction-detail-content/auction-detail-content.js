@@ -57,6 +57,9 @@ const AuctionDetailContent = () => {
                     thumbnails={true}
                     thumbnailWidth="100px"
                     classname={classes.auctionDetailContent}
+                    style={{
+                        maxWidth: "100%",
+                    }}
                 />
                 <SetBidBar/>
             </div>

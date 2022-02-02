@@ -5,11 +5,15 @@
 }
 
 .image {
+    display: contents;
     position: relative;
+    height: auto;
+    width: 100%;
 }
 .image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: inherit;
     display: block;
+    width: inherit;
+    height: auto;
+    min-height: 150px;
 }
