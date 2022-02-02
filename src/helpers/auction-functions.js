@@ -102,6 +102,10 @@ export const doSortAuctionsList = (auctionsArr, sortType) => {
             return auctionsArr.sort(function (x, y) {
                 return x.spec.mileage - y.spec.mileage;
             });
+        case 'recently_ended':
+            return auctionsArr.sort(function (x, y) {
+                return y.end_date - x.end_date;
+            });
 
         default:
             return auctionsArr.sort(function (x, y) {

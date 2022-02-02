@@ -1,12 +1,13 @@
 import {useSearchParams} from "react-router-dom";
-
-import classes from "./collection-sorts-bar.module.css";
 import {appendSearchParams} from "../../helpers/auction-functions";
+import classes from "./collection-sorts-bar.module.css";
 
-
-const CollectionSortsBar = () => {
+const CollectionSortsBar = ({pageType}) => {
     let [searchParams, setSearchParams] = useSearchParams();
     let activeSort = searchParams.get('sort');
+    let defaultSortTitle = 'Ending soon';
+
+    if (pageType === 'past') defaultSortTitle = 'Recently ended';
 
     return (
         <div className={classes.sortsBar}>
@@ -16,7 +17,7 @@ const CollectionSortsBar = () => {
                         onClick={() => setSearchParams(appendSearchParams({sort: null}, searchParams))}
                         className={!activeSort ? classes.selected : null}
                     >
-                        Ending soon
+                        {defaultSortTitle}
                     </span>
                 </li>
                 <li>

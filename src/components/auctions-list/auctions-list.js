@@ -5,9 +5,9 @@ import AuctionItem from "../auction-item/auction-item";
 import classes from "./auctions-list.module.css";
 
 
-const AuctionsList = ({auctionsArr, bidGroups}) => {
+const AuctionsList = ({auctionsArr, bidGroups, pageType}) => {
     const [searchParams] = useSearchParams();
-    const currentSort = searchParams.get('sort');
+    let currentSort = searchParams.get('sort');
     const transmissionFilter = searchParams.get('transmission');
     const bodyStyleFilter = searchParams.get('body_style');
     const startYearFilter = searchParams.get('start_year');
@@ -19,6 +19,10 @@ const AuctionsList = ({auctionsArr, bidGroups}) => {
 
     if (!auctionsArr.length) {
         return <p>Nothing found for your request</p>;
+    }
+
+    if (pageType === 'past' && currentSort === null) {
+        currentSort = 'recently_ended'
     }
 
     const auctionItems = doSortAuctionsList(auctionsArr, currentSort);

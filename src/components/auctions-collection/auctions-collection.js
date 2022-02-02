@@ -40,11 +40,11 @@ const AuctionsCollection = (props) => {
                     {pageTitle}
                 </h3>
                 <FiltersBar />
-                <CollectionSortsBar/>
+                <CollectionSortsBar pageType={pageType}/>
             </div>
             {
                 isCarsFetching
-                    ? <AuctionsList auctionsArr={auctionsArr}/>
+                    ? <AuctionsList auctionsArr={auctionsArr} pageType={pageType}/>
                     : <Spinner/>
             }
         </div>
