@@ -1,0 +1,15 @@
+.auctionStatsMeta {
+    margin-bottom: 12px;
+    padding: 0 0 12px;
+    border: 1px solid #eeeef0;
+    border-bottom: none;
+}
+
+@media screen and (min-width: 769px){
+    .auctionStatsMeta {
+        margin-bottom: 47px;
+        padding: 13px 0 0;
+        border: 1px solid #eeeef0;
+        border-radius: 6px;
+    }
+}

@@ -1,0 +1,90 @@
+.stats {
+    display: table;
+    margin-bottom: 0;
+}
+
+.stats li {
+    display: table-row;
+}
+
+.stats li .th {
+    display: table-cell;
+    padding-right: 27px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 28px;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.stats li .td {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 28px;
+    min-height: 28px;
+}
+
+.endIcon:before {
+    font-family: FontAwesome;
+    content: "\f017";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.bidsIcon:before {
+    font-family: FontAwesome;
+    content: "\f0e3";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.commentsIcon:before {
+    font-family: FontAwesome;
+    content: "\f075";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.viewsIcon:before {
+    font-family: FontAwesome;
+    content: "\f06e";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+@media screen and (min-width: 769px){
+    .stats {
+        margin-top: 4px;
+        padding-left: 30px;
+        align-self: start;
+        flex-basis: 50%;
+    }
+
+    .stats li .th {
+        width: 53px;
+        line-height: 23px;
+    }
+
+    .stats li .td {
+        line-height: 23px;
+        min-height: 23px;
+    }
+}

@@ -1,0 +1,24 @@
+.auctionJumpSection {
+    padding-top: 60px;
+    margin-bottom: 16px;
+    padding-left: 4px;
+    position: relative;
+}
+
+.auctionJumpSection h3 {
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    padding-right: 40px;
+}
+
+@media screen and (min-width: 769px) {
+    .auctionJumpSection h3 {
+        padding-left: 10px;
+        padding-right: 0;
+        margin-bottom: 16px;
+        font-size: 22px;
+        line-height: 26px;
+    }
+}

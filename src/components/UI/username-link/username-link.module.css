@@ -1,0 +1,31 @@
+.username {
+    display: flex;
+    align-items: center;
+}
+
+.username .photo a {
+    display: block;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+}
+.username .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    vertical-align: middle;
+}
+
+.username .text {
+    margin-left: 5px;
+}
+
+.username .text a {
+    font-size: 14px;
+    line-height: 17px;
+    color: #262626;
+    font-weight: 600;
+    text-decoration: none;
+}

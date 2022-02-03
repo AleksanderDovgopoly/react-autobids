@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import UsernameLink from "../UI/username-link/username-link";
 
 import classes from "./auction-detail-spec.module.css";
 
@@ -9,14 +9,12 @@ const AuctionSpec = () => {
     const {taxonomies} = useSelector(state => state.categories);
     const {body_style, drivetrain, engine, exterior, interior, make, mileage, model, transmission, vin} = spec;
 
-    const sellerUrl = `/user/${seller.id}`;
-
     return (
         <div className={classes.auctionSpec}>
             <dl>
                 <dt>Make</dt><dd>{make}</dd>
                 <dt>Model</dt><dd>{model}</dd>
-                <dt>Seller</dt><dd><Link to={sellerUrl}>{seller.name}</Link></dd>
+                <dt>Seller</dt><dd><UsernameLink userId={seller.id}/></dd>
                 <dt>Location</dt><dd>{geo}</dd>
                 <dt>VIN</dt><dd>{vin}</dd>
                 <dt>Mileage</dt><dd>{mileage}</dd>

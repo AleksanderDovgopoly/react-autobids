@@ -9,6 +9,8 @@ import NewListingsSidebar from "../sidebars/new-listings-sidebar/new-listings-si
 import SetBidBar from "../set-bid-bar/set-bid-bar";
 import AuctionDetailDescription from "../auction-detail-description/auction-detail-description";
 import EndingSoonSidebar from "../sidebars/ending-soon-sidebar/ending-soon-sidebar";
+import AuctionDetailJump from "../auction-detail-jump/auction-detail-jump";
+import AuctionDetailStats from "../auction-detail-stats/auction-detail-stats";
 
 import classes from "./auction-detail-content.module.css";
 
@@ -70,6 +72,8 @@ const AuctionDetailContent = () => {
                     {
                         descriptions && <AuctionDetailDescription descriptionsList={descriptions}/>
                     }
+                    <AuctionDetailJump />
+                    <AuctionDetailStats />
                     <CommentBox auctionId={id}/>
                 </div>
                 <div className={classes.sidebar}>

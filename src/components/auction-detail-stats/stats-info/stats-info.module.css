@@ -1,0 +1,52 @@
+.statsInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.infoWrapper {
+    flex-shrink: 1;
+}
+
+.bidder {
+    display: flex;
+    margin-left: 15px;
+}
+
+.bidder h4 {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.currentBid {
+    margin-top: 1px;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 64px;
+}
+
+.dollar {
+    margin-right: 3px;
+}
+
+@media screen and (min-width: 769px){
+    .statsInfo {
+        flex-direction: row;
+    }
+    .currentBid {
+        flex-basis: 50%;
+    }
+    .bidder h4 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 30px;
+        white-space: nowrap;
+    }
+}

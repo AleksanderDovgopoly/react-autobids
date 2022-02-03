@@ -1,6 +1,5 @@
 import {Fragment} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {togglePopupAuth} from "../../redux/user/user.actions";
+import {useSelector} from "react-redux";
 import StatsTimeLeft from "./stats-time-left/stats-time-left";
 import StatsCurrentBid from "./stats-current-bid/stats-current-bid";
 import StatsBidsCounter from "./stats-bids-counter/stats-bids-counter";
@@ -13,15 +12,9 @@ import classes from "./auction-header-bar.module.css";
 
 const AuctionHeaderBar = () => {
     const {start_price, current_price, views, end_date, status} = useSelector(state => state.detail.data);
-    const {isLogin} = useSelector(state => state.user);
-    const dispatch = useDispatch();
 
     function setNewBid() {
-        if (!isLogin) {
-            dispatch(togglePopupAuth())
-            return;
-        }
-        console.log('Scroll to set bid block here');
+        document.getElementById('auction-jump').scrollIntoView({behavior: "smooth"});
     }
 
     return (

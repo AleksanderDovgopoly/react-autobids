@@ -387,6 +387,18 @@ export const getCommentsAndBidsByUserId = async (userId) => {
     return convertCommentsSnapshotToMap(commentsByUser);
 }
 
+export const getBidsByAuctionId = async (auctionId) => {
+    if (!auctionId) return;
+
+    const commentsRef = await firestore.collection('comments_bids');
+    const bidsByAuction = await commentsRef
+        .where('type', '==', 'bid')
+        .where('auction_id', '==', auctionId)
+        .orderBy('createAt', 'desc')
+        .get();
+    return convertCommentsSnapshotToMap(bidsByAuction);
+}
+
 
 export const auth = firebase.auth();
 
