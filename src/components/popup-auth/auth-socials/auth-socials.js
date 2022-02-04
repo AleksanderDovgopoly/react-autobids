@@ -2,7 +2,7 @@ import {useDispatch} from "react-redux";
 import {getAuth, signInWithPopup} from "firebase/auth";
 import firebase from "firebase/compat/app";
 import {setCurrentUser} from "../../../redux/user/user.actions";
-import {createUserProfileDocument} from "../../../firebase/firebase.utils";
+import {createUserProfileDocument, getUserDataById} from "../../../firebase/firebase.utils";
 import CustomButton from "../../custom-button/custom-button";
 
 import classes from "./auth-socials.module.css";
@@ -17,11 +17,12 @@ const AuthSocials = ({closePopup}) => {
         const auth = getAuth();
         const provider = new firebase.auth.GoogleAuthProvider();
         signInWithPopup(auth, provider)
-            .then((result) => {
+            .then(async (result) => {
                 const user = result.user;
-                dispatch(setCurrentUser(user));
                 closePopup();
-                createUserProfileDocument(user);
+                await createUserProfileDocument(user);
+                const localUserData = await getUserDataById(user.uid);
+                dispatch(setCurrentUser(localUserData));
             }).catch((error) => {
             console.log('Sign In Error', error)
         });

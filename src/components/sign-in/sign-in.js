@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {auth, createUserProfileDocument} from "../../firebase/firebase.utils";
+import {auth, createUserProfileDocument, getUserDataById} from "../../firebase/firebase.utils";
 import firebase from "firebase/compat/app";
 import {getAuth, signInWithPopup} from "firebase/auth";
 import {setCurrentUser} from "../../redux/user/user.actions";
@@ -26,7 +26,8 @@ const SignIn = () => {
 
         try {
             const response = await auth.signInWithEmailAndPassword(email, password);
-            dispatch(setCurrentUser(response.user));
+            const localUserData = await getUserDataById(response.user.uid);
+            dispatch(setCurrentUser(localUserData));
             setUserCredentials({email: '', password: ''});
             navigate('/my-account')
         } catch (error) {
@@ -40,11 +41,11 @@ const SignIn = () => {
         const auth = getAuth();
         const provider = new firebase.auth.GoogleAuthProvider();
         signInWithPopup(auth, provider)
-            .then((result) => {
+            .then(async (result) => {
                 const user = result.user;
-
-                dispatch(setCurrentUser(user));
-                createUserProfileDocument(user);
+                await createUserProfileDocument(user);
+                const localUserData = await getUserDataById(user.uid);
+                dispatch(setCurrentUser(localUserData));
                 navigate('/my-account');
 
             }).catch((error) => {

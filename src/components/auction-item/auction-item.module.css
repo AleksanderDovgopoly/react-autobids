@@ -6,33 +6,7 @@
     position: relative;
 }
 
-.toggleWatchList {
-    background: url(../../images/watchlist.png) no-repeat;
-    background-size: contain;
-    border: none;
-    margin: 0;
-    position: absolute;
-    right: 1px;
-    top: 5px;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .12s ease-in;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    -webkit-appearance: none;
-    appearance: none;
-    cursor: pointer;
-}
-
-.auctionItem:hover .toggleWatchList {
-    visibility: visible;
-    opacity: 1;
-}
-
-.watched {
-    background: url(../../images/watched.png);
-    border: none;
+.auctionItem:hover button {
     visibility: visible;
     opacity: 1;
 }

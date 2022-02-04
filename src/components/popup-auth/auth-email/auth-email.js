@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import {useState} from "react";
-import {auth} from "../../../firebase/firebase.utils";
+import {auth, getUserDataById} from "../../../firebase/firebase.utils";
 import {setCurrentUser} from "../../../redux/user/user.actions";
 import FormInput from "../../form-input/form-input";
 import CustomButton from "../../custom-button/custom-button";
@@ -17,7 +17,8 @@ const AuthEmail = ({closePopup}) => {
         event.preventDefault();
         try {
             const response = await auth.signInWithEmailAndPassword(email, password);
-            dispatch(setCurrentUser(response.user));
+            const localUserData = await getUserDataById(response.user.uid);
+            dispatch(setCurrentUser(localUserData));
             setUserCredentials({email: '', password: ''});
             closePopup();
         } catch (error) {

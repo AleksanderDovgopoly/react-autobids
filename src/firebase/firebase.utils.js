@@ -349,6 +349,29 @@ export const updateUserVotesById = async (authorId, userId) => {
     return userRef;
 }
 
+export const updateUserWatchedAuctions = async (userId, auctionId) => {
+    if (!auctionId || !userId) return;
+
+    const userRef = await firestore.doc(`users/${userId}`);
+    const snapShot = (await userRef.get()).data();
+    const isAuctionWatched = snapShot.watch_list.auctions.includes(auctionId);
+
+    try {
+        let updated_watch_list = snapShot.watch_list;
+        isAuctionWatched
+            ? updated_watch_list.auctions = updated_watch_list.auctions.filter(id => id !== auctionId)
+            : updated_watch_list.auctions = [...updated_watch_list.auctions, auctionId]
+
+        await userRef.update({
+            watch_list: updated_watch_list
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    return userRef;
+}
+
 export const getUserDataById = async (userId) => {
     if (!userId) return;
 
@@ -356,7 +379,9 @@ export const getUserDataById = async (userId) => {
     const documentSnapshot = await userRef
         .get()
         .then(snapshot => {
-            return snapshot.data();
+            let userData = snapshot.data();
+            userData.uid = userId;
+            return userData;
         })
         .catch(error => {
             console.log('Some error with fetching!', error)
@@ -399,11 +424,7 @@ export const getBidsByAuctionId = async (auctionId) => {
     return convertCommentsSnapshotToMap(bidsByAuction);
 }
 
-
 export const auth = firebase.auth();
-
 export const firestore = firebase.firestore();
-
 export const storage = firebase.storage();
-
 export default firebase;
