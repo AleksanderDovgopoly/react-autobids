@@ -1,0 +1,47 @@
+.userNavigation {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    height: inherit;
+}
+
+.watchlistToggle, .notificationsToggle, .menuToggle {
+    display: block;
+    position: relative;
+}
+
+.activeToggle:after {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 3px;
+    border-radius: 3px;
+    background: #ffe55f;
+    position: absolute;
+    bottom: 0;
+    left: 1px;
+    z-index: 1;
+}
+
+.watchlistToggle img {
+    height: 24px;
+}
+
+.notificationsToggle img {
+    height: 22px;
+}
+
+.menuToggle img {
+    height: 22px;
+}
+
+@media screen and (min-width: 769px) {
+    .activeToggle:after {
+        width: 22px;
+        bottom: 0;
+        left: 1px;
+    }
+}

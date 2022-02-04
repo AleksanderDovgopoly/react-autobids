@@ -28,10 +28,10 @@
 }
 .loginContainer {
     display: block;
-    width: 40%;
+    width: 20%;
+    min-width: 200px;
     height: 100%;
     text-align: right;
-    vertical-align: center;
 }
 
 .navBar {

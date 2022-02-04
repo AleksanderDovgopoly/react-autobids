@@ -14,6 +14,9 @@ const AuctionItem = ({item, bids}) => {
             <AuctionItemHero itemData={item} bids={bids}/>
             <div className={classes.metaData}>
                 <h4 className={classes.auctionTitle}>{title}</h4>
+
+                <button className={classes.toggleWatchList} />
+
                 <p className={classes.auctionSubtitle}>{short_description}</p>
                 {
                     status === 'past'

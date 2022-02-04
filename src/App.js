@@ -13,6 +13,7 @@ import UserDetail from "./pages/user-detail/user-detail";
 import PastAuctions from "./pages/past-auctions/past-auctions";
 import SearchPage from "./pages/search-page/search-page";
 import MyAccount from "./pages/my-account/my-account";
+import WatchList from "./pages/watch-list/watch-list";
 
 function App() {
     const loggedIn = useSelector(state => state.user.isLogin);
@@ -42,6 +43,9 @@ function App() {
                 <Route path='/sign-in' element={<SignInAndSignUpPage/>}/>
                 <Route path='/my-account' element={
                     loggedIn ? <MyAccount/> : <Navigate to="/sign-in"/>
+                }/>
+                <Route path='/watchlist' element={
+                    loggedIn ? <WatchList/> : <Navigate to="/sign-in"/>
                 }/>
                 <Route path='/past-auctions' element={<PastAuctions/>}/>
                 <Route path='/auctions/:auctionId' element={<AuctionDetail/>}/>
