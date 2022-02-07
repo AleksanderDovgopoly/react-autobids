@@ -43,6 +43,12 @@ code {
   border-color: #4ad493;
 }
 
+.btn-secondary {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.2);
+  color: #828282;
+}
+
 .react-datetime-picker {
   height: fit-content;
 }

@@ -11,6 +11,7 @@ import AuctionDetailDescription from "../auction-detail-description/auction-deta
 import EndingSoonSidebar from "../sidebars/ending-soon-sidebar/ending-soon-sidebar";
 import AuctionDetailJump from "../auction-detail-jump/auction-detail-jump";
 import AuctionDetailStats from "../auction-detail-stats/auction-detail-stats";
+import WatchListButton from "../UI/watch-list-button/watch-list-button";
 
 import classes from "./auction-detail-content.module.css";
 
@@ -31,6 +32,7 @@ const AuctionDetailContent = () => {
             <div className={classes.auctionDetailHeader}>
                 <div className={classes.auctionDetailHeading}>
                     <h2>{title}</h2>
+                    <WatchListButton auctionId={id} />
                     <span>{short_description}</span>
                 </div>
                 <div className={classes.ending}>

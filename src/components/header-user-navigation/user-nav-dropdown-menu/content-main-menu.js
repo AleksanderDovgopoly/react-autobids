@@ -9,7 +9,7 @@ import classes from "./user-nav-dropdown.module.css";
 
 const ContentMainMenu = () => {
     const dispatch = useDispatch();
-    const {photoURL} = useSelector((state => state.user.currentUser));
+    const {avatar} = useSelector((state => state.user.currentUser));
     let userPhoto = 'https://firebasestorage.googleapis.com/v0/b/auto-bids.appspot.com/o/empty_user.jpg?alt=media&token=0148c2c3-1bc7-4315-97ad-02a36e0a517c';
 
     function logOutHandler(event) {
@@ -24,7 +24,7 @@ const ContentMainMenu = () => {
                 <li className={classes.profileLink}>
                     <Link to="/my-account">
                         <span>Profile</span>
-                        <img src={photoURL || userPhoto} alt="Profile photo"/>
+                        <img src={avatar || userPhoto} alt="Profile photo"/>
                     </Link>
                 </li>
                 <li>

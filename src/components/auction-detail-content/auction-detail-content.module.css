@@ -11,8 +11,18 @@
     padding-bottom: 20px;
 }
 
+.auctionDetailHeading {
+    display: block;
+    position: relative;
+}
+
 .auctionDetailHeading h2 {
     margin: 0 0;
+}
+
+.auctionDetailHeading button {
+    visibility: visible;
+    opacity: 1;
 }
 
 .ending span {

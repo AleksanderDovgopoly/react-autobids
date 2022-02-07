@@ -353,6 +353,27 @@ export const updateUserVotesById = async (authorId, userId) => {
     return userRef;
 }
 
+export const updateUserEditorData = async (userId, newData) => {
+    if (!userId || !newData) return;
+
+    const {avatar, bio} = newData;
+    const userRef = await firestore.doc(`users/${userId}`);
+
+    try {
+        await userRef.update({
+            bio: bio,
+            avatar: avatar
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    const snapShotNewData = (await userRef.get()).data();
+
+    return snapShotNewData;
+
+}
+
 export const updateUserWatchedAuctions = async (userId, auctionId) => {
     if (!auctionId || !userId) return;
 
