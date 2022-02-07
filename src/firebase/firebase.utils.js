@@ -32,6 +32,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
                 createdAt,
                 rep_score: [],
                 avatar: '',
+                watch_list: {
+                    auctions: [],
+                    searches: '1'
+                },
                 ...additionalData
             });
         } catch (error) {

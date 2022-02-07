@@ -1,7 +1,9 @@
-import classes from "./watch-list-button.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {actionUpdateUserWatchedAuctions, togglePopupAuth} from "../../../redux/user/user.actions";
 import {updateUserWatchedAuctions} from "../../../firebase/firebase.utils";
+
+import classes from "./watch-list-button.module.css";
+
 
 const WatchListButton = ({auctionId}) => {
     let isItemWatched = false;
