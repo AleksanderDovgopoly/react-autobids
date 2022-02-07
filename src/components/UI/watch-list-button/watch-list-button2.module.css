@@ -1,0 +1,38 @@
+.watchButton {
+    box-sizing: border-box;
+    font: inherit;
+    text-decoration: none;
+    color: #262626 !important;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    font-size: .875rem;
+    border-radius: 6px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    padding: 0;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin: 0 7px;
+    white-space: nowrap;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.watchButton:before {
+    content: "";
+    background: url(../../../images/watchlist.png) no-repeat;
+    background-size: contain;
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 3px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+.watched:before {
+    background: url(../../../images/watched.png) no-repeat;
+    background-size: contain;
+}

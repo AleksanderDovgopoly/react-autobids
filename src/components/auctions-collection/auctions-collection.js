@@ -7,8 +7,7 @@ import FiltersBar from "../collection-filters-bar/collection-filters-bar";
 import classes from "./auctions-collection.module.css";
 
 
-const AuctionsCollection = (props) => {
-    const {pageType, queryWord} = props;
+const AuctionsCollection = ({pageType, queryWord}) => {
     const isCarsFetching = useSelector((state => state.auctions.isFetching));
     const auctionItemsObject = useSelector((state => state.auctions.cars));
 

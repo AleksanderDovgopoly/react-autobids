@@ -4,11 +4,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {togglePopupAuth} from "../../../redux/user/user.actions";
 import Popup from "reactjs-popup";
 import SetBidBar from "../../set-bid-bar/set-bid-bar";
+import WatchListButton2 from "../../UI/watch-list-button/watch-list-button2";
 
 import classes from "./stats-actions.module.css";
 
 
 const StatsActions = () => {
+    const auctionId = useSelector(state => state.detail.fetchingId)
     const {isLogin} = useSelector(state => state.user);
     const {model} = useSelector(state => state.detail.data.spec);
     const dispatch = useDispatch();
@@ -32,9 +34,7 @@ const StatsActions = () => {
                 <Link className={classes.iconBtn + ' ' + classes.iconHw} to="#">
                     How buying works
                 </Link>
-                <button className={classes.iconBtn + ' ' + classes.iconWatch}>
-                    Watch this auction
-                </button>
+                <WatchListButton2 auctionId={auctionId}/>
                 <button className={classes.iconBtn + ' ' + classes.iconNotify}>
                     Notify me of {model}
                 </button>

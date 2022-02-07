@@ -13,7 +13,6 @@
 .image img {
     position: inherit;
     display: block;
-    width: inherit;
+    width: 100%;
     height: auto;
-    min-height: 150px;
 }

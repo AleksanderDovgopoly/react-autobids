@@ -1,31 +1,35 @@
-.pastAuctions {
-    display: flex;
-    flex-direction: column;
-    max-width: 1440px;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-right: auto;
-    margin-left: auto;
+.heading h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
-.pastAuctions ul {
+.results ul {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.noResults {
+    padding-top: 8px;
+    color: #828282;
+}
+
 @media screen and (max-width: 1366px) {
-    .pastAuctions ul {
+    .results ul {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .pastAuctions ul {
+    .results ul {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media screen and (max-width: 399px) {
-    .pastAuctions ul {
+    .results ul {
         width: 100%;
         grid-template-columns: 1fr;
     }

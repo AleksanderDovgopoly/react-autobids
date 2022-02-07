@@ -22,10 +22,10 @@
 .watchList h1:after {
     content: "";
     display: block;
-    bottom: -16px;
+    bottom: -10px;
     position: absolute;
     width: 100%;
-    height: 10px;
+    height: 8px;
     background: #ffe55f;
     border-radius: 3px;
 }
@@ -35,9 +35,5 @@
         margin-bottom: 64px;
         font-size: 28px;
         line-height: 33px;
-    }
-    .watchList h1:after {
-        bottom: -12px;
-        height: 8px;
     }
 }
