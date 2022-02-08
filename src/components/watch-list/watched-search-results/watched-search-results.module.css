@@ -1,0 +1,13 @@
+.watchedSearches {
+    padding: 40px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.watchedSearches h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: 700;
+    white-space: nowrap;
+}

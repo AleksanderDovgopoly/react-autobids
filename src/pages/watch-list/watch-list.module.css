@@ -9,7 +9,6 @@
 }
 
 .watchList h1 {
-    margin-bottom: 36px;
     font-weight: 700;
     font-size: 28px;
     line-height: 33px;
@@ -32,7 +31,6 @@
 
 @media screen and (min-width: 769px){
     .watchList h1 {
-        margin-bottom: 64px;
         font-size: 28px;
         line-height: 33px;
     }

@@ -1,4 +1,9 @@
-.heading h2 {
+.watchedCollection {
+    padding: 40px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.watchedCollection h2 {
     padding: 0;
     margin: 0;
     font-size: 22px;
