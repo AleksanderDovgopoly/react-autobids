@@ -24,9 +24,9 @@ const NotificationsContainer = () => {
     return (
         <div className={classes.notifyContainer}>
             {
-                notifyData !== []
-                    ? <NotificationsContent notifyData={notifyData}/>
-                    : <div className={classes.empty}>No notifications yet</div>
+                notifyData.length === 0
+                    ? <div className={classes.empty}>No notifications yet</div>
+                    : <NotificationsContent notifyData={notifyData}/>
             }
 
         </div>
