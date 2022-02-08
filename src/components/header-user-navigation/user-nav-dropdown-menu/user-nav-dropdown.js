@@ -1,5 +1,5 @@
 import ContentMainMenu from "./content-main-menu";
-import ContentNotifications from "./content-notifications";
+import NotificationsContainer from "../notifications-dropdown/notifications-container";
 import classes from "./user-nav-dropdown.module.css";
 
 const UserNavDropdown = ({menuType}) => {
@@ -8,7 +8,7 @@ const UserNavDropdown = ({menuType}) => {
             {
                 menuType === "main"
                     ? <ContentMainMenu/>
-                    : <ContentNotifications/>
+                    : <NotificationsContainer/>
             }
         </div>
     )

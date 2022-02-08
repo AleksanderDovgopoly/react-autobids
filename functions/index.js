@@ -17,4 +17,8 @@ exports.updatePastAuctions = functions.firestore
         });
         functions.logger.log("Auction Update!");
       });
+      const realtimeDbRef = await admin.database()
+          .ref("/notifications/pmnktF3A5ZfinTFi9GRuHXC92PQ2/0")
+          .get();
+      functions.logger.log(realtimeDbRef);
     });
