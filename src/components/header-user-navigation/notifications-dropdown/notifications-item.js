@@ -5,7 +5,7 @@ import {update, getDatabase, ref} from "firebase/database";
 import classes from "./notifications-dropdown.module.css";
 
 
-const NotificationsItem = ({data, itemKey}) => {
+const NotificationsItem = ({data, itemKey, refetchData}) => {
     const navigate = useNavigate();
     const {auction_id, status, type} = data;
     const userId = useSelector(state => state.user.currentUser.uid);
@@ -19,6 +19,7 @@ const NotificationsItem = ({data, itemKey}) => {
         const updates = {};
         updates[`/notifications/${userId}/${itemKey}/status`] = 'seen';
         update(dbRef, updates);
+        refetchData(false);
     }
 
     return (
