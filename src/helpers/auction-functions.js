@@ -141,3 +141,24 @@ export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter, st
 
     return auctionsArr;
 }
+
+export const brandsAndModelsToArray = (brandsModelsState) => {
+    const brandsArr = Object.entries(brandsModelsState).map(([key, data]) => {
+        return {
+            slug: key,
+            title: data.title,
+            child: data.models
+        }
+    });
+
+    const modelsArr = brandsArr.map((brand) =>
+        Object.entries(brand.child).map(([key, value]) => {
+            return {
+                slug: `${brand.slug}/${key}`,
+                title: `${brand.title} ${value}`
+            }
+        })
+    ).flat();
+
+    return [...brandsArr, ...modelsArr];
+}

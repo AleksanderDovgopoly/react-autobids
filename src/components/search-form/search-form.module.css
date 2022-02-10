@@ -1,24 +1,126 @@
 .searchForm {
-    width: inherit;
     display: flex;
-    height: 100%;
-    align-content: center;
+    flex-flow: row wrap;
+    padding-left: 2px;
+    padding-right: 2px;
+    position: relative;
+    height: 46px;
     align-items: center;
+    margin: 2px 32px 0 0;
+    min-width: 267px;
+    max-width: 493px;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.searchForm fieldset {
+    text-align: left;
+    box-sizing: border-box;
+    font: inherit;
+    vertical-align: initial;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    flex-flow: row wrap;
+    margin: 0;
+    width: 100%;
+    transition: box-shadow .1s ease-in-out;
+    background: #fff;
+    border-radius: 6px;
+    z-index: 10;
+}
+
+.searchForm fieldset.active {
+    position: relative;
+    transition: box-shadow .1s ease-in-out;
+    background: #fff;
+    box-shadow: 0 8px 40px rgb(0 0 0 / 16%);
+    border-radius: 6px;
+    z-index: 10;
+}
+
+.searchForm fieldset:before {
+    font-family: FontAwesome, serif;
+    content: "\f002";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 24px;
+    top: 16px;
+    z-index: 11;
 }
 
 .searchForm input {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
-    font-family: 'Poppins';
-    font-size: .875rem;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: inherit;
+    overflow: visible;
     font-weight: 400;
-    line-height: 1.5;
-    padding-left: 1rem;
-    color: #262626;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #d5d5d5;
     border-radius: 6px;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    display: inline-block;
+    vertical-align: middle;
+    background: #eeeef0;
+    border-color: #eeeef0;
+    font-size: 15px;
+    line-height: 18px;
+    color: #828282;
+    width: 100%;
+    height: 46px;
+    min-width: 0;
+    padding: 14px 14px 14px 53px;
+    border: none;
+}
+
+.searchForm input:focus-visible {
+    outline-style: none;
+}
+
+.searchForm input:focus {
+    border: 1px solid #262626;
+}
+
+fieldset.active input {
+    background: #fff;
+    color: #262626;
+    transition: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: #fff;
+    border-bottom: 1px solid #efefef;
+}
+
+.clearSearch {
+    display: none;
+}
+
+fieldset.active .clearSearch {
+    display: block;
+    position: absolute;
+    background: none;
+    border: none;
+    right: 17px;
+    top: 14px;
+    width: 14px;
+    height: 14px;
+    opacity: 1;
+    visibility: visible;
+    transition: none;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.clearSearch:before {
+    font-family: FontAwesome, sans-serif;
+    content: "\f00d";
+    font-size: 1rem;
+}
+
+.clearSearch span {
+    display: none;
 }

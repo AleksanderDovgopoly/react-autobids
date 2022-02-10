@@ -3,7 +3,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
     box-shadow: 0 4px 11px 5px #c1c1c154;
 }
 
@@ -37,6 +36,7 @@
     width: 50%;
     height: 100%;
     align-content: center;
+    align-items: center;
 }
 .loginContainer {
     display: block;
@@ -75,7 +75,7 @@
 }
 
 @media screen and (max-width: 768px){
-    .navSellCar {
+    .navContainer {
         display: none;
     }
 }
@@ -84,6 +84,9 @@
     .logo-container {
         width: 50px;
         padding: 0;
+    }
+    .navSellCar {
+        display: none;
     }
 }
 

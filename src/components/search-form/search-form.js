@@ -1,42 +1,19 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
-
+import {useSelector} from "react-redux";
+import {brandsAndModelsToArray} from "../../helpers/auction-functions";
+import SearchFormAutocomplete from "../search-form-autocomplete/search-form-autocomplete";
 import classes from "./search-form.module.css";
 
 const SearchForm = () => {
-    const navigate = useNavigate();
-    let initSearchWords = '';
-    const currentPath = window.location.pathname.split('/');
-    if (currentPath[1] === 'search') {
-        initSearchWords = decodeURI(currentPath[2]);
-    }
+    const brandsModels = useSelector(state => state.categories.brand_models);
+    const brandsAndModelsArr = brandsAndModelsToArray(brandsModels);
 
-    const [searchWords, setSearchWords] = useState(initSearchWords);
-
-    const handleChange = (event) => {
-        setSearchWords(event.target.value);
-    }
-
-    const submitHandler = (event) => {
-        event.preventDefault();
-
-        if (!searchWords) {
-            return;
-        }
-        // navigate(`/search/${searchWords}`, {replace: false})
+    function submitHandler(e) {
+        e.preventDefault();
     }
 
     return (
-        <form
-            className={classes.searchForm}
-            onSubmit={submitHandler}
-        >
-            <input
-                type="text"
-                placeholder='Search for cars'
-                value={searchWords}
-                onChange={handleChange}
-            />
+        <form className={classes.searchForm} onSubmit={submitHandler}>
+            <SearchFormAutocomplete suggestions={brandsAndModelsArr}/>
         </form>
     )
 }

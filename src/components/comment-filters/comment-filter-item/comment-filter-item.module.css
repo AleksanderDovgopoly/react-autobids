@@ -1,12 +1,15 @@
 .filterItem {
+    font-family: 'Poppins';
     background: none;
     border: none;
     opacity: .6;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .activeFilter {
     opacity: 1;
     color: #4ad493;
-    font-weight: 800;
+    font-weight: 700;
+    text-decoration: underline;
 }
