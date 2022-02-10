@@ -1,0 +1,35 @@
+.saveThis {
+    width: 100%;
+}
+
+.saveSearchBtn {
+    padding-top: 0;
+    padding-bottom: 0;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    background: #ffea79;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 44px;
+    border: 0;
+    color: #000;
+    transition: none;
+}
+
+@media screen and (min-width: 769px){
+    .saveThis {
+        width: auto;
+        height: 37px;
+        display: inline-flex;
+        margin-left: 0;
+    }
+
+    .saveSearchBtn {
+        padding-left: 14px;
+        padding-right: 13px;
+        line-height: 37px;
+        border-radius: 6px;
+        font-weight: 400;
+    }
+}

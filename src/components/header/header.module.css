@@ -8,15 +8,27 @@
 }
 
 .logoContainer {
-    height: 100%;
-    width: 70px;
-    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
 }
 
 .logoContainer a {
     text-decoration: none;
+    color: #000000;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.logoContainer a span {
+    text-decoration: none;
+    font-size: 1.4rem;
     color: #4ad493;
-    font-weight: bold;
+    font-weight: 800;
 }
 
 .navContainer {
@@ -60,6 +72,12 @@
 .hasSubMenu ul li {
     padding: 0 15px;
     margin: 0;
+}
+
+@media screen and (max-width: 768px){
+    .navSellCar {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 800px) {

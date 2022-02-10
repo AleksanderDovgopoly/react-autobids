@@ -7,7 +7,7 @@ import FiltersBar from "../collection-filters-bar/collection-filters-bar";
 import classes from "./auctions-collection.module.css";
 
 
-const AuctionsCollection = ({pageType, queryWord}) => {
+const AuctionsCollection = ({pageType}) => {
     const isCarsFetching = useSelector((state => state.auctions.isFetching));
     const auctionItemsObject = useSelector((state => state.auctions.cars));
 
@@ -23,13 +23,6 @@ const AuctionsCollection = ({pageType, queryWord}) => {
     if (pageType === 'past') {
         pageTitle = 'Results';
         auctionsArr = auctionsArr.filter(auction => auction.status === 'past');
-    }
-
-    if (pageType === 'search') {
-        auctionsArr = auctionsArr.filter(auction => {
-            return auction.title.toLowerCase().includes(queryWord.toLowerCase())
-        });
-        pageTitle = `Results for: ${queryWord}  (${auctionsArr.length})`;
     }
 
     return (

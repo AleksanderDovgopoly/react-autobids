@@ -1,16 +1,12 @@
-import AuctionsCollection from "../../components/auctions-collection/auctions-collection";
-
+import SearchPageHeading from "../../components/search-result-page/search-page-heading/search-page-heading";
+import SearchPageResult from "../../components/search-result-page/search-page-result/search-page-result";
 import classes from "./search-page.module.css";
-import {useParams} from "react-router-dom";
-
 
 const SearchPage = () => {
-    const {query} = useParams();
-
-
     return (
         <div className={classes.searchContainer}>
-            <AuctionsCollection pageType="search" queryWord={query}/>
+            <SearchPageHeading/>
+            <SearchPageResult/>
         </div>
     )
 }

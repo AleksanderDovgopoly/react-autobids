@@ -22,7 +22,7 @@ const Header = () => {
     return (
         <div className={classes.header}>
             <div className={classes.logoContainer}>
-                <Link to='/'>AutoBids</Link>
+                <Link to='/'>React<span>&</span>Redux</Link>
             </div>
             <div className={classes.navContainer}>
                 <ul className={classes.navBar}>
@@ -30,7 +30,7 @@ const Header = () => {
                         Auctions
                         <DropDownMenu/>
                     </li>
-                    <li>
+                    <li className={classes.navSellCar}>
                         <Link to="/sell-car">Sell car</Link>
                     </li>
                 </ul>

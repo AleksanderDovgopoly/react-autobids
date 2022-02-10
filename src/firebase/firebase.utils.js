@@ -161,9 +161,23 @@ export const fetchAllCategoriesList = async () => {
             return commentsMap;
         })
         .catch(error => {
-            console.log('Some error with fetching!', error)
+            console.log('Some error with fetching categories!', error)
         })
     return categoriesSnapshot;
+}
+
+export const fetchBrandsAndModels = async () => {
+    const brandsRef = await firestore.collection('brand_models');
+    const brandsSnapshot = await brandsRef
+        .get()
+        .then(snapshot => {
+            const brandsMap = convertBrandsSnapshotToMap(snapshot);
+            return brandsMap;
+        })
+        .catch(error => {
+            console.log('Some error with fetching brands!', error)
+        })
+    return brandsSnapshot;
 }
 
 export const convertCategoriesSnapshotToMap = (collection) => {
@@ -176,8 +190,27 @@ export const convertCategoriesSnapshotToMap = (collection) => {
         }
     });
 
-    return transformedCollection.reduce((accumulator, collection, index) => {
+    return transformedCollection.reduce((accumulator, collection) => {
         accumulator[collection.id] = collection.list;
+        return accumulator;
+    }, {});
+}
+
+export const convertBrandsSnapshotToMap = (collection) => {
+    const transformedCollection = collection.docs.map(doc => {
+        const brandData = doc.data();
+        return {
+            id: doc.id,
+            name: brandData.name,
+            models: brandData.models
+        }
+    });
+
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.id] = {
+            title: collection.name,
+            models: collection.models
+        };
         return accumulator;
     }, {});
 }

@@ -13,6 +13,7 @@ const AuctionDetail = () => {
     const dispatch = useDispatch();
     const {auctionId} = useParams();
     const {fetchingId} = useSelector(state => state.detail);
+    const isFetchingCategories = useSelector(state => state.categories.isFetching);
 
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const AuctionDetail = () => {
     return (
         <div className={classes.auctionDetails}>
             {
-                auctionId === fetchingId
+                auctionId === fetchingId && isFetchingCategories
                     ? <AuctionDetailContent/>
                     : <Spinner/>
             }

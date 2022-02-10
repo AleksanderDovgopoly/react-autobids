@@ -23,7 +23,7 @@ const NotificationsItem = ({data, itemKey, refetchData}) => {
     }
 
     return (
-        <li className={status === 'seen' && classes.seen} onClick={showNotifyHandler}>
+        <li className={status === 'seen' ? classes.seen : null} onClick={showNotifyHandler}>
             <div className={classes.count} aria-label="Count">
                 <span>1</span>
             </div>

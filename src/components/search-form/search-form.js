@@ -23,7 +23,7 @@ const SearchForm = () => {
         if (!searchWords) {
             return;
         }
-        navigate(`/search/${searchWords}`, {replace: false})
+        // navigate(`/search/${searchWords}`, {replace: false})
     }
 
     return (
