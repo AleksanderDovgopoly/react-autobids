@@ -124,3 +124,35 @@ fieldset.active .clearSearch {
 .clearSearch span {
     display: none;
 }
+
+/* In modal window */
+.inModal {
+    margin: 0;
+    width: 100%;
+    align-content: flex-start;
+    padding: 0;
+}
+
+.inModal fieldset.active .clearSearch {
+    width: auto;
+}
+
+.inModal fieldset.active {
+    box-shadow: none;
+}
+
+.inModal fieldset.active input {
+    border-color: #eeeef0;
+    border-radius: 6px;
+}
+
+.inModal .clearSearch span {
+    display: block;
+    width: fit-content;
+    font-family: Poppins, serif;
+    opacity: .7;
+}
+
+.inModal .clearSearch:before {
+    display: none;
+}

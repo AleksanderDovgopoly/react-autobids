@@ -1,0 +1,73 @@
+.modalBody {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    vertical-align: initial;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    outline: 0;
+    border: 0;
+    border-radius: 0;
+    min-height: 100vh;
+    box-shadow: none;
+}
+
+.modalHeading {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalHeading h6 {
+    margin-left: 4px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 22px;
+}
+
+.modalHeading h6:before {
+    margin-right: 10px;
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: #4ad493;
+    border-radius: 0 3px 3px 0;
+}
+
+button.close {
+    border-radius: 0;
+    font-family: inherit;
+    overflow: visible;
+    text-transform: none;
+    float: right;
+    font-size: 40px;
+    font-weight: 300;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    line-height: 14px;
+    opacity: 1!important;
+    transition: none;
+    background-color: initial;
+    border: 0;
+    appearance: none;
+    cursor: pointer;
+    margin: 12px 0 0 0;
+    padding: 12px;
+    position: absolute;
+    top: 0;
+    right: 12px;
+}
+
+button.close span {
+    text-indent: -9999em;
+    overflow: hidden;
+    width: 14px;
+    height: 14px;
+}

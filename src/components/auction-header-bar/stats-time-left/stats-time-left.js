@@ -8,9 +8,11 @@ const StatsTimeLeft = (props) => {
     const [timeLeft, setTimeLeft] = useState(calculateLeftTime(endDate));
 
     useEffect(() => {
-        setInterval(() => {
+        let interval = setInterval(() => {
             setTimeLeft(calculateLeftTime(endDate))
         }, 1000);
+
+        return () => clearInterval(interval);
     });
 
     return (

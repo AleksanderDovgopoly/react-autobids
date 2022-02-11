@@ -3,7 +3,6 @@ import FilterByYears from "../collection-filter-by-years/collection-filter-by-ye
 
 import classes from "./collection-filters-bar.module.css";
 
-
 const FiltersBar = () => {
     return (
         <div className={classes.filtersBar}>

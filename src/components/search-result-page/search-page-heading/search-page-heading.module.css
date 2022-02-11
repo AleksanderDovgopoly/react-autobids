@@ -39,6 +39,37 @@ span.arrow:before {
     padding-right: 6px;
 }
 
+button.pseudoSearch {
+    width: calc(100vw - 20px);
+    min-width: 300px;
+    margin: 0 10px 10px;
+    padding: 11px 16px 11px 48px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    height: 44px;
+    position: relative;
+    color: #262626;
+}
+
+button.pseudoSearch span:before {
+    font-family: FontAwesome, serif;
+    content: "\f002";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 24px;
+    top: 12px;
+    z-index: 11;
+}
+
 @media screen and (min-width: 769px){
     .searchHeading h1 {
         display: inline-flex;
@@ -46,5 +77,12 @@ span.arrow:before {
         margin-left: 0;
         font-size: 24px;
         line-height: 24px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .filterSet {
+        width: auto;
+        padding: 0 10px;
     }
 }

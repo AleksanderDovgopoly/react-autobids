@@ -4,7 +4,7 @@ import SuggestionsListComponent from "./suggestions-list-component";
 import classes from "../search-form/search-form.module.css";
 
 
-const SearchFormAutocomplete = ({suggestions}) => {
+const SearchFormAutocomplete = ({close, suggestions}) => {
     const navigate = useNavigate();
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
@@ -31,6 +31,9 @@ const SearchFormAutocomplete = ({suggestions}) => {
         setInput(e.target.innerText);
         setActiveSuggestionIndex(0);
         setShowSuggestions(false);
+        if (typeof close !== 'undefined') {
+            close();
+        }
         navigate(`/search/${e.target.getAttribute('data-slug')}`);
     };
 
@@ -82,7 +85,7 @@ const SearchFormAutocomplete = ({suggestions}) => {
                 onClick={onClick}
             />}
             <button type="reset" className={classes.clearSearch} onClick={resetBtnHandler}>
-                <span>close</span>
+                <span>Clear</span>
             </button>
         </fieldset>
     );
