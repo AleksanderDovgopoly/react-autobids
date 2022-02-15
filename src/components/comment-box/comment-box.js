@@ -10,9 +10,9 @@ import classes from "./comment-box.module.css";
 
 
 const CommentBox = ({auctionId}) => {
-    const [replyToId, setReplyToId] = useState('')
-    const usersQuery = useQuery('users', fetchUsers);
+    const [replyToId, setReplyToId] = useState('');
     const commentsQuery = useQuery(['comments', auctionId], () => fetchCommentsByAuctionId(auctionId));
+    const usersQuery = useQuery('users', fetchUsers);
 
     if (usersQuery.isLoading || commentsQuery.isLoading) {
         return <Spinner/>;
