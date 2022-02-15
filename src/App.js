@@ -1,6 +1,8 @@
 import {useEffect} from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from 'react-query/devtools'
 import {fetchAllCategoriesList, fetchBrandsAndModels} from "./firebase/firebase.utils";
 import {fetchCategoriesCollection} from "./redux/categories/categories.actions";
 import HomePage from "./pages/home-page/homePage";
@@ -14,8 +16,8 @@ import SearchPage from "./pages/search-page/search-page";
 import MyAccount from "./pages/my-account/my-account";
 import WatchList from "./pages/watch-list/watch-list";
 import ScrollToTop from "./hoc/scrollToTop";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from 'react-query/devtools'
+import Spinner from "./components/spinner/spinner";
+
 
 function App() {
     const loggedIn = useSelector(state => state.user.isLogin);
@@ -32,6 +34,8 @@ function App() {
             dispatch(fetchCategoriesCollection(fetchingData));
         }
     }, [dispatch, isFetching]);
+
+    if (!isFetching) return <Spinner/>
 
     return (
         <QueryClientProvider client={queryClient}>

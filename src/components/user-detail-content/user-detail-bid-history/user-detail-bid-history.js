@@ -1,12 +1,8 @@
-import {useSelector} from "react-redux";
 import AuctionsList from "../../auctions-list/auctions-list";
-
 import classes from "./user-detail-bid-history.module.css";
 
-
-const UserDetailBidHistory = ({userBids}) => {
-    const auctionItemsObject = useSelector((state => state.auctions.cars));
-    let auctionsItemsArr = Object.values(auctionItemsObject);
+const UserDetailBidHistory = ({userBids, auctionsData}) => {
+    let auctionsItemsArr = Object.values(auctionsData);
 
     const bidsGroupByAuctions = userBids.reduce((acc, item) => {
         const auctionId = item.auction_id;

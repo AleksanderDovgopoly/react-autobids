@@ -1,15 +1,30 @@
-import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
+import {useQuery, useQueryClient} from "react-query";
+import {fetchAuctions} from "../../../firebase/firebase.utils";
 import SearchResultsCollection from "../search-results-collection/search-results-collection";
+import Spinner from "../../spinner/spinner";
 
 import classes from "./search-page-result.module.css";
 
 
 const SearchPageResult = () => {
     const {made, model} = useParams();
-    const auctions = useSelector(state => state.auctions.cars);
+    const client = useQueryClient();
+    const {isLoading, isError, data, error} = useQuery('auctions', fetchAuctions, {
+        placeholderData: () => {
+            return client.getQueryData('auctions');
+        }
+    });
 
-    let auctionsArr = Object.values(auctions);
+    if (isLoading) {
+        return <Spinner/>;
+    }
+
+    if (isError) {
+        return <span>Error: {error.message}</span>
+    }
+
+    let auctionsArr = Object.values(data);
     if (made !== undefined && model === undefined) {
         auctionsArr = auctionsArr.filter(item => item.spec.make.toLowerCase() === made);
     }

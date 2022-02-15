@@ -29,13 +29,9 @@ const AuctionsCollection = ({pageType}) => {
         return () => window.removeEventListener("resize", updateMedia);
     });
 
-    if (isLoading) {
-        return <Spinner/>;
-    }
+    if (isLoading) return <Spinner/>;
 
-    if (isError) {
-        return <span>Error: {error.message}</span>
-    }
+    if (isError) return <span>Error: {error.message}</span>;
 
     return (
         <div className={classes.auctionCollection}>

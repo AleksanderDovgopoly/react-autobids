@@ -3,14 +3,27 @@ import {useNavigate} from "react-router-dom";
 import {update, getDatabase, ref} from "firebase/database";
 
 import classes from "./notifications-dropdown.module.css";
+import {useQuery, useQueryClient} from "react-query";
+import {fetchAuctions} from "../../../firebase/firebase.utils";
+import Spinner from "../../spinner/spinner";
 
 
-const NotificationsItem = ({data, itemKey, refetchData}) => {
+const NotificationsItem = ({itemData, itemKey, refetchData}) => {
     const navigate = useNavigate();
-    const {auction_id, status, type} = data;
+    const {auction_id, status, type} = itemData;
     const userId = useSelector(state => state.user.currentUser.uid);
-    const auctionsData = useSelector(state => state.auctions.cars);
-    const currentAuction = Object.values(auctionsData).filter(item => item.id === auction_id)[0];
+    const client = useQueryClient();
+    const {isLoading, isError, data, error} = useQuery('auctions', fetchAuctions, {
+        placeholderData: () => {
+            return client.getQueryData('auctions');
+        }
+    });
+
+    if (isLoading) return <Spinner/>;
+
+    if (isError) return <p>{error.message}</p>
+
+    const currentAuction = Object.values(data).filter(item => item.id === auction_id)[0];
 
     function showNotifyHandler(event) {
         event.preventDefault();
@@ -19,7 +32,7 @@ const NotificationsItem = ({data, itemKey, refetchData}) => {
         const updates = {};
         updates[`/notifications/${userId}/${itemKey}/status`] = 'seen';
         update(dbRef, updates);
-        refetchData(false);
+        refetchData();
     }
 
     return (
