@@ -19,8 +19,6 @@ const AuctionDetail = () => {
     useEffect(() => {
         async function fetchData() {
             const fetchingData = await fetchAuctionById(auctionId);
-            const fetchingComments = await fetchCommentsByAuctionId(auctionId);
-            dispatch(fetchAuctionComments(fetchingComments));
             dispatch(fetchAuctionDetail(fetchingData));
         }
 

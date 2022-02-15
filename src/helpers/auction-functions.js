@@ -61,8 +61,8 @@ export const getEndDateAuction = (UNIX_timestamp) => {
     return endDate;
 }
 
-export const getAuthorNameByCommentId = (commentId, comments, usersData) => {
-    const replyComment = Object.values(comments).find(item => item.id === commentId);
+export const getAuthorNameByCommentId = (commentId, commentsData, usersData) => {
+    const replyComment = Object.values(commentsData).find(item => item.id === commentId);
     const replyCommentAuthor = Object.values(usersData).find(item => item.id === replyComment.author_id);
     return replyCommentAuthor.displayName;
 }
@@ -112,6 +112,18 @@ export const doSortAuctionsList = (auctionsArr, sortType) => {
                 return x.end_date - y.end_date;
             });
     }
+}
+
+export const doFilterAuctionsByStatus = (auctionsArr, pageType) => {
+    if (pageType === 'home') {
+        auctionsArr = auctionsArr.filter(auction => auction.status !== 'past');
+    }
+
+    if (pageType === 'past') {
+        auctionsArr = auctionsArr.filter(auction => auction.status === 'past');
+    }
+
+    return auctionsArr;
 }
 
 export const doFilterAuctions = (auctionsArr, transmissionFilter, bodyFilter, startYear, endYear) => {

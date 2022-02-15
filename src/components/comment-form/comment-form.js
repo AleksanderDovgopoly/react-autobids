@@ -1,17 +1,17 @@
 import {useForm} from "react-hook-form";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {useQueryClient} from "react-query";
 import {setNewAuctionBidOrComment} from "../../firebase/firebase.utils";
 import {togglePopupAuth} from "../../redux/user/user.actions";
-import {updateAuctionComment} from "../../redux/auction-detail/auction-detail.actions";
 import {getAuthorNameByCommentId} from "../../helpers/auction-functions";
 
 import classes from "./comment-form.module.css";
 
 
-const CommentForm = ({auctionId, usersData, replyTo, setReplyToId}) => {
-    const comments = useSelector(state => state.detail.comments_n_bids);
+const CommentForm = ({commentsData, auctionId, usersData, replyTo, setReplyToId}) => {
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
     const {isLogin, currentUser} = useSelector(state => state.user);
 
     const {register, handleSubmit, formState: {isDirty}, setValue, reset} = useForm({
@@ -49,7 +49,7 @@ const CommentForm = ({auctionId, usersData, replyTo, setReplyToId}) => {
         if (response === 'success') {
             reset();
             setReplyToId('');
-            dispatch(updateAuctionComment(data));
+            await queryClient.invalidateQueries(['comments', auctionId]);
         } else {
             console.log('Submit comment Error')
         }
@@ -60,7 +60,7 @@ const CommentForm = ({auctionId, usersData, replyTo, setReplyToId}) => {
             {
                 replyTo !== ''
                     ? <label className={classes.replyTo}>
-                        Re: {getAuthorNameByCommentId(replyTo, comments, usersData)}
+                        Re: {getAuthorNameByCommentId(replyTo, commentsData, usersData)}
                         <span onClick={() => setReplyToId('')}> </span>
                     </label>
                     : null

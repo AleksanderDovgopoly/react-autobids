@@ -1,17 +1,19 @@
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
+import {useQueryClient} from "react-query";
 import {setNewAuctionBidOrComment, setNewAuctionPrice} from "../../firebase/firebase.utils";
-import {updateAuctionComment} from "../../redux/auction-detail/auction-detail.actions";
 import CustomButton from "../custom-button/custom-button";
 
 import classes from "./set-bid-bar.module.css";
 
 
 const SetBidBar = () => {
-    const dispatch = useDispatch();
+    const queryClient = useQueryClient();
+    const auctionId = useSelector(state => state.detail.fetchingId);
+    const user = useSelector(state => state.user.currentUser);
     const {current_price, bids_step, id, start_price} = useSelector(state => state.detail.data);
     const [newBidValue, setNewBidValue] = useState(current_price + bids_step || start_price + bids_step);
-    const user = useSelector(state => state.user.currentUser)
+
 
     function setNewBidHandler(event) {
         event.preventDefault();
@@ -27,7 +29,7 @@ const SetBidBar = () => {
         }
 
         // ToDo: Update Auction price in Redux
-        dispatch(updateAuctionComment(newBidData));
+        queryClient.invalidateQueries(['comments', auctionId]);
         setNewAuctionBidOrComment(newBidData);
         setNewAuctionPrice(id, Number(newBidValue))
     }
@@ -46,7 +48,7 @@ const SetBidBar = () => {
             <CustomButton
                 className={classes.submitBid}
                 onClick={setNewBidHandler}
-                disabled={user.uid ? false : true}
+                disabled={!user.uid}
             >
                 Set New Bid
             </CustomButton>

@@ -1,16 +1,14 @@
-import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {getAuthorNameByCommentId} from "../../../../helpers/auction-functions";
 import classes from "./comment-message.module.css";
 
 
-const CommentMessage = ({message, replyId, usersData}) => {
-    const comments = useSelector(state => state.detail.comments_n_bids);
+const CommentMessage = ({allComments, message, replyId, usersData}) => {
     const [replyAuthorName, setAuthorName] = useState('');
 
     useEffect(() => {
         if (Object.keys(usersData).length && replyId !== undefined) {
-            setAuthorName(() => getAuthorNameByCommentId(replyId, comments, usersData))
+            setAuthorName(() => getAuthorNameByCommentId(replyId, allComments, usersData))
         }
     }, [usersData])
 

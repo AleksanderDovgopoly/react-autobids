@@ -1,5 +1,5 @@
 import {useSearchParams} from "react-router-dom";
-import {doFilterAuctions, doSortAuctionsList} from "../../helpers/auction-functions";
+import {doFilterAuctions, doFilterAuctionsByStatus, doSortAuctionsList} from "../../helpers/auction-functions";
 import AuctionItem from "../auction-item/auction-item";
 
 import classes from "./auctions-list.module.css";
@@ -12,6 +12,9 @@ const AuctionsList = ({auctionsArr, bidGroups, pageType}) => {
     const bodyStyleFilter = searchParams.get('body_style');
     const startYearFilter = searchParams.get('start_year');
     const endYearFilter = searchParams.get('end_year');
+
+    // Check page type and sort by status
+    auctionsArr = doFilterAuctionsByStatus(auctionsArr, pageType);
 
     if (transmissionFilter || bodyStyleFilter || startYearFilter || endYearFilter) {
         auctionsArr = doFilterAuctions(auctionsArr, transmissionFilter, bodyStyleFilter, startYearFilter, endYearFilter);
