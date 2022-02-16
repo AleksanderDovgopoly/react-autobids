@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import {Carousel} from 'react-carousel-minimal';
 import moment from "moment";
 import {updateAuctionViewsById} from "../../firebase/firebase.utils";
@@ -6,7 +5,6 @@ import AuctionHeaderBar from "../auction-header-bar/auction-header-bar";
 import CommentBox from "../comment-box/comment-box";
 import AuctionSpec from "../auction-detail-spec/auction-detail-spec";
 import NewListingsSidebar from "../sidebars/new-listings-sidebar/new-listings-sidebar";
-import SetBidBar from "../set-bid-bar/set-bid-bar";
 import AuctionDetailDescription from "../auction-detail-description/auction-detail-description";
 import EndingSoonSidebar from "../sidebars/ending-soon-sidebar/ending-soon-sidebar";
 import AuctionDetailJump from "../auction-detail-jump/auction-detail-jump";
@@ -16,10 +14,11 @@ import WatchListButton from "../UI/watch-list-button/watch-list-button";
 import classes from "./auction-detail-content.module.css";
 
 
-const AuctionDetailContent = () => {
-    const {title, short_description, photos, id, end_date, descriptions} = useSelector(state => state.detail.data);
+const AuctionDetailContent = ({auctionData}) => {
+    const {title, short_description, photos, id, end_date, descriptions} = auctionData;
 
     const sliderData = Object.entries(photos).map((e) => ({image: e[1]}));
+    console.log(sliderData)
 
     const endingMoment = moment.unix(end_date.seconds);
     const endingDate = endingMoment.format("MMM D YYYY, h:mm a");
@@ -65,16 +64,15 @@ const AuctionDetailContent = () => {
                         maxWidth: "100%",
                     }}
                 />
-                <SetBidBar/>
             </div>
             <div className={classes.withSidebar}>
                 <div className={classes.col}>
-                    <AuctionHeaderBar/>
-                    <AuctionSpec/>
+                    <AuctionHeaderBar auctionData={auctionData}/>
+                    <AuctionSpec auctionData={auctionData}/>
                     {
                         descriptions && <AuctionDetailDescription descriptionsList={descriptions}/>
                     }
-                    <AuctionDetailJump />
+                    <AuctionDetailJump title={title} />
                     <AuctionDetailStats />
                     <CommentBox auctionId={id}/>
                 </div>

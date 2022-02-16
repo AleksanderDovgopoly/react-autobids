@@ -9,7 +9,9 @@ import classes from "./user-detail.module.css";
 
 const UserDetail = () => {
     const {userId} = useParams();
-    const {isLoading, isError, data, error} = useQuery(['userData', userId], () => getUserDataById(userId));
+    const {isLoading, isError, data, error} = useQuery(
+        ['userData', userId], () => getUserDataById(userId)
+    );
 
     if (isLoading) return <Spinner/>;
     if (isError) return <span>{error.message}</span>;

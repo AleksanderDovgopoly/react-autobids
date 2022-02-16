@@ -1,5 +1,4 @@
 import {Fragment} from "react";
-import {useSelector} from "react-redux";
 import StatsTimeLeft from "./stats-time-left/stats-time-left";
 import StatsCurrentBid from "./stats-current-bid/stats-current-bid";
 import StatsBidsCounter from "./stats-bids-counter/stats-bids-counter";
@@ -10,8 +9,8 @@ import StatsSoldDate from "./stats-sold-date/stats-sold-date";
 import classes from "./auction-header-bar.module.css";
 
 
-const AuctionHeaderBar = () => {
-    const {start_price, current_price, views, end_date, status} = useSelector(state => state.detail.data);
+const AuctionHeaderBar = ({auctionData}) => {
+    const {start_price, current_price, views, end_date, status} = auctionData;
 
     function setNewBid() {
         document.getElementById('auction-jump').scrollIntoView({behavior: "smooth"});

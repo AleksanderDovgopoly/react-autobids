@@ -27,7 +27,7 @@
 }
 
 .darkgreen {
-    background-color: RGBA(2,106,93,.4);
+    background-color: rgba(38,38,38,.4);
     animation: hide2 2s ease infinite;
 }
 

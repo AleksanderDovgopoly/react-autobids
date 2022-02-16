@@ -5,8 +5,8 @@ import UsernameLink from "../UI/username-link/username-link";
 import classes from "./auction-detail-spec.module.css";
 
 
-const AuctionSpec = () => {
-    const {spec, seller, geo} = useSelector(state => state.detail.data);
+const AuctionSpec = ({auctionData}) => {
+    const {spec, seller, geo} = auctionData;
     const {taxonomies, brand_models} = useSelector(state => state.categories);
     const {body_style, drivetrain, engine, exterior, interior, make, mileage, model, transmission, vin} = spec;
 

@@ -1,4 +1,5 @@
-import {useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
+import {useAuctionCacheById} from "../../../hooks/useAuctionCacheById";
 import {getBidsByAuctionId} from "../../../firebase/firebase.utils";
 import {Fragment, useEffect, useState} from "react";
 import Stats from "./stats/stats";
@@ -8,8 +9,8 @@ import classes from "./stats-info.module.css";
 
 
 const StatsInfo = () => {
-    const auctionId = useSelector(state => state.detail.fetchingId);
-    const {start_price} = useSelector(state => state.detail.data);
+    const {auctionId} = useParams();
+    const {start_price} = useAuctionCacheById(auctionId);
     const [auctionBids, setAuctionBids] = useState('');
 
     const [currentBidData, setCurrentBidData] = useState(null);

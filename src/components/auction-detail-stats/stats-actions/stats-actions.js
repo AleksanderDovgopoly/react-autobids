@@ -1,7 +1,8 @@
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {togglePopupAuth} from "../../../redux/user/user.actions";
+import {useAuctionCacheById} from "../../../hooks/useAuctionCacheById";
 import Popup from "reactjs-popup";
 import SetBidBar from "../../set-bid-bar/set-bid-bar";
 import WatchListButton2 from "../../UI/watch-list-button/watch-list-button2";
@@ -10,9 +11,10 @@ import classes from "./stats-actions.module.css";
 
 
 const StatsActions = () => {
-    const auctionId = useSelector(state => state.detail.fetchingId)
+    const {auctionId} = useParams();
     const {isLogin} = useSelector(state => state.user);
-    const {model} = useSelector(state => state.detail.data.spec);
+    const auctionCache = useAuctionCacheById(auctionId);
+    const {model} = auctionCache.spec;
     const dispatch = useDispatch();
     const [isShowPopupBid, setIsShowPopup] = useState(false);
 

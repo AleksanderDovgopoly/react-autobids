@@ -24,7 +24,7 @@ function App() {
     const dispatch = useDispatch();
     const {isFetching} = useSelector(state => state.categories);
 
-    const queryClient = new QueryClient()
+    const queryClient = new QueryClient();
 
     useEffect(async () => {
         if (!isFetching) {

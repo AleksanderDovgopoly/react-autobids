@@ -1,7 +1,6 @@
 import {useParams} from "react-router-dom";
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchAuctionDetail} from "../../redux/auction-detail/auction-detail.actions";
+import {useSelector} from "react-redux";
+import {useQuery, useQueryClient} from "react-query";
 import {fetchAuctionById} from "../../firebase/firebase.utils";
 import AuctionDetailContent from "../../components/auction-detail-content/auction-detail-content";
 import Spinner from "../../components/spinner/spinner";
@@ -10,32 +9,26 @@ import classes from "./auction-detail.module.css";
 
 
 const AuctionDetail = () => {
-    const dispatch = useDispatch();
     const {auctionId} = useParams();
-    const {fetchingId} = useSelector(state => state.detail);
+    const client = useQueryClient();
     const isFetchingCategories = useSelector(state => state.categories.isFetching);
-
-
-    useEffect(() => {
-        async function fetchData() {
-            const fetchingData = await fetchAuctionById(auctionId);
-            dispatch(fetchAuctionDetail(fetchingData));
+    const {isLoading, isError, data, error} = useQuery(['auction', auctionId], () => fetchAuctionById(auctionId), {
+        initialData: () => {
+            let auction = undefined;
+            const cachedAuctions = client.getQueryData('auctions');
+            if (cachedAuctions) {
+                auction = Object.values(cachedAuctions).find(item => item.id === auctionId);
+            }
+            return auction;
         }
+    })
 
-        if (auctionId !== fetchingId) {
-            fetchData();
-        }
-
-    }, [dispatch, auctionId, fetchingId]);
-
+    if (isLoading || !isFetchingCategories) return <Spinner/>;
+    if (isError) return <p>{error.message}</p>
 
     return (
         <div className={classes.auctionDetails}>
-            {
-                auctionId === fetchingId && isFetchingCategories
-                    ? <AuctionDetailContent/>
-                    : <Spinner/>
-            }
+            <AuctionDetailContent auctionData={data}/>
         </div>
     )
 }

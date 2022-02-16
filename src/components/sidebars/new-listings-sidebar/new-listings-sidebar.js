@@ -1,7 +1,7 @@
 import {useQuery, useQueryClient} from "react-query";
 import {fetchAuctions} from "../../../firebase/firebase.utils";
-import Spinner from "../../spinner/spinner";
 import AuctionItem from "../../auction-item/auction-item";
+import Spinner from "../../spinner/spinner";
 
 import classes from "./new-listings-sidebar.module.css";
 
@@ -14,13 +14,9 @@ const NewListingsSidebar = () => {
         }
     });
 
-    if (isLoading) {
-        return <Spinner/>;
-    }
+    if (isLoading) return <Spinner/>;
 
-    if (isError) {
-        return <span>Error: {error.message}</span>
-    }
+    if (isError) return <span>Error: {error.message}</span>
 
     const auctionItems = Object.values(data)
         .sort(function (x, y) {

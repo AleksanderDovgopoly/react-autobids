@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import {useQuery} from "react-query";
 import {fetchCommentsByAuctionId} from "../../../../firebase/firebase.utils";
-import {useSelector} from "react-redux";
+import {useAuctionCacheById} from "../../../../hooks/useAuctionCacheById";
 import UsernameLink from "../../../UI/username-link/username-link";
 import moment from "moment";
 
@@ -9,11 +10,12 @@ import classes from "./stats.module.css";
 
 
 const Stats = () => {
+    const {auctionId} = useParams();
     const [bidsCount, setBidsCount] = useState(0);
     const [commentsCount, setCommentsCount] = useState(0);
-    const auctionId = useSelector(state => state.detail.fetchingId);
-    const {end_date, views} = useSelector(state => state.detail.data);
-    const sellerId = useSelector(state => state.detail.data.seller.id);
+    const auctionData = useAuctionCacheById(auctionId);
+    const {end_date, views} = auctionData;
+    const sellerId = auctionData.seller.id;
     const {status, data} = useQuery(['comments', auctionId], () => fetchCommentsByAuctionId(auctionId));
 
     const formattedEndDate = moment.unix(end_date.seconds).format("MMMM D YYYY, h:mm a");
