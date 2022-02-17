@@ -1,3 +1,4 @@
+import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useQueryClient} from "react-query";
 import {isUserAlreadyVoted} from "../../../../../helpers/auction-functions";
@@ -10,7 +11,7 @@ import classes from "./comment-upvote-button.module.css";
 const CommentUpvoteButton = ({commentId, repScore, authorId}) => {
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
-    const auctionId = useSelector(state => state.detail.fetchingId);
+    const {auctionId} = useParams();
     const {isLogin, currentUser} = useSelector(state => state.user);
 
     const isUserVoted = isUserAlreadyVoted(repScore, currentUser.uid);

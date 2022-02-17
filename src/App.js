@@ -1,8 +1,6 @@
 import {useEffect} from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from 'react-query/devtools'
 import {fetchAllCategoriesList, fetchBrandsAndModels} from "./firebase/firebase.utils";
 import {fetchCategoriesCollection} from "./redux/categories/categories.actions";
 import HomePage from "./pages/home-page/homePage";
@@ -24,7 +22,6 @@ function App() {
     const dispatch = useDispatch();
     const {isFetching} = useSelector(state => state.categories);
 
-    const queryClient = new QueryClient();
 
     useEffect(async () => {
         if (!isFetching) {
@@ -38,32 +35,29 @@ function App() {
     if (!isFetching) return <Spinner/>
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <ScrollToTop>
-                    <Header/>
-                    <Routes>
-                        <Route exact path='/' element={<HomePage/>}/>
-                        <Route path='/sign-in' element={<SignInAndSignUpPage/>}/>
-                        <Route path='/my-account' element={
-                            loggedIn ? <MyAccount/> : <Navigate to="/sign-in"/>
-                        }/>
-                        <Route path='/watchlist' element={
-                            loggedIn ? <WatchList/> : <Navigate to="/sign-in"/>
-                        }/>
-                        <Route path='/past-auctions' element={<PastAuctions/>}/>
-                        <Route path='/auctions/:auctionId' element={<AuctionDetail/>}/>
-                        <Route path='/user/:userId' element={<UserDetail/>}/>
-                        <Route path='/search/:made/:model' element={<SearchPage/>}/>
-                        <Route path='/search/:made' element={<SearchPage/>}/>
-                        <Route path='/sell-car' element={
-                            loggedIn ? <SellCar/> : <Navigate to="/sign-in"/>
-                        }/>
-                    </Routes>
-                </ScrollToTop>
-            </BrowserRouter>
-            <ReactQueryDevtools initialIsOpen={false}/>
-        </QueryClientProvider>
+        <BrowserRouter>
+            <ScrollToTop>
+                <Header/>
+                <Routes>
+                    <Route exact path='/' element={<HomePage/>}/>
+                    <Route path='/sign-in' element={<SignInAndSignUpPage/>}/>
+                    <Route path='/my-account' element={
+                        loggedIn ? <MyAccount/> : <Navigate to="/sign-in"/>
+                    }/>
+                    <Route path='/watchlist' element={
+                        loggedIn ? <WatchList/> : <Navigate to="/sign-in"/>
+                    }/>
+                    <Route path='/past-auctions' element={<PastAuctions/>}/>
+                    <Route path='/auctions/:auctionId' element={<AuctionDetail/>}/>
+                    <Route path='/user/:userId' element={<UserDetail/>}/>
+                    <Route path='/search/:made/:model' element={<SearchPage/>}/>
+                    <Route path='/search/:made' element={<SearchPage/>}/>
+                    <Route path='/sell-car' element={
+                        loggedIn ? <SellCar/> : <Navigate to="/sign-in"/>
+                    }/>
+                </Routes>
+            </ScrollToTop>
+        </BrowserRouter>
     );
 }
 

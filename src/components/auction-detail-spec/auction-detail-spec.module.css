@@ -37,6 +37,10 @@
     align-items: center;
 }
 
+.auctionSpec dd a {
+    color: #000000;
+}
+
 @media (min-width: 769px) {
     .auctionSpec dl:nth-child(2) {
         border-left: none;
