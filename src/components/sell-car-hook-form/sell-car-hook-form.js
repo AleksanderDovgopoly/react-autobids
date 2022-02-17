@@ -44,6 +44,7 @@ const SellCarHookForm = () => {
 
     function convertStateToHtml(descriptions) {
         let newDescriptionsObj = {};
+        // eslint-disable-next-line array-callback-return
         Object.keys(descriptions).map((key) => {
             newDescriptionsObj[key] = draftToHtml(convertToRaw(descriptions[key].getCurrentContent()));
         })
