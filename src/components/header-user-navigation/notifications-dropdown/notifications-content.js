@@ -11,7 +11,7 @@ const NotificationsContent = ({notifyData, refetchData}) => {
             <ul>
                 {
                     notifyData.map((item, index) => {
-                        return <NotificationsItem key={index} data={item} itemKey={index} refetchData={refetchData}/>
+                        return <NotificationsItem key={index} itemData={item} itemKey={index} refetchData={refetchData}/>
                     })
                 }
             </ul>

@@ -1,5 +1,5 @@
-import {Fragment, useEffect, useState} from "react";
-import {getCommentsAndBidsByUserId} from "../../firebase/firebase.utils";
+import {useQuery, useQueryClient} from "react-query";
+import {fetchAuctions, getCommentsAndBidsByUserId} from "../../firebase/firebase.utils";
 import UserDetailSummary from "./user-detail-summary/user-detail-summary";
 import UserDetailAuctioned from "./user-detail-auctioned/user-detail-auctioned";
 import UserDetailBidHistory from "./user-detail-bid-history/user-detail-bid-history";
@@ -9,31 +9,30 @@ import Spinner from "../spinner/spinner";
 import classes from "./user-detail-content.module.css";
 
 
-const UserDetailContent = ({userData, userId}) => {
-    const [isCommentsFetching, setIsCommentsFetching] = useState(false);
-    const [userBidsArr, setUserBidsArr] = useState([]);
-    const [userCommentsArr, setUserCommentsArr] = useState([]);
+const UserDetailContent = ({userData}) => {
+    const userId = userData.uid;
+    const client = useQueryClient();
+    const commentsNBids = useQuery(['userComments', userId], () => getCommentsAndBidsByUserId(userId));
+    const auctions = useQuery('auctions', fetchAuctions, {
+        placeholderData: () => {
+            return client.getQueryData('auctions');
+        }
+    });
 
-    useEffect(async () => {
-        const fetchUserCommentsAndBids = await getCommentsAndBidsByUserId(userId);
-        setUserBidsArr(Object.values(fetchUserCommentsAndBids).filter(item => item.type === 'bid'));
-        setUserCommentsArr(Object.values(fetchUserCommentsAndBids).filter(item => item.type === 'comment'));
-        setIsCommentsFetching(true);
-    }, [userId]);
+    if (commentsNBids.isLoading || auctions.isLoading) return <Spinner/>;
+
+    if (commentsNBids.isError) return <span>Error: {commentsNBids.error.message}</span>;
+    if (auctions.isError) return <span>Error: {auctions.error.message}</span>;
+
+    const userBidsArr = Object.values(commentsNBids.data).filter(item => item.type === 'bid');
+    const userCommentsArr = Object.values(commentsNBids.data).filter(item => item.type === 'comment');
 
     return (
         <div className={classes.userContainer}>
             <UserDetailSummary userData={userData}/>
-            <UserDetailAuctioned userId={userId}/>
-            {
-                isCommentsFetching
-                    ? <Fragment>
-                        <UserDetailBidHistory userBids={userBidsArr}/>
-                        <UserDetailComments comments={userCommentsArr}/>
-                    </Fragment>
-                    : <Spinner/>
-            }
-
+            <UserDetailAuctioned userId={userId} auctionsData={auctions.data}/>
+            <UserDetailBidHistory userBids={userBidsArr} auctionsData={auctions.data}/>
+            <UserDetailComments comments={userCommentsArr}/>
         </div>
     )
 }

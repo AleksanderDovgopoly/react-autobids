@@ -4,8 +4,7 @@ import CommentItem from "../comment-item/comment-item";
 import classes from "./comments-list.module.css";
 
 
-const CommentsList = ({usersData, setIsUsersFetching, setReplyToId}) => {
-    const commentsData = useSelector(state => state.detail.comments_n_bids);
+const CommentsList = ({commentsData, usersData, setReplyToId}) => {
     const activeFilter = useSelector(state => state.detail.comments_filter);
 
     let sortedComments = commentsData.sort(function (x, y) {
@@ -31,9 +30,9 @@ const CommentsList = ({usersData, setIsUsersFetching, setReplyToId}) => {
                     ? sortedComments.map((comment, index) => (
                         <CommentItem
                             key={index}
+                            allComments={commentsData}
                             commentData={comment}
                             usersData={usersData}
-                            refetchUser={setIsUsersFetching}
                             setReplyToId={setReplyToId}
                         />
                     ))

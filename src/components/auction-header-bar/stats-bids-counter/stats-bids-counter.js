@@ -1,16 +1,28 @@
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useQuery} from "react-query";
+import {useParams} from "react-router-dom";
 import {bidCountFromCommentsList} from "../../../helpers/auction-functions";
+import {fetchCommentsByAuctionId} from "../../../firebase/firebase.utils";
+
 import classes from "./stats-bids-counter.module.css";
 
+
 const StatsBidsCounter = () => {
-    const {comments_n_bids} = useSelector(state => state.detail)
+    const [bidsCount, setBidsCount] = useState(0);
+    const {auctionId} = useParams();
+    const {status, data} = useQuery(['comments', auctionId], () => fetchCommentsByAuctionId(auctionId));
+
+    useEffect(() => {
+        if (status === 'success') {
+            setBidsCount(bidCountFromCommentsList(data));
+        }
+    }, [status])
+
 
     return (
         <div className={classes.bidsCounter}>
             <span>Bids: </span>
-            {
-                bidCountFromCommentsList(comments_n_bids)
-            }
+            {bidsCount}
         </div>
     )
 }

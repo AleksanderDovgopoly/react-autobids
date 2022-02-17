@@ -5,15 +5,15 @@ import CommentBid from "./comment-bid/comment-bid";
 import classes from "./comment-content.module.css";
 
 
-const CommentContent = ({commentId, authorId, itemType, message, repScore, replyId, bidPrice, refetchUser, setReplyToId, usersData}) => {
+const CommentContent = ({allComments, commentId, authorId, itemType, message, repScore, replyId, bidPrice, setReplyToId, usersData}) => {
     return (
         <div className={classes.content}>
             {
                 itemType === 'comment'
-                    ? <CommentMessage message={message} replyId={replyId} usersData={usersData}/>
+                    ? <CommentMessage allComments={allComments} message={message} replyId={replyId} usersData={usersData}/>
                     : <CommentBid bid={bidPrice}/>
             }
-            <CommentActions commentId={commentId} authorId={authorId} repScore={repScore} setReplyToId={setReplyToId} refetchUser={refetchUser}/>
+            <CommentActions commentId={commentId} authorId={authorId} repScore={repScore} setReplyToId={setReplyToId}/>
         </div>
     )
 }

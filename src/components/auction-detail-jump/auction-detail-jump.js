@@ -1,9 +1,6 @@
-import {useSelector} from "react-redux";
 import classes from "./auction-detail-jump.module.css";
 
-const AuctionDetailJump = () => {
-    const {title} = useSelector(state => state.detail.data);
-
+const AuctionDetailJump = ({title}) => {
     return (
         <div id="auction-jump" className={classes.auctionJumpSection}>
             <h3>{title}</h3>

@@ -1,14 +1,8 @@
-import {useSelector} from "react-redux";
 import AuctionsList from "../../auctions-list/auctions-list";
-
 import classes from "./user-detail-auctioned.module.css";
 
-
-const UserDetailAuctioned = ({userId}) => {
-    const auctionItemsObject = useSelector((state => state.auctions.cars));
-
-    let auctionsArr = Object.values(auctionItemsObject);
-
+const UserDetailAuctioned = ({userId, auctionsData}) => {
+    let auctionsArr = Object.values(auctionsData);
     const filteredAuctions = auctionsArr
         .filter(function (key, value) {
             return key.seller.id === userId

@@ -1,15 +1,17 @@
 import {useDispatch, useSelector} from "react-redux";
+import {useQueryClient} from "react-query";
 import {isUserAlreadyVoted} from "../../../../../helpers/auction-functions";
 import {togglePopupAuth} from "../../../../../redux/user/user.actions";
 import {updateCommentVotesById, updateUserVotesById} from "../../../../../firebase/firebase.utils";
-import {updateCommentVote} from "../../../../../redux/auction-detail/auction-detail.actions";
 
 import classes from "./comment-upvote-button.module.css";
 
 
-const CommentUpvoteButton = ({commentId, repScore, authorId, refetchUser}) => {
-    const {isLogin, currentUser} = useSelector(state => state.user);
+const CommentUpvoteButton = ({commentId, repScore, authorId}) => {
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
+    const auctionId = useSelector(state => state.detail.fetchingId);
+    const {isLogin, currentUser} = useSelector(state => state.user);
 
     const isUserVoted = isUserAlreadyVoted(repScore, currentUser.uid);
 
@@ -22,10 +24,8 @@ const CommentUpvoteButton = ({commentId, repScore, authorId, refetchUser}) => {
         try {
             await updateCommentVotesById(commentId, currentUser.uid);
             await updateUserVotesById(authorId, currentUser.uid);
-            dispatch(updateCommentVote(commentId, currentUser.uid));
-            if (refetchUser !== undefined) {
-                refetchUser(false);
-            }
+            await queryClient.invalidateQueries('users');
+            await queryClient.invalidateQueries(['comments', auctionId]);
         } catch (error) {
             console.log(error);
         }

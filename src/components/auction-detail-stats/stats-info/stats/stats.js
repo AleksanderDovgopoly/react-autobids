@@ -1,17 +1,32 @@
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {useQuery} from "react-query";
+import {fetchCommentsByAuctionId} from "../../../../firebase/firebase.utils";
+import {useAuctionCacheById} from "../../../../hooks/useAuctionCacheById";
 import UsernameLink from "../../../UI/username-link/username-link";
 import moment from "moment";
 
 import classes from "./stats.module.css";
 
+
 const Stats = () => {
-    const {end_date, views} = useSelector(state => state.detail.data);
-    const sellerId = useSelector(state => state.detail.data.seller.id);
-    const {comments_n_bids} = useSelector(state => state.detail);
+    const {auctionId} = useParams();
+    const [bidsCount, setBidsCount] = useState(0);
+    const [commentsCount, setCommentsCount] = useState(0);
+    const auctionData = useAuctionCacheById(auctionId);
+    const {end_date, views} = auctionData;
+    const sellerId = auctionData.seller.id;
+    const {status, data} = useQuery(['comments', auctionId], () => fetchCommentsByAuctionId(auctionId));
 
     const formattedEndDate = moment.unix(end_date.seconds).format("MMMM D YYYY, h:mm a");
-    const bidsCount = comments_n_bids.filter(item => item.type === 'bid').length;
-    const commentsCount = comments_n_bids.filter(item => item.type === 'comment').length;
+
+    useEffect(() => {
+        if (status === 'success') {
+            setBidsCount(data.filter(item => item.type === 'bid').length);
+            setCommentsCount(data.filter(item => item.type === 'comment').length)
+        }
+    }, [status])
+
 
     return (
         <ul className={classes.stats}>

@@ -36,6 +36,7 @@
     font-weight: 700;
     line-height: 33px;
     word-break: break-word;
+    text-align: center;
 }
 
 .metadata p {
@@ -50,6 +51,11 @@
     line-height: 21px;
     color: #262626;
     padding-right: 8px;
+}
+
+.bio {
+    text-align: center;
+    padding-top: 15px;
 }
 
 @media (min-width: 576px) {
@@ -68,7 +74,7 @@
         margin-bottom: 0;
     }
 
-    .metadata {
+    .metadata, .bio {
         align-items: flex-start;
     }
 }

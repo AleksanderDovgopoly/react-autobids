@@ -1,28 +1,26 @@
-import {useEffect, useState} from "react";
-import {fetchUsers} from "../../firebase/firebase.utils";
+import {useState} from "react";
+import {useQuery} from "react-query";
+import {fetchCommentsByAuctionId, fetchUsers} from "../../firebase/firebase.utils";
 import CommentForm from "../comment-form/comment-form";
 import CommentsList from "../comments-list/comments-list";
 import CommentFilters from "../comment-filters/comment-filters";
+import Spinner from "../spinner/spinner";
 
 import classes from "./comment-box.module.css";
 
 
 const CommentBox = ({auctionId}) => {
-    const [isUsersFetching, setIsUsersFetching] = useState(false);
-    const [usersData, setUsersData] = useState({});
-    const [replyToId, setReplyToId] = useState('')
+    const [replyToId, setReplyToId] = useState('');
+    const commentsQuery = useQuery(['comments', auctionId], () => fetchCommentsByAuctionId(auctionId));
+    const usersQuery = useQuery('users', fetchUsers);
 
-    useEffect(() => {
-        async function fetchData() {
-            const usersCollection = await fetchUsers();
-            setUsersData(usersCollection);
-            setIsUsersFetching(true);
-        }
+    if (usersQuery.isLoading || commentsQuery.isLoading) {
+        return <Spinner/>;
+    }
 
-        if (!isUsersFetching) {
-            fetchData();
-        }
-    }, [isUsersFetching])
+    if (usersQuery.isError || commentsQuery.isError) {
+        return <span>Error: {usersQuery.error.message}</span>
+    }
 
     return (
         <div id="comment_box" className={classes.commentBox}>
@@ -30,8 +28,18 @@ const CommentBox = ({auctionId}) => {
                 <h3>Comments & Bids</h3>
                 <CommentFilters/>
             </div>
-            <CommentForm usersData={usersData} auctionId={auctionId} replyTo={replyToId} setReplyToId={setReplyToId}/>
-            <CommentsList usersData={usersData} setIsUsersFetching={setIsUsersFetching} setReplyToId={setReplyToId}/>
+            <CommentForm
+                commentsData={commentsQuery.data}
+                usersData={usersQuery.data}
+                auctionId={auctionId}
+                replyTo={replyToId}
+                setReplyToId={setReplyToId}
+            />
+            <CommentsList
+                commentsData={commentsQuery.data}
+                usersData={usersQuery.data}
+                setReplyToId={setReplyToId}
+            />
         </div>
     )
 }

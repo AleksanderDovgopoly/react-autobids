@@ -2,6 +2,7 @@ import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 import 'firebase/compat/storage'
+import {child, get, getDatabase, ref} from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA0CGxASlJ2b3WI5Jl68TUC5T69BcQ2SkQ",
@@ -128,10 +129,12 @@ export const fetchUsers = async () => {
 export const fetchCommentsByAuctionId = async (auctionId) => {
     const commentsRef = await firestore.collection('comments_bids');
     const commentsMap = await commentsRef
+        .orderBy('createAt', 'asc')
+        .where('auction_id', '==', auctionId)
         .get()
         .then(snapshot => {
             const commentsMap = convertCommentsSnapshotToMap(snapshot);
-            return Object.values(commentsMap).filter(item => item.auction_id === auctionId);
+            return Object.values(commentsMap);
         })
         .catch(error => {
             console.log('Some error with comments fetching!', error)
@@ -178,6 +181,19 @@ export const fetchBrandsAndModels = async () => {
             console.log('Some error with fetching brands!', error)
         })
     return brandsSnapshot;
+}
+
+export const fetchUserNotifications = async (userId) => {
+    const dbRef = ref(getDatabase());
+    const data = await get(child(dbRef, `/notifications/${userId}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            return snapshot.val();
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
+
+    return data;
 }
 
 export const convertCategoriesSnapshotToMap = (collection) => {

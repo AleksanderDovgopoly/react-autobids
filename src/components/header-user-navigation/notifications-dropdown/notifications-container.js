@@ -1,35 +1,31 @@
-import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {getDatabase, ref, child, get} from "firebase/database";
+import {useQuery} from "react-query";
+import {fetchUserNotifications} from "../../../firebase/firebase.utils";
 import NotificationsContent from "./notifications-content";
-
+import Spinner from "../../spinner/spinner";
 import classes from "./notifications-dropdown.module.css";
 
 
 const NotificationsContainer = () => {
     const userId = useSelector(state => state.user.currentUser.uid);
-    const [notifyData, setNotifyData] = useState([]);
-    const [isFetching, setIsFetching] = useState(false);
+    const {
+        isLoading,
+        isError,
+        data,
+        error,
+        refetch
+    } = useQuery(['notifications', userId], () => fetchUserNotifications(userId));
 
-    useEffect(() => {
-        if (isFetching) return;
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, `/notifications/${userId}`)).then((snapshot) => {
-            if (snapshot.exists()) {
-                setNotifyData(snapshot.val());
-                setIsFetching(true);
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-    }, [userId, isFetching]);
+    if (isLoading) return <Spinner/>;
+
+    if (isError) return <span>Error: {error.message}</span>
 
     return (
         <div className={classes.notifyContainer}>
             {
-                notifyData.length === 0
+                data === undefined
                     ? <div className={classes.empty}>No notifications yet</div>
-                    : <NotificationsContent notifyData={notifyData} refetchData={setIsFetching}/>
+                    : <NotificationsContent notifyData={data} refetchData={refetch}/>
             }
 
         </div>

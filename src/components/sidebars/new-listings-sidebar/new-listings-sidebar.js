@@ -1,13 +1,24 @@
-import {useSelector} from "react-redux";
+import {useQuery, useQueryClient} from "react-query";
+import {fetchAuctions} from "../../../firebase/firebase.utils";
 import AuctionItem from "../../auction-item/auction-item";
+import Spinner from "../../spinner/spinner";
 
 import classes from "./new-listings-sidebar.module.css";
 
 
 const NewListingsSidebar = () => {
-    const auctionsObj = useSelector(state => state.auctions.cars);
+    const client = useQueryClient();
+    const {isLoading, isError, data, error} = useQuery('auctions', fetchAuctions, {
+        placeholderData: () => {
+            return client.getQueryData('auctions');
+        }
+    });
 
-    const auctionItems = Object.values(auctionsObj)
+    if (isLoading) return <Spinner/>;
+
+    if (isError) return <span>Error: {error.message}</span>
+
+    const auctionItems = Object.values(data)
         .sort(function (x, y) {
             return y.start_date - x.start_date;
         })

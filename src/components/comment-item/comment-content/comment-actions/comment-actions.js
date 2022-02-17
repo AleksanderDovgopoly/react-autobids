@@ -1,7 +1,7 @@
 import CommentUpvoteButton from "./comment-upvote-button/comment-upvote-button";
 import classes from "./comment-actions.module.css";
 
-const CommentActions = ({commentId, authorId, repScore, refetchUser, setReplyToId}) => {
+const CommentActions = ({commentId, authorId, repScore, setReplyToId}) => {
 
     function replyClickHandler() {
         setReplyToId(commentId);
@@ -10,7 +10,7 @@ const CommentActions = ({commentId, authorId, repScore, refetchUser, setReplyToI
 
     return (
         <div className={classes.actions}>
-            <CommentUpvoteButton commentId={commentId} authorId={authorId} repScore={repScore} refetchUser={refetchUser} />
+            <CommentUpvoteButton commentId={commentId} authorId={authorId} repScore={repScore}/>
             <button
                 className={classes.reply}
                 onClick={() => replyClickHandler()}

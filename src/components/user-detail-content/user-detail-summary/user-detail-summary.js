@@ -1,10 +1,8 @@
 import moment from "moment";
-
 import classes from "./user-detail-summary.module.css";
 
-
-const UserDetailSummary = (props) => {
-    const {createdAt, metadata, displayName, email, avatar, rep_score} = props.userData;
+const UserDetailSummary = ({userData}) => {
+    const {createdAt, metadata, displayName, email, avatar, rep_score, bio} = userData;
     let createDate = createdAt;
     if (createdAt === undefined) {
         createDate = metadata.createdAt;
@@ -20,7 +18,6 @@ const UserDetailSummary = (props) => {
         userPhoto = avatar;
     }
 
-
     return (
         <div className={classes.userSummary}>
             <div className={classes.userHero}>
@@ -28,7 +25,7 @@ const UserDetailSummary = (props) => {
             </div>
             <div className={classes.metadata}>
                 <h1>{displayName}</h1>
-                <p>
+                <div>
                         <span className="reputation">
                             <span className={classes.rep}>
                                 <svg className="reputation"
@@ -47,9 +44,10 @@ const UserDetailSummary = (props) => {
                                 </svg>
                                 {showRep} </span>Reputation Score
                         </span>
-                </p>
-                <p><span>Email: {email}</span></p>
+                </div>
+                <p><span>Email: </span>{email}</p>
                 <p>Joined {joinDate || 'no data'}</p>
+                <p className={classes.bio}><span>Bio: </span>{bio}</p>
             </div>
         </div>
     )
