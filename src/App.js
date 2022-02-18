@@ -50,8 +50,8 @@ function App() {
                     <Route path='/past-auctions' element={<PastAuctions/>}/>
                     <Route path='/auctions/:auctionId' element={<AuctionDetail/>}/>
                     <Route path='/user/:userId' element={<UserDetail/>}/>
-                    <Route path='/search/:made/:model' element={<SearchPage/>}/>
-                    <Route path='/search/:made' element={<SearchPage/>}/>
+                    <Route path='/search/:brand/:model' element={<SearchPage/>}/>
+                    <Route path='/search/:brand' element={<SearchPage/>}/>
                     <Route path='/sell-car' element={
                         loggedIn ? <SellCar/> : <Navigate to="/sign-in"/>
                     }/>

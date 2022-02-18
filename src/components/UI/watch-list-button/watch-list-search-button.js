@@ -1,16 +1,18 @@
-import {useParams} from "react-router-dom";
+import {Fragment} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {isSearchWatched} from "../../../helpers/searches-functions";
 import {actionUpdateUserWatchedSearch, togglePopupAuth} from "../../../redux/user/user.actions";
 import {removeWatchedSearch, setNewWatchedSearch} from "../../../firebase/firebase.utils";
 
-import classes from "./save-search-result-button.module.css";
+import classes from "./watch-list-search-button.module.css";
 
 
-const SaveSearchResultButton = () => {
-    const searchParams = useParams();
+const WatchListSearchButton = (props) => {
+    const searchParams = props;
     const dispatch = useDispatch();
     const {isLogin, currentUser} = useSelector(state => state.user);
+    const {brand_models} = useSelector(state => state.categories);
+    const modelTitle = brand_models[props.brand].models[props.model];
     let isWatched = false;
     if (isLogin) {
         isWatched = isSearchWatched(searchParams, currentUser.watch_list.searches);
@@ -40,24 +42,21 @@ const SaveSearchResultButton = () => {
     }
 
     return (
-        <div className={classes.saveThis}>
+        <Fragment>
             {
-                !isWatched
+                isWatched
                     ? <button
-                        className={classes.saveSearchBtn}
-                        onClick={saveSearchHandler}
-                    >
-                        Save Search & Notify Me
-                    </button>
-                    : <button
-                        className={classes.savedSearchBtn}
+                        className={`${classes.watchButton} ${classes.watched}`}
                         onClick={removeSearchHandler}
                     >
-                        Saved
+                        Notify me of {modelTitle}
+                    </button>
+                    : <button className={classes.watchButton} onClick={saveSearchHandler}>
+                        Notify me of {modelTitle}
                     </button>
             }
-        </div>
+        </Fragment>
     )
 }
 
-export default SaveSearchResultButton
+export default WatchListSearchButton

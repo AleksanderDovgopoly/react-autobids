@@ -7,12 +7,12 @@ import classes from "../../auctions-collection/auctions-collection.module.css";
 
 
 const SearchResultsCollection = ({auctionsArr, resultType}) => {
-    const {made, model} = useParams();
+    const {brand, model} = useParams();
     const brandsModels = useSelector(state => state.categories.brand_models);
 
-    let sectionTitle = brandsModels[made].title;
+    let sectionTitle = brandsModels[brand].title;
     if (model !== undefined) {
-        sectionTitle = sectionTitle + ` ${brandsModels[made].models[model]}`;
+        sectionTitle = sectionTitle + ` ${brandsModels[brand].models[model]}`;
     }
     if (resultType === 'active') {
         sectionTitle = sectionTitle + ` Auctions (${auctionsArr.length})`;

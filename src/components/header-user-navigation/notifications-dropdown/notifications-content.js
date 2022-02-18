@@ -2,7 +2,7 @@ import {Fragment} from "react";
 import NotificationsItem from "./notifications-item";
 import classes from "./notifications-dropdown.module.css";
 
-const NotificationsContent = ({notifyData, refetchData}) => {
+const NotificationsContent = ({notifyData}) => {
     return (
         <Fragment>
             <div className={classes.heading}>
@@ -11,7 +11,7 @@ const NotificationsContent = ({notifyData, refetchData}) => {
             <ul>
                 {
                     notifyData.map((item, index) => {
-                        return <NotificationsItem key={index} itemData={item} itemKey={index} refetchData={refetchData}/>
+                        return <NotificationsItem key={index} itemData={item} itemKey={index}/>
                     })
                 }
             </ul>

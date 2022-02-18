@@ -35,7 +35,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
                 avatar: '',
                 watch_list: {
                     auctions: [],
-                    searches: '1'
+                    searches: []
                 },
                 ...additionalData
             });
@@ -345,6 +345,48 @@ export const setNewAuctionPrice = async (auctionId, newPrice) => {
     }
 
     return auctionRef;
+}
+
+export const setNewWatchedSearch = async (userId, searchParams) => {
+    if (!searchParams || !userId) return;
+
+    const userRef = await firestore.doc(`users/${userId}`);
+    const snapShot = (await userRef.get()).data();
+
+    try {
+        let updated_watch_list = snapShot.watch_list;
+        updated_watch_list.searches = [...updated_watch_list.searches, searchParams]
+
+        await userRef.update({
+            watch_list: updated_watch_list
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    return userRef;
+}
+
+export const removeWatchedSearch = async (userId, searchParams) => {
+    if (!searchParams || !userId) return;
+
+    const userRef = await firestore.doc(`users/${userId}`);
+    const snapShot = (await userRef.get()).data();
+
+    try {
+        let updated_watch_list = snapShot.watch_list;
+        updated_watch_list.searches = updated_watch_list.searches.filter(function (item) {
+            return (item.brand !== searchParams.brand) || (item.model !== searchParams.model)
+        })
+
+        await userRef.update({
+            watch_list: updated_watch_list
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    return userRef;
 }
 
 export const updateAuctionViewsById = async (auctionId) => {

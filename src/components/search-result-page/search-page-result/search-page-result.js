@@ -8,7 +8,7 @@ import classes from "./search-page-result.module.css";
 
 
 const SearchPageResult = () => {
-    const {made, model} = useParams();
+    const {brand, model} = useParams();
     const client = useQueryClient();
     const {isLoading, isError, data, error} = useQuery('auctions', fetchAuctions, {
         placeholderData: () => {
@@ -25,8 +25,8 @@ const SearchPageResult = () => {
     }
 
     let auctionsArr = Object.values(data);
-    if (made !== undefined && model === undefined) {
-        auctionsArr = auctionsArr.filter(item => item.spec.make.toLowerCase() === made);
+    if (brand !== undefined && model === undefined) {
+        auctionsArr = auctionsArr.filter(item => item.spec.make.toLowerCase() === brand);
     }
     if (model !== undefined) {
         auctionsArr = auctionsArr.filter(item => item.spec.model.toLowerCase() === model);

@@ -1,5 +1,11 @@
-import {CLEAR_CURRENT_USER, SET_CURRENT_USER, SHOW_POPUP_AUTH, UPDATE_USER_WATCHED_AUCTIONS} from "../actionTypes";
-import {utilUpdateUserWatchedAuctions} from "./user.utils";
+import {
+    CLEAR_CURRENT_USER,
+    SET_CURRENT_USER,
+    SHOW_POPUP_AUTH,
+    UPDATE_USER_WATCHED_AUCTIONS,
+    UPDATE_USER_WATCHED_SEARCH
+} from "../actionTypes";
+import {utilUpdateUserWatchedAuctions, utilUpdateUserWatchedSearch} from "./user.utils";
 
 
 const INITIAL_STATE = {
@@ -25,6 +31,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 currentUser: utilUpdateUserWatchedAuctions(state.currentUser, action.payload),
+            }
+        case UPDATE_USER_WATCHED_SEARCH:
+            return {
+                ...state,
+                currentUser: utilUpdateUserWatchedSearch(state.currentUser, action.payload),
             }
         case CLEAR_CURRENT_USER:
             return INITIAL_STATE;

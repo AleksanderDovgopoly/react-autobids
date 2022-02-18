@@ -14,12 +14,9 @@ const AuctionDetail = () => {
     const isFetchingCategories = useSelector(state => state.categories.isFetching);
     const {isLoading, isError, data, error} = useQuery(['auction', auctionId], () => fetchAuctionById(auctionId), {
         initialData: () => {
-            let auction = undefined;
-            const cachedAuctions = client.getQueryData('auctions');
-            if (cachedAuctions) {
-                auction = Object.values(cachedAuctions).find(item => item.id === auctionId);
+            if (client.getQueryData('auctions')) {
+                return Object.values(client.getQueryData('auctions')).find(item => item.id === auctionId);
             }
-            return auction;
         }
     })
 

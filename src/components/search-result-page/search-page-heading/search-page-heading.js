@@ -12,15 +12,15 @@ import classes from "./search-page-heading.module.css";
 
 
 const SearchPageHeading = () => {
-    const {made, model} = useParams();
+    const {brand, model} = useParams();
     const {brand_models} = useSelector(state => state.categories);
 
-    let pageTitle = brand_models[made].title;
+    let pageTitle = brand_models[brand].title;
     if (model !== undefined) {
         pageTitle = (<>
-            <Link to={`/search/${made}`}>{brand_models[made].title}</Link>
+            <Link to={`/search/${brand}`}>{brand_models[brand].title}</Link>
             <span className={classes.arrow}/>
-            {brand_models[made].models[model]}
+            {brand_models[brand].models[model]}
         </>)
     }
 
@@ -43,7 +43,7 @@ const SearchPageHeading = () => {
                     ? <Popup
                         trigger={
                             <button className={classes.pseudoSearch}>
-                                <span>{brand_models[made].title} {brand_models[made].models[model]}</span>
+                                <span>{brand_models[brand].title} {brand_models[brand].models[model]}</span>
                             </button>
                         }
                         modal
@@ -59,7 +59,7 @@ const SearchPageHeading = () => {
                     </Popup>
                     : <h1>{pageTitle}</h1>
             }
-            {model === undefined ? <ModelsBar currentMade={made}/> : null}
+            {model === undefined ? <ModelsBar currentMade={brand}/> : null}
             <div className={classes.filterSet}>
                 <FiltersBar/>
                 <SaveSearchResultButton/>

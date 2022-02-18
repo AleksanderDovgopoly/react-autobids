@@ -1,14 +1,14 @@
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {update, getDatabase, ref} from "firebase/database";
-
-import classes from "./notifications-dropdown.module.css";
 import {useQuery, useQueryClient} from "react-query";
+import {update, getDatabase, ref} from "firebase/database";
 import {fetchAuctions} from "../../../firebase/firebase.utils";
 import Spinner from "../../spinner/spinner";
 
+import classes from "./notifications-dropdown.module.css";
 
-const NotificationsItem = ({itemData, itemKey, refetchData}) => {
+
+const NotificationsItem = ({itemData, itemKey}) => {
     const navigate = useNavigate();
     const {auction_id, status, type} = itemData;
     const userId = useSelector(state => state.user.currentUser.uid);
@@ -32,7 +32,7 @@ const NotificationsItem = ({itemData, itemKey, refetchData}) => {
         const updates = {};
         updates[`/notifications/${userId}/${itemKey}/status`] = 'seen';
         update(dbRef, updates);
-        refetchData();
+        client.invalidateQueries(['notifications', userId]);
     }
 
     return (

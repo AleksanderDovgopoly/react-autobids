@@ -13,7 +13,6 @@ const NotificationsContainer = () => {
         isError,
         data,
         error,
-        refetch
     } = useQuery(['notifications', userId], () => fetchUserNotifications(userId));
 
     if (isLoading) return <Spinner/>;
@@ -25,7 +24,7 @@ const NotificationsContainer = () => {
             {
                 data === undefined
                     ? <div className={classes.empty}>No notifications yet</div>
-                    : <NotificationsContent notifyData={data} refetchData={refetch}/>
+                    : <NotificationsContent notifyData={data}/>
             }
 
         </div>

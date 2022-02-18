@@ -1,4 +1,10 @@
-import {CLEAR_CURRENT_USER, SET_CURRENT_USER, SHOW_POPUP_AUTH, UPDATE_USER_WATCHED_AUCTIONS} from "../actionTypes";
+import {
+    CLEAR_CURRENT_USER,
+    SET_CURRENT_USER,
+    SHOW_POPUP_AUTH,
+    UPDATE_USER_WATCHED_AUCTIONS,
+    UPDATE_USER_WATCHED_SEARCH
+} from "../actionTypes";
 
 
 export const setCurrentUser = user => ({
@@ -17,4 +23,9 @@ export const clearCurrentUser = () => ({
 export const actionUpdateUserWatchedAuctions = auctionId => ({
     type: UPDATE_USER_WATCHED_AUCTIONS,
     payload: auctionId
+})
+
+export const actionUpdateUserWatchedSearch = searchParams => ({
+    type: UPDATE_USER_WATCHED_SEARCH,
+    payload: searchParams
 })
