@@ -1,4 +1,4 @@
-.autosuggestionContainer {
+.autosuggestionContainer, .savedItems {
     width: 100%;
     color: #262626;
     text-align: left;
@@ -74,4 +74,48 @@
 
 .activeSuggest {
     background: rgba(35, 43, 51, .05);
+}
+
+.savedItems h6 {
+    margin: 15px 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #b9b8b8;
+}
+
+.savedItems h6 a {
+    text-decoration: none;
+    color: #4ad493;
+    margin-left: 12px;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.savedItems h6 a:hover {
+    text-decoration: underline;
+}
+
+.searchesList {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+@media screen and (min-width: 769px){
+    .savedItems {
+        padding: 26px 20px 24px;
+    }
+
+    .savedItems h6 {
+        font-size: 13px;
+        line-height: 13px;
+    }
+
+    .savedItems h6 a {
+        margin-left: 20px;
+    }
 }

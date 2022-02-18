@@ -71,18 +71,20 @@ const SearchFormAutocomplete = ({close, suggestions}) => {
     }
 
     return (
-        <fieldset className={showSuggestions && input ? classes.active : undefined}>
+        <fieldset className={showSuggestions ? classes.active : undefined}>
             <input
                 type="text"
                 placeholder='Search for cars'
+                onClick={() => setShowSuggestions(true)}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
                 value={input}
             />
-            {showSuggestions && input && <SuggestionsListComponent
+            {showSuggestions && <SuggestionsListComponent
                 filteredSuggestions={filteredSuggestions}
                 activeSuggestionIndex={activeSuggestionIndex}
                 onClick={onClick}
+                showList={setShowSuggestions}
             />}
             <button type="reset" className={classes.clearSearch} onClick={resetBtnHandler}>
                 <span>Clear</span>

@@ -7,7 +7,7 @@ const WatchedSearchResults = () => {
     const searchesList = useSelector(state => state.user.currentUser.watch_list.searches);
 
     return (
-        <div className={classes.watchedSearches}>
+        <div id="saved_searches" className={classes.watchedSearches}>
             <h3>Saved Searches</h3>
             {
                 searchesList.length

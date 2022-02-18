@@ -1,6 +1,8 @@
+import SavedSearchesList from "./saved-searches-list";
 import classes from "./search-form-autocomplete.module.css";
 
-const SuggestionsListComponent = ({filteredSuggestions, activeSuggestionIndex, onClick}) => {
+
+const SuggestionsListComponent = ({filteredSuggestions, activeSuggestionIndex, onClick, showList}) => {
     return filteredSuggestions.length ? (
         <div className={classes.autosuggestionContainer}>
             <ul>
@@ -22,12 +24,7 @@ const SuggestionsListComponent = ({filteredSuggestions, activeSuggestionIndex, o
         </div>
 
     ) : (
-        <div className={classes.autosuggestionContainer}>
-        <span role="img" aria-label="tear emoji">
-          😪
-        </span>{" "}
-            <em>sorry no suggestions</em>
-        </div>
+        <SavedSearchesList showList={showList}/>
     );
 };
 
