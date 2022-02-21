@@ -1,8 +1,12 @@
+import {useSelector} from "react-redux";
 import SavedSearchesList from "./saved-searches-list";
 import classes from "./search-form-autocomplete.module.css";
 
 
 const SuggestionsListComponent = ({filteredSuggestions, activeSuggestionIndex, onClick, showList}) => {
+    const {isLogin} = useSelector(state => state.user);
+
+
     return filteredSuggestions.length ? (
         <div className={classes.autosuggestionContainer}>
             <ul>
@@ -24,7 +28,8 @@ const SuggestionsListComponent = ({filteredSuggestions, activeSuggestionIndex, o
         </div>
 
     ) : (
-        <SavedSearchesList showList={showList}/>
+        null
+        // <SavedSearchesList showList={showList}/>
     );
 };
 
