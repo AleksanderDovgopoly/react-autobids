@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import SuggestionsListComponent from "./suggestions-list-component";
+import SearchFormDropdown from "./search-form-dropdown";
 import classes from "../search-form/search-form.module.css";
 
 
@@ -80,7 +80,7 @@ const SearchFormAutocomplete = ({close, suggestions}) => {
                 onKeyDown={onKeyDown}
                 value={input}
             />
-            {showSuggestions && <SuggestionsListComponent
+            {showSuggestions && <SearchFormDropdown
                 filteredSuggestions={filteredSuggestions}
                 activeSuggestionIndex={activeSuggestionIndex}
                 onClick={onClick}
