@@ -13,6 +13,7 @@ const CommentBox = ({auctionId}) => {
     const [replyToId, setReplyToId] = useState('');
     const commentsQuery = useQuery(['comments', auctionId], () => fetchCommentsByAuctionId(auctionId));
     const usersQuery = useQuery('users', fetchUsers);
+    const [activeCommentFilter, setActiveCommentFilter] = useState('newest');
 
     if (usersQuery.isLoading || commentsQuery.isLoading) {
         return <Spinner/>;
@@ -26,7 +27,10 @@ const CommentBox = ({auctionId}) => {
         <div id="comment_box" className={classes.commentBox}>
             <div className={classes.heading}>
                 <h3>Comments & Bids</h3>
-                <CommentFilters/>
+                <CommentFilters
+                    activeCommentFilter={activeCommentFilter}
+                    setActiveCommentFilter={setActiveCommentFilter}
+                />
             </div>
             <CommentForm
                 commentsData={commentsQuery.data}
@@ -36,6 +40,7 @@ const CommentBox = ({auctionId}) => {
                 setReplyToId={setReplyToId}
             />
             <CommentsList
+                activeCommentFilter={activeCommentFilter}
                 commentsData={commentsQuery.data}
                 usersData={usersQuery.data}
                 setReplyToId={setReplyToId}

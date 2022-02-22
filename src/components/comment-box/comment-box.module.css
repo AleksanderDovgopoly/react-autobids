@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 768px) {
     .commentBox {
-        padding: 0 20px;
+        padding: 0;
     }
 
     .heading {
