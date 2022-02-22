@@ -4,8 +4,10 @@ import classes from "./sell-car.module.css";
 const SellCar = () => {
     return (
         <div className={classes.sellCarContainer}>
-            <h3>Sell your Car on AutoBids</h3>
-            <SellCarHookForm/>
+            <div className={classes.col}>
+                <h1>Sell your Car on AutoBids</h1>
+                <SellCarHookForm/>
+            </div>
         </div>
     )
 }

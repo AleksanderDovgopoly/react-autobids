@@ -1,7 +1,0 @@
-.form fieldset {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 60px;
-    align-items: center;
-    justify-items: stretch;
-}

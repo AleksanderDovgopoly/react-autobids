@@ -1,11 +1,27 @@
 .sellCarContainer {
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: initial;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    width: 80%;
-    max-width: 1440px;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 25px;
+    padding: 65px 0 0;
+    position: relative;
+    min-height: 410px;
+}
+
+.col {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: initial;
+    position: relative;
+    width: 100%;
+    padding: 0 10px;
+    flex-basis: 0;
+    flex-grow: 1;
+    align-self: center;
+    max-width: 720px;
 }

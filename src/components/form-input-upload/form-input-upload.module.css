@@ -1,0 +1,65 @@
+.uploadedImageWrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.imageBox {
+    position: relative;
+    width: 115px;
+    padding: 0 10px;
+    margin-bottom: 12px;
+}
+
+.imageBg {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding-bottom: 100%;
+}
+
+.imageClose {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 3px;
+    right: 13px;
+    text-align: center;
+    line-height: 24px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.imageClose:after {
+    content: "✖";
+    font-size: 14px;
+    color: white;
+}
+
+.uploadInput {
+    width: 100%;
+    color: #262626;
+    text-align: left;
+    box-sizing: border-box;
+    font: inherit;
+    vertical-align: initial;
+    min-width: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    margin: 0;
+    padding: 0 0 32px 0;
+}
+
+@media screen and (min-width: 576px) {
+    .uploadInput {
+        flex-basis: 50%;
+        padding-right: 24px;
+    }
+}
+

@@ -16,7 +16,7 @@ const FormSelect = ({label, catSlug, register, name, isRequired, errors}) => {
     }, [isFetching, catSlug]);
 
     return (
-        <label>{label}
+        <label className={classes.sellInput}>{label}
             <select {...register(name, {required: isRequired ? "This field is required!" : false})} defaultValue=''>
                 <option value="" disabled hidden>Choose here</option>
                 {

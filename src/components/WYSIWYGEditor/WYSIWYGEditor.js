@@ -3,6 +3,7 @@ import {useController} from "react-hook-form";
 import {EditorState} from "draft-js";
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import classes from "./WYSIWYGEditor.module.css";
 
 
 const WYSIWYGEditor = ({editorName, control}) => {
@@ -17,14 +18,17 @@ const WYSIWYGEditor = ({editorName, control}) => {
         <Editor
             editorState={field.value}
             toolbar={{
-                options: ['inline', 'blockType', 'list', 'textAlign', 'remove', 'history'],
+                options: ['inline', 'list'],
+                inline: {
+                    options: ['bold', 'italic', 'underline'],
+                },
             }}
-            wrapperClassName="wrapper-class"
+            wrapperClassName={classes.editorWrapper}
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"
             onEditorStateChange={field.onChange}
             onBlur={field.onBlur}
-            editorStyle={{height: "200px"}}
+            editorStyle={{height: "150px"}}
         />
     );
 };

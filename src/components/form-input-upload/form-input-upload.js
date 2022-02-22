@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import CustomButton from "../custom-button/custom-button";
 import firebase, {storage} from "../../firebase/firebase.utils";
+import classes from "./form-input-upload.module.css";
 
 const InputUploadPhoto = ({setFormData, auctionId}) => {
     const [files, setFiles] = useState([]);
@@ -50,11 +51,33 @@ const InputUploadPhoto = ({setFormData, auctionId}) => {
             .catch(err => console.log(err.code));
     }
 
+    const removePhotoHandler = (index) => {
+        setUploadedPhoto(prevState => {
+            let photosArr = [...prevState];
+            photosArr.splice(index, 1);
+            return photosArr;
+        });
+    }
+
     return (
         <>
-            <label>Upload photos
-                <input type='file' accept=".png, .jpg, .jpeg" name='photos' onChange={handlePhotoChange} required multiple/>
+            <label htmlFor="photos" className={classes.uploadInput}>Upload photos
+                <input type='file' accept=".png, .jpg, .jpeg" name='photos' onChange={handlePhotoChange} required
+                       multiple/>
             </label>
+
+            <div className={classes.uploadedImageWrap}>
+                {
+                    uploadedPhoto.map((image, index) => {
+                        return (
+                            <div key={index} className={classes.imageBox}>
+                                <div style={{backgroundImage: `url(${image})`}} className={classes.imageBg}/>
+                                <div onClick={() => removePhotoHandler(index)} className={classes.imageClose}/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
             <CustomButton onClick={onUploadSubmission}>Upload files</CustomButton>
         </>
     )
