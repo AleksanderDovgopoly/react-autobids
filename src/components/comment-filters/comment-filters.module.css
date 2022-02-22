@@ -1,7 +1,7 @@
 .headingNav {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-content: center;
     align-items: flex-end;
     justify-content: flex-end;
@@ -13,6 +13,6 @@
         padding: 10px 0;
         align-content: center;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
     }
 }
