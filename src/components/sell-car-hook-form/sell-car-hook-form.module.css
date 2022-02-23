@@ -29,6 +29,7 @@
 .formProgress {
     display: block;
     padding-bottom: 20px;
+    text-align: end;
 }
 
 .progressNav {
