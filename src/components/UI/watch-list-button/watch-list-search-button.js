@@ -1,7 +1,7 @@
 import {Fragment} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {isSearchWatched} from "../../../helpers/searches-functions";
-import {actionUpdateUserWatchedSearch, togglePopupAuth} from "../../../redux/user/user.actions";
+import {actionUpdateUserWatchedSearch, togglePopupAuth} from "../../../redux/user/actions";
 import {removeWatchedSearch, setNewWatchedSearch} from "../../../firebase/firebase.utils";
 
 import classes from "./watch-list-search-button.module.css";

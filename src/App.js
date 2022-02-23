@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllCategoriesList, fetchBrandsAndModels} from "./firebase/firebase.utils";
-import {fetchCategoriesCollection} from "./redux/categories/categories.actions";
+import {fetchCategoriesCollection} from "./redux/categories/actions";
 import HomePage from "./pages/home-page/homePage";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up";
 import Header from "./components/header/header";

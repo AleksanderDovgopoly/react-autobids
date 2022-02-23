@@ -2,7 +2,7 @@ import {useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
-import {togglePopupAuth} from "../../redux/user/user.actions";
+import {togglePopupAuth} from "../../redux/user/actions";
 import SearchForm from "../search-form/search-form";
 import DropDownMenu from "../drop-down-menu/drop-down-menu";
 import UserBar from "../header-user-bar/header-user-bar";

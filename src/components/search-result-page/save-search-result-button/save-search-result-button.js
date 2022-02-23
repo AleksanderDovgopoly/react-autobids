@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {isSearchWatched} from "../../../helpers/searches-functions";
-import {actionUpdateUserWatchedSearch, togglePopupAuth} from "../../../redux/user/user.actions";
+import {actionUpdateUserWatchedSearch, togglePopupAuth} from "../../../redux/user/actions";
 import {removeWatchedSearch, setNewWatchedSearch} from "../../../firebase/firebase.utils";
 
 import classes from "./save-search-result-button.module.css";

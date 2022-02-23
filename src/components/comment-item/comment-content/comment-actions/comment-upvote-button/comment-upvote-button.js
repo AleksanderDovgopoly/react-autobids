@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useQueryClient} from "react-query";
 import {isUserAlreadyVoted} from "../../../../../helpers/auction-functions";
-import {togglePopupAuth} from "../../../../../redux/user/user.actions";
+import {togglePopupAuth} from "../../../../../redux/user/actions";
 import {updateCommentVotesById, updateUserVotesById} from "../../../../../firebase/firebase.utils";
 
 import classes from "./comment-upvote-button.module.css";

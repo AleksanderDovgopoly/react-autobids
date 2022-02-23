@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {getAuth, signInWithPopup} from "firebase/auth";
 import firebase from "firebase/compat/app";
-import {setCurrentUser} from "../../../redux/user/user.actions";
+import {setCurrentUser} from "../../../redux/user/actions";
 import {createUserProfileDocument, getUserDataById} from "../../../firebase/firebase.utils";
 import CustomButton from "../../custom-button/custom-button";
 

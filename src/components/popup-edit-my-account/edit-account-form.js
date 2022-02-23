@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import firebase, {storage, updateUserEditorData} from "../../firebase/firebase.utils";
-import {setCurrentUser} from "../../redux/user/user.actions";
+import {setCurrentUser} from "../../redux/user/actions";
 
 import classes from "./edit-account-form.module.css";
 

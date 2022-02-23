@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {Fragment} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {auth} from "../../../firebase/firebase.utils";
-import {clearCurrentUser} from "../../../redux/user/user.actions";
+import {clearCurrentUser} from "../../../redux/user/actions";
 
 import classes from "./user-nav-dropdown.module.css";
 

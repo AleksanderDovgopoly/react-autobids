@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {togglePopupAuth} from "../../../redux/user/user.actions";
+import {togglePopupAuth} from "../../../redux/user/actions";
 import {useAuctionCacheById} from "../../../hooks/useAuctionCacheById";
 import Popup from "reactjs-popup";
 import SetBidBar from "../../set-bid-bar/set-bid-bar";

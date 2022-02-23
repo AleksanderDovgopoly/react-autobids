@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useQueryClient} from "react-query";
 import {setNewAuctionBidOrComment} from "../../firebase/firebase.utils";
-import {togglePopupAuth} from "../../redux/user/user.actions";
+import {togglePopupAuth} from "../../redux/user/actions";
 import {getAuthorNameByCommentId} from "../../helpers/auction-functions";
 
 import classes from "./comment-form.module.css";

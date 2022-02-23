@@ -6,7 +6,6 @@ const CommentFilters = ({activeCommentFilter, setActiveCommentFilter}) => {
         newest: 'Newest',
         upvoted: 'Most Upvoted',
         seller: 'Seller comments',
-        most_viewed: 'Most viewed',
         bids: 'Bid History'
     }
 

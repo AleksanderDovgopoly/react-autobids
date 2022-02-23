@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {useState} from "react";
 import {auth, getUserDataById} from "../../../firebase/firebase.utils";
-import {setCurrentUser} from "../../../redux/user/user.actions";
+import {setCurrentUser} from "../../../redux/user/actions";
 import FormInput from "../../form-input/form-input";
 import CustomButton from "../../custom-button/custom-button";
 
