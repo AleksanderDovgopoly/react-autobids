@@ -1,17 +1,19 @@
 import {useState} from "react";
+import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useQueryClient} from "react-query";
 import {setNewAuctionBidOrComment, setNewAuctionPrice} from "../../firebase/firebase.utils";
+import {useAuctionCacheById} from "../../hooks/useAuctionCacheById";
 import CustomButton from "../custom-button/custom-button";
 
 import classes from "./set-bid-bar.module.css";
 
 
-const SetBidBar = () => {
+const SetBidBar = ({close}) => {
     const queryClient = useQueryClient();
-    const auctionId = useSelector(state => state.detail.fetchingId);
+    const {auctionId} = useParams();
     const user = useSelector(state => state.user.currentUser);
-    const {current_price, bids_step, id, start_price} = useSelector(state => state.detail.data);
+    const {current_price, bids_step, id, start_price} = useAuctionCacheById(auctionId);
     const [newBidValue, setNewBidValue] = useState(current_price + bids_step || start_price + bids_step);
 
 
@@ -31,7 +33,8 @@ const SetBidBar = () => {
         // ToDo: Update Auction price in Redux
         queryClient.invalidateQueries(['comments', auctionId]);
         setNewAuctionBidOrComment(newBidData);
-        setNewAuctionPrice(id, Number(newBidValue))
+        setNewAuctionPrice(id, Number(newBidValue));
+        close();
     }
 
     return (

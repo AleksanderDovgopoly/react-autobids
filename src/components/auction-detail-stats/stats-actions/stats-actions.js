@@ -29,8 +29,10 @@ const StatsActions = () => {
 
     return (
         <div className={classes.statsAction}>
-            <Popup open={isShowPopupBid} onClose={() => setIsShowPopup(false)}>
-                <SetBidBar/>
+            <Popup open={isShowPopupBid} close onClose={() => setIsShowPopup(false)}>
+                {close => (
+                    <SetBidBar close={close}/>
+                )}
             </Popup>
             <button className="btn signInBtn" onClick={() => setNewBid()}>Place Bid</button>
             <div className={classes.subActions}>
