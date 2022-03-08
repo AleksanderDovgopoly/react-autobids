@@ -12,11 +12,10 @@ const StatsInfo = () => {
     const {auctionId} = useParams();
     const {start_price} = useAuctionCacheById(auctionId);
     const [auctionBids, setAuctionBids] = useState('');
-
     const [currentBidData, setCurrentBidData] = useState(null);
 
     useEffect(async () => {
-        if (auctionBids === '') {
+        if (auctionBids === '' || auctionBids !== auctionId) {
             const fetchData = await getBidsByAuctionId(auctionId);
             if (Object.keys(fetchData).length !== 0) {
                 setAuctionBids(fetchData);

@@ -16,7 +16,6 @@ const SetBidBar = ({close}) => {
     const {current_price, bids_step, id, start_price} = useAuctionCacheById(auctionId);
     const [newBidValue, setNewBidValue] = useState(current_price + bids_step || start_price + bids_step);
 
-
     function setNewBidHandler(event) {
         event.preventDefault();
 
