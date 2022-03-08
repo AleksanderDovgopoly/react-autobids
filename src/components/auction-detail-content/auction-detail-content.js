@@ -37,30 +37,6 @@ const AuctionDetailContent = ({auctionData}) => {
                 </div>
             </div>
             <div className={classes.sliderContainer}>
-                {/*<Carousel*/}
-                {/*    data={sliderData}*/}
-                {/*    time={3000}*/}
-                {/*    width="1440px"*/}
-                {/*    height="500px"*/}
-                {/*    radius="10px"*/}
-                {/*    slideNumber={true}*/}
-                {/*    slideNumberStyle={{*/}
-                {/*        fontSize: '20px',*/}
-                {/*        fontWeight: 'bold',*/}
-                {/*    }}*/}
-                {/*    automatic={true}*/}
-                {/*    dots={true}*/}
-                {/*    pauseIconColor="white"*/}
-                {/*    pauseIconSize="40px"*/}
-                {/*    slideBackgroundColor="darkgrey"*/}
-                {/*    slideImageFit="cover"*/}
-                {/*    thumbnails={true}*/}
-                {/*    thumbnailWidth="100px"*/}
-                {/*    classname={classes.auctionDetailContent}*/}
-                {/*    style={{*/}
-                {/*        maxWidth: "100%",*/}
-                {/*    }}*/}
-                {/*/>*/}
                 <ImageGallery title={title} images={sliderData}/>
             </div>
             <div className={classes.withSidebar}>

@@ -41,7 +41,10 @@ function App() {
                 <Routes>
                     <Route exact path='/' element={<HomePage/>}/>
                     <Route path='/sign-in' element={<SignInAndSignUpPage/>}/>
-                    <Route path='/my-account' element={
+                    <Route path='/my-account/' element={
+                        loggedIn ? <MyAccount/> : <Navigate to="/sign-in"/>
+                    }/>
+                    <Route path='/my-account/:breakpoint' element={
                         loggedIn ? <MyAccount/> : <Navigate to="/sign-in"/>
                     }/>
                     <Route path='/watchlist' element={
