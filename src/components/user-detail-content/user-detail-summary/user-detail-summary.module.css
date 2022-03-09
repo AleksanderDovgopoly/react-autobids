@@ -1,4 +1,5 @@
 .userSummary {
+    width: 100%;
     margin-top: -14px;
     padding-bottom: 24px;
     padding-top: 15px;
@@ -6,6 +7,13 @@
     position: relative;
     flex-direction: column;
     align-items: center;
+}
+
+.userSummary button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #828282;
 }
 
 .userHero {
@@ -46,6 +54,7 @@
     line-height: 20px;
     color: #828282;
 }
+
 .rep {
     font-size: 18px;
     line-height: 21px;
@@ -60,12 +69,15 @@
 
 @media (min-width: 576px) {
     .userSummary {
-        width: 60%;
-        margin-top: 20px;
+        margin-top: -15px;
         padding-top: 0;
-        padding-bottom: 60px;
+        padding-bottom: 8px;
         flex-direction: row;
         align-items: flex-start;
+    }
+
+    .userSummary button {
+        top: 13px;
     }
 
     .userHero {

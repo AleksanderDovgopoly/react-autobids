@@ -1,16 +1,11 @@
-import {useRef} from "react";
 import moment from "moment";
 import PopupEditMyAccount from "../../popup-edit-my-account/popup-edit-my-account";
-import Popup from "reactjs-popup";
-import 'reactjs-popup/dist/index.css';
 
 import classes from "./user-detail-summary.module.css";
 
 
-const UserDetailSummary = ({userData}) => {
+const UserDetailSummary = ({userData, isEditable}) => {
     const {createdAt, metadata, displayName, email, avatar, rep_score, bio} = userData;
-    const ref = useRef();
-    const closePopup = () => ref.current.close();
     let createDate = createdAt;
     if (createdAt === undefined) {
         createDate = metadata.createdAt;
@@ -27,16 +22,15 @@ const UserDetailSummary = ({userData}) => {
     }
 
     return (
-        <>
-            <div className={classes.userSummary}>
-                <div className={classes.userHero}>
-                    <img src={userPhoto} alt={displayName}/>
-                </div>
-                <div className={classes.metadata}>
-                    <h1>{displayName}</h1>
-                    <div>
-                        <span className="reputation">
-                            <span className={classes.rep}>
+        <div className={classes.userSummary}>
+            <div className={classes.userHero}>
+                <img src={userPhoto} alt={displayName}/>
+            </div>
+            <div className={classes.metadata}>
+                <h1>{displayName}</h1>
+                <div>
+                    <span className="reputation">
+                        <span className={classes.rep}>
                                 <svg className="reputation"
                                      width="11" height="13"
                                      viewBox="0 0 11 13"
@@ -51,23 +45,25 @@ const UserDetailSummary = ({userData}) => {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"></path>
                                 </svg>
-                                {showRep} </span>Reputation Score
+                            {showRep}
                         </span>
-                    </div>
-                    <p><span>Email: </span>{email}</p>
-                    <p>Joined {joinDate || 'no data'}</p>
-                    <p className={classes.bio}><span>Bio: </span>{bio}</p>
+                        Reputation Score
+                    </span>
                 </div>
+                <p><span>Email: </span>{email}</p>
+                <p>Joined {joinDate || 'no data'}</p>
+                {
+                    bio !== ''
+                        ? <p className={classes.bio}><span>Bio: </span>{bio}</p>
+                        : null
+                }
             </div>
-            <Popup
-                ref={ref}
-                trigger={<button className='btn btn-secondary'>Edit profile</button>}
-                modal
-                contentStyle={{width: '580px', maxWidth: '580px'}}
-            >
-                <PopupEditMyAccount closePopup={closePopup}/>
-            </Popup>
-        </>
+            {
+                isEditable
+                    ? <PopupEditMyAccount/>
+                    : null
+            }
+        </div>
     )
 }
 

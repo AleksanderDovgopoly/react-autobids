@@ -1,6 +1,6 @@
 .withSidebar {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     max-width: 1440px;
@@ -9,24 +9,59 @@
     margin-right: auto;
     margin-left: auto;
     margin-top: 25px;
+    border: 0;
+    font: inherit;
+    vertical-align: initial;
+    flex-wrap: wrap;
+    padding-top: 65px;
+    position: relative;
+    min-height: 410px;
 }
 
-.col {
+.accountContent {
+    display: flex;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: initial;
+    position: relative;
+    width: 100%;
+    padding: 0 10px;
     flex-basis: 0;
     flex-grow: 1;
-    width: 70%;
+    align-self: center;
+    max-width: 740px;
 }
 
 .withSidebar .sidebar {
-    display: flex;
-    width: 15%;
-    height: 100%;
-    align-items: flex-start;
-    flex-direction: column;
-    border-right: 1px solid #00000038;
+    margin-top: -25px;
+    max-width: 620px;
+    align-self: center;
+    width: 100%;
+    padding: 0 10px;
+    display: none;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (min-width: 992px) {
+    .withSidebar .sidebar {
+        margin-top: 0;
+        padding: 0;
+        position: absolute;
+        top: 67px;
+        max-width: none;
+        width: auto;
+        align-self: start;
+        display: block;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .accountContent {
+        max-width: 740px;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .myAccount {
         flex-direction: column;
     }

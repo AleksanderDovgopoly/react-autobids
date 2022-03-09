@@ -1,0 +1,17 @@
+.listingsWrapper h1 {
+    font-size: 28px;
+    line-height: 33px;
+    margin-bottom: 24px;
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.auctionsList {
+    list-style: none;
+}
+
+.emptyListings {
+    margin-bottom: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #ebebeb;
+}

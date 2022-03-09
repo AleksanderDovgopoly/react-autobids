@@ -28,10 +28,10 @@ const ContentMainMenu = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/my-account">My Listings</Link>
+                    <Link to="/my-account/listings">My Listings</Link>
                 </li>
                 <li>
-                    <Link to="/my-account">Settings</Link>
+                    <Link to="/my-account/settings">Settings</Link>
                 </li>
             </ul>
             <div className={classes.logOut}>
