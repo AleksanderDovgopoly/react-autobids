@@ -1,3 +1,7 @@
+.listingsWrapper {
+    width: 100%;
+}
+
 .listingsWrapper h1 {
     font-size: 28px;
     line-height: 33px;
@@ -7,11 +11,137 @@
 }
 
 .auctionsList {
+    padding: 0;
     list-style: none;
+}
+
+.auctionsListItem {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0;
+    margin: 10px 0;
+    border: 1px solid #0000001a;
+    border-radius: 8px;
+}
+
+.auctionsListItem .image {
+    display: block;
+    height: 150px;
+    max-width: 240px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 8px 8px;
+}
+
+.auctionsListItem .info {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    width: inherit;
+}
+
+.auctionsListItem .info .stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.auctionsListItem .info .date {
+    font-size: 14px;
+}
+
+.auctionsListItem .info .date span {
+    font-weight: bold;
+}
+
+.auctionsListItem .info h4 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 15px 0;
+}
+
+.auctionsListItem .actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-width: 120px;
+}
+
+.auctionsListItem .actions .soldPrice {
+    text-align: center;
+    font-size: 14px;
+}
+
+.auctionsListItem .actions .soldPrice span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.auctionsListItem .actions button, .auctionsListItem .actions a {
+    padding: 6px 0;
+    margin: 0 6px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.auctionsListItem .actions button {
+    background: #ff000045;
 }
 
 .emptyListings {
     margin-bottom: 24px;
     padding-top: 24px;
     border-top: 1px solid #ebebeb;
+}
+
+.endIcon:before {
+    font-family: FontAwesome;
+    content: "\f017";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.bidsIcon:before {
+    font-family: FontAwesome;
+    content: "\f0e3";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.commentsIcon:before {
+    font-family: FontAwesome;
+    content: "\f075";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.viewsIcon:before {
+    font-family: FontAwesome;
+    content: "\f06e";
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
 }

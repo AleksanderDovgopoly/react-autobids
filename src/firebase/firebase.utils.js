@@ -246,7 +246,8 @@ export const convertCollectionsSnapshotToMap = (collections) => {
             status,
             end_date,
             year_release,
-            spec
+            spec,
+            views
         } = doc.data();
 
         return {
@@ -263,7 +264,8 @@ export const convertCollectionsSnapshotToMap = (collections) => {
             bids_history,
             spec,
             year_release,
-            status
+            status,
+            views
         }
 
     });
@@ -398,6 +400,23 @@ export const updateAuctionViewsById = async (auctionId) => {
     try {
         await auctionRef.update({
             views: snapShot.views + 1
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    return auctionRef;
+}
+
+export const updateAuctionStatus = async (auctionId, newStatus) => {
+    if (!auctionId) return;
+
+    const auctionRef = await firestore.doc(`auctions/${auctionId}`);
+    const snapShot = (await auctionRef.get()).data();
+
+    try {
+        await auctionRef.update({
+            status: newStatus
         })
     } catch (error) {
         console.log('Error update auction comments!')

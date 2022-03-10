@@ -22,6 +22,9 @@ const MyAccountListings = () => {
     const userAuctions = Object.values(auctions.data)
         .filter(function (key, value) {
             return key.seller.id === userId
+        })
+        .sort(function (x, y) {
+            return y.end_date - x.end_date;
         });
 
     return (
