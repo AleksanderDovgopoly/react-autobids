@@ -55,6 +55,11 @@
     justify-content: space-around;
 }
 
+.auctionsListItem .info .stats .currentStep span {
+    padding-right: 3px;
+    font-weight: 700;
+}
+
 .auctionsListItem .info .date {
     font-size: 14px;
 }

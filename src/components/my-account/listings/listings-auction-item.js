@@ -28,11 +28,11 @@ const ListingsAuctionItem = ({auctionData}) => {
         }
     }, [isSuccess])
 
-
     const deactivateHandler = async () => {
         await updateAuctionStatus(id, 'past');
         await client.invalidateQueries('auctions');
     };
+
 
     return (
         <li className={classes.auctionsListItem}>
@@ -44,6 +44,13 @@ const ListingsAuctionItem = ({auctionData}) => {
                     {formattedEndDate}
                 </div>
                 <div className={classes.stats}>
+                    {
+                        status === 'active'
+                            ? <div className={classes.currentStep}>
+                                <span>$</span>{current_price}
+                            </div>
+                            : null
+                    }
                     <div className={classes.viewsIcon}>{views}</div>
                     <div className={classes.bidsIcon}>{bidsCount}</div>
                     <div className={classes.commentsIcon}>{commentsCount}</div>

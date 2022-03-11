@@ -1,0 +1,44 @@
+.accountSettings {
+    width: 100%;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.accountSettings h1 {
+    font-size: 28px;
+    line-height: 33px;
+    margin-bottom: 24px;
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.accountSettings .section {
+    border-top: 1px solid #0000001a;
+}
+
+.accountSettings .section h2 {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 700;
+}
+
+.accountSettings .flexColumn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.accountSettings .accountAction {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.accountSettings .accountAction .pass {
+    color: #828282;
+}

@@ -21,7 +21,7 @@ const MyAccount = () => {
     if (breakpoint === 'listings') {
         content = <MyAccountListings/>
     } else if (breakpoint === 'settings') {
-        content = <MyAccountSettings/>
+        content = <MyAccountSettings userData={currentUser}/>
     } else {
         content = <UserDetailSummary userData={currentUser} isEditable={true}/>
     }
