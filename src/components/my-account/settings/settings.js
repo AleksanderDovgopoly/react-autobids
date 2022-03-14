@@ -1,6 +1,32 @@
+import {useDispatch} from "react-redux";
+import {getAuth, deleteUser} from "firebase/auth";
+import {removeAccountById} from "../../../firebase/firebase.utils";
+import {clearCurrentUser} from "../../../redux/user/actions";
+
 import classes from "./settings.module.css";
+import Popup from "reactjs-popup";
+import PopupSetPassword from "./popupSetPassword";
+
 
 const MyAccountSettings = ({userData}) => {
+    const {uid, email} = userData;
+    const dispatch = useDispatch();
+
+    const removeUserHandler = async (event) => {
+        event.preventDefault();
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        await deleteUser(user).then(() => {
+            console.log('Auth delete')
+        }).catch((error) => {
+            console.log('Some problem with delete Auth')
+        });
+        dispatch(clearCurrentUser());
+        await removeAccountById(uid);
+        console.log('Complete')
+    }
+
     return (
         <div className={classes.accountSettings}>
             <h1>Settings</h1>
@@ -9,13 +35,18 @@ const MyAccountSettings = ({userData}) => {
                 <div className={classes.flexColumn}>
                     <span>Linked accounts</span>
                     <div className={classes.accountAction}>
-                        <div>{userData.email}</div>
-                        <button className="btn btn-secondary">Remove account</button>
+                        <div>{email}</div>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={removeUserHandler}
+                        >
+                            Remove account
+                        </button>
                     </div>
-                    <span>Linked accounts</span>
+                    <span>Password</span>
                     <div className={classes.accountAction}>
                         <div className={classes.pass}>Non set</div>
-                        <button className="btn btn-secondary">Set password</button>
+                        <PopupSetPassword />
                     </div>
                 </div>
             </div>

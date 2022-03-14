@@ -369,28 +369,6 @@ export const setNewWatchedSearch = async (userId, searchParams) => {
     return userRef;
 }
 
-export const removeWatchedSearch = async (userId, searchParams) => {
-    if (!searchParams || !userId) return;
-
-    const userRef = await firestore.doc(`users/${userId}`);
-    const snapShot = (await userRef.get()).data();
-
-    try {
-        let updated_watch_list = snapShot.watch_list;
-        updated_watch_list.searches = updated_watch_list.searches.filter(function (item) {
-            return (item.brand !== searchParams.brand) || (item.model !== searchParams.model)
-        })
-
-        await userRef.update({
-            watch_list: updated_watch_list
-        })
-    } catch (error) {
-        console.log('Error update auction comments!')
-    }
-
-    return userRef;
-}
-
 export const updateAuctionViewsById = async (auctionId) => {
     if (!auctionId) return;
 
@@ -557,6 +535,34 @@ export const getBidsByAuctionId = async (auctionId) => {
         .orderBy('createAt', 'desc')
         .get();
     return convertCommentsSnapshotToMap(bidsByAuction);
+}
+
+export const removeWatchedSearch = async (userId, searchParams) => {
+    if (!searchParams || !userId) return;
+
+    const userRef = await firestore.doc(`users/${userId}`);
+    const snapShot = (await userRef.get()).data();
+
+    try {
+        let updated_watch_list = snapShot.watch_list;
+        updated_watch_list.searches = updated_watch_list.searches.filter(function (item) {
+            return (item.brand !== searchParams.brand) || (item.model !== searchParams.model)
+        })
+
+        await userRef.update({
+            watch_list: updated_watch_list
+        })
+    } catch (error) {
+        console.log('Error update auction comments!')
+    }
+
+    return userRef;
+}
+
+export const removeAccountById = async (userId) => {
+    if (!userId) return;
+
+    const userRef = await firestore.doc(`users/${userId}`).delete();
 }
 
 export const auth = firebase.auth();
