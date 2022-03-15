@@ -2,10 +2,9 @@ import {useDispatch} from "react-redux";
 import {getAuth, deleteUser} from "firebase/auth";
 import {removeAccountById} from "../../../firebase/firebase.utils";
 import {clearCurrentUser} from "../../../redux/user/actions";
+import PopupSetPassword from "./popupSetPassword";
 
 import classes from "./settings.module.css";
-import Popup from "reactjs-popup";
-import PopupSetPassword from "./popupSetPassword";
 
 
 const MyAccountSettings = ({userData}) => {
@@ -46,7 +45,7 @@ const MyAccountSettings = ({userData}) => {
                     <span>Password</span>
                     <div className={classes.accountAction}>
                         <div className={classes.pass}>Non set</div>
-                        <PopupSetPassword />
+                        <PopupSetPassword/>
                     </div>
                 </div>
             </div>

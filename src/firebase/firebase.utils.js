@@ -485,6 +485,17 @@ export const updateUserWatchedAuctions = async (userId, auctionId) => {
     return userRef;
 }
 
+export const updateUserAuthPassword = async (newPassword) => {
+    let user = firebase.auth().currentUser;
+    const response = user.updatePassword(newPassword).then(() => {
+        return 'Complete';
+    }, (error) => {
+        return error
+    });
+
+    return response;
+}
+
 export const getUserDataById = async (userId) => {
     if (!userId) return;
 

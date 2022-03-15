@@ -1,7 +1,7 @@
-import classes from "./set-password-form.module.css";
 import {useRef} from "react";
+import classes from "./set-password-form.module.css";
 
-const SetPasswordFormInput = ({inputSlug, inputName}) => {
+const SetPasswordFormInput = ({inputSlug, inputName, formData, setFormData, newPasswordError}) => {
     const inputRef = useRef();
 
     function toggleInputType() {
@@ -13,6 +13,11 @@ const SetPasswordFormInput = ({inputSlug, inputName}) => {
         }
     }
 
+    const onChangeHandler = (event) => {
+        const {value} = event.target;
+        setFormData({...formData, [inputSlug]: value});
+    }
+
     return (
         <fieldset>
             <label
@@ -20,14 +25,17 @@ const SetPasswordFormInput = ({inputSlug, inputName}) => {
             >
                 {inputName}
             </label>
+            {
+                newPasswordError !== '' ? <span className="st-prompt">{newPasswordError}</span> : null
+            }
             <div className={classes.showHideWrap}>
-                <input id={inputSlug} type="password" ref={inputRef} required/>
+                <input id={inputSlug} type="password" ref={inputRef} onChange={onChangeHandler}/>
                 <button
                     type="button"
                     className={classes.showPass}
                     onClick={toggleInputType}
                 >
-                    <span className="sr-only">show</span>
+                    <span>show</span>
                 </button>
             </div>
         </fieldset>

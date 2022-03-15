@@ -49,6 +49,35 @@ code {
   color: #828282;
 }
 
+p.text-danger {
+  color: #dc3545;
+  margin-top: 3px;
+  margin-bottom: 8px;
+  font-size: 12px;
+
+}
+
+.st-prompt {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  color: #eb5e4b;
+}
+
+.st-complete {
+  text-align: center;
+  width: 100%;
+  top: 2px;
+  right: 0;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+  color: #4ad493;
+}
+
 .react-datetime-picker {
   height: fit-content;
 }

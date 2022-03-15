@@ -12,7 +12,7 @@ const PopupSetPassword = () => {
     return (
         <Popup
             ref={ref}
-            trigger={<button className="btn btn-secondary">Set password</button>}
+            trigger={<button className="btn btn-secondary">Set new password</button>}
             modal
         >
             <div className={classes.setPassModal}>
